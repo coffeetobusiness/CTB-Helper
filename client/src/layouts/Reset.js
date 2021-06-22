@@ -18,7 +18,7 @@ export default function Reset(){
 
 
                 <div className="form-group">
-                    <input type="email" className="form-control" placeholder="email" />
+                    <input type="email" className="form-control input-line" placeholder="email" />
                 </div>
                
                
@@ -29,7 +29,7 @@ export default function Reset(){
                 </p>
             </form>
             </div>
-            <div className="col" id="col-side">
+            <div className="col" >
                 
             </div>
         </div>

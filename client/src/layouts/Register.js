@@ -15,16 +15,16 @@ export default function Register(){
                 
 
                 <div className="form-group mt-5">
-                    <input type="text" className="form-control" placeholder="name" />
+                    <input type="text" className="form-control input-line" placeholder="name" />
                 </div>
                 <div className="form-group">
-                    <input type="text" className="form-control" placeholder="username" />
+                    <input type="text" className="form-control input-line" placeholder="username" />
                 </div>
                 <div className="form-group">
-                    <input type="email" className="form-control" placeholder="email" />
+                    <input type="email" className="form-control input-line" placeholder="email" />
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control" placeholder="password" />
+                    <input type="password" className="form-control input-line" placeholder="password" />
                 </div>
 
                

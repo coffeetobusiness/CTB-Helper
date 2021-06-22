@@ -1,22 +1,35 @@
-.App {
-  text-align: center;
+.main {
+  font-family: Gill Sans;
+}
+.input-line{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0%;
+}
+.input-line:focus{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0%;
+  
 }
 
 
 
 
-
 .App-header {
-  background-color: #d3d0d0d7;
+  background-color: #f7f8edd7;
+  box-shadow: 9px 8px 5px grey;
   align-items: center;
   justify-content: center;
   color: rgb(24, 23, 23);
  padding: 40px;
-  margin-right: 100px;
-  margin-left: 100px;
+  margin-right: 10%;
+  margin-left: 10%;
   margin-top: 50px;
-  border:  1px solid black;
   border-radius: 5px;
+  background-image: linear-gradient( 58.9deg,  rgb(171, 185, 185) 5.5%, rgba(152, 150, 192, 0.74) 45.2%, rgb(145, 165, 184) 55.2%, rgb(125, 125, 177) 88.4% );
 }
 
 .App-link {

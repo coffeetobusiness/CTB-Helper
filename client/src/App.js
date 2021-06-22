@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
 import './App.css';
-import Home from './components/Home';
-import Register from './components/Register';
-import Reset from './components/Reset';
+import Home from './layouts/Home';
+import Register from './layouts/Register';
+import Reset from './layouts/Reset';
 function App() {
   return (
-    <div className="">
+    <div className="main">
       <Router>
         <Switch>
           <Route exact path="/">

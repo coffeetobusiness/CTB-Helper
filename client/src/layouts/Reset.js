@@ -24,7 +24,7 @@ export default function Reset(){
                
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">RESET PASSWORD</button>
-                <p className=" text-center mt-4">
+                <p className=" text-right mt-4">
                     Back to <Link  to="/">Login</Link>
                 </p>
             </form>

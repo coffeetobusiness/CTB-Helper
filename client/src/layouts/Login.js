@@ -2,7 +2,7 @@ import React from 'react';
 import { Link  } from "react-router-dom";
 import Header from './Header';
 // <Link  to="/register">Register</Link>
-export default function Home(){
+export default function Login(){
     return(
         <div className="app">
         <div><Header/></div> 

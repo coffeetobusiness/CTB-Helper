@@ -85,4 +85,7 @@ body, html, .App, #root, .outer {
   color: rgb(17, 2, 2);
   border: 1px solid black;
 }
-
+.form-control:focus{
+  border: none;
+  box-shadow: none;
+}

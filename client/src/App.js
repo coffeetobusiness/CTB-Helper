@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
 import './App.css';
-import Home from './layouts/Home';
+import Login from './layouts/Login';
 import Register from './layouts/Register';
 import Reset from './layouts/Reset';
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home/>
+            <Login/>
           </Route>
           <Route exact path="/register">
             <Register/>

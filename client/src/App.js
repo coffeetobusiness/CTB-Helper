@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
-import './App.css';
-import Login from './layouts/Login';
-import Register from './layouts/Register';
-import Reset from './layouts/Reset';
+import './App.scss';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Reset from './pages/Reset';
 function App() {
   return (
     <div className="main">

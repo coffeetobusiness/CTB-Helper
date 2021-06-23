@@ -1,12 +1,13 @@
 import React from 'react';
+//import './page.scss';
 import { Link  } from "react-router-dom";
-import Header from './Header';
+import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 export default function Register(){
     return(
         <div className="app">
         <div><Header/></div> 
-        <div className="row App-header">
+        <div className="row App-conatiner">
             <div className="col-6">
                <form>
 

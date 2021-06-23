@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link  } from "react-router-dom";
-
+// import './header/header.scss'; //  [ITS ALSO WORKING]
 // <Link  to="/register">Register</Link>
 export default function Header(){
     return(

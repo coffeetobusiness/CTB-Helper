@@ -4,7 +4,8 @@ const userRoutes = require('./routes/users');
 const bodyParser = require('body-parser')
 
 const app = express();
-
+var cors = require('cors');   //FOR diffrent port run on same web like connect to React app
+app.use(cors());
 
 
 //Database Connection

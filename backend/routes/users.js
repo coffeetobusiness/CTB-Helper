@@ -49,6 +49,9 @@ router.post('/register', async (req, res) => {
 
             await user.save() //To add new user
             res.send("user created-"+"name:"+user.firstName)
+            res.json({
+                message:"success",
+             });
         }
     } catch (err) {
         res.send("error" + err)
@@ -68,7 +71,7 @@ router.delete('/:id', async (req, res) => {
 
 
 //Home
-router.get('/Home', (req, res) => {
+router.get('/home', (req, res) => {
     res.send('This is Home');
 })
 

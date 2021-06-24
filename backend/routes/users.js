@@ -60,7 +60,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         const user1 = user.remove()
-        res.json(user1)
+        res.send("userdata remove  with email id of:"+user.email)
     } catch (err) {
         res.send("error" + err);
     }

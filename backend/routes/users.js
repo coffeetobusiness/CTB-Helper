@@ -34,13 +34,13 @@ router.post('/register', async (req, res) => {
         if (user1) {
 
             res.json({
-                message: "Username already exists",
+                message: "email already exists",
             });
             return;
         }
         else {
 
-            await user.save() //To add new user
+            await user.save() 
             res.send("user created")
         }
     } catch (err) {

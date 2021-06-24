@@ -27,5 +27,5 @@ app.use('/users',userRoutes)
 //Listening on PORT
 PORT = process.env.PORT || 4000;
 app.listen(PORT,()=>{
-    console.log(`Server is listening on ${PORT}`)
+    console.log(`Server is listening on: http://localhost:${PORT}`)
 })

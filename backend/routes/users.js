@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/login',async(req,res)=>{
     const user ={
     email : req.body.email,
-     password : req.body.password
+    password : req.body.password
     }
  if (user){
      res.json(user)

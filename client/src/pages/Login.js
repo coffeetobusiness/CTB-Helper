@@ -11,7 +11,7 @@ export default function Login(){
             <div className="col-6 container-fluid">
                <form>
 
-                <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
+                <h3><i className="fas fa-hands-helping"></i> Helpo LogIn </h3> 
                 <p className=" mt-5">
                     New User?? <Link  to="/register">Register</Link>
                 </p>

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
-
+//just check
 
 //Database Connection
 const url = "mongodb://localhost/my_db";

@@ -36,9 +36,9 @@ router.post('/register',(req,res)=>{
 })
 
 //Delete
-router.delete('/:id', (req,res)=>{
+router.delete('/:id', async(req,res)=>{
    try{
-       const user =  User.findById(req.params.id)
+       const user =  await User.findById(req.params.id)
        const user1 =  user.remove()
        res.json(user1)
    }catch(err){

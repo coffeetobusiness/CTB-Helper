@@ -9,7 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.19.0",
+=======
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+>>>>>>> 82b8fc471f0ae94c52d116f67468f203580f14f7
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.12.14",

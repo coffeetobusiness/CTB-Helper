@@ -3,20 +3,27 @@ const User = require('../Models/UserModel');
 
 const router = express.Router();
 
-//Login
-router.post('/login', async (req, res) => {
-    const user = {
+
+//logIn
+router.post('/login',async (req, res) => {
+    const user = new User({
         email: req.body.email,
         password: req.body.password
+    })
+    try{
+        const user1 = await User.findOne({ email: user.email });
+        if (!user1 || user1.password !== user.password) {
+            res.send("Login failed plz register first")
+            return;
+        }
+        else {
+            res.send("LogIn Suceess");
+        }
     }
- 
-    if (user) {
-        res.json(user)
+    catch (err) {
+        res.send("error" + err)
     }
-    else {
-        res.send("User not found");
-    }
-});
+})
 
 //Register
 router.post('/register', async (req, res) => {
@@ -40,8 +47,13 @@ router.post('/register', async (req, res) => {
         }
         else {
 
+
             await user.save() 
             res.send("user created")
+
+            await user.save() //To add new user
+            res.send("user created-"+"name:"+user.firstName)
+
         }
     } catch (err) {
         res.send("error" + err)
@@ -53,7 +65,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         const user1 = user.remove()
-        res.json(user1)
+        res.send("userdata remove  with email id of:"+user.email)
     } catch (err) {
         res.send("error" + err);
     }

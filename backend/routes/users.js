@@ -17,7 +17,7 @@ router.post('/login',async (req, res) => {
             return;
         }
         else {
-            res.send("LogIn Suceess");
+            res.send("Log In Suceess");
         }
     }
     catch (err) {
@@ -49,10 +49,10 @@ router.post('/register', async (req, res) => {
 
 
             await user.save() 
-            res.send("user created")
+            
 
-            await user.save() //To add new user
-            res.send("user created-"+"name:"+user.firstName)
+             
+            res.send("user created - name:" + user.firstName)
 
         }
     } catch (err) {
@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
-        const user1 = user.remove()
+        const user1 =  user.remove()
         res.send("userdata remove  with email id of:"+user.email)
     } catch (err) {
         res.send("error" + err);

@@ -5,10 +5,15 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
-//just check
+//connection check
+app.get('/',async(req,res)=>{
+    res.send("yeh its working");
+});
 
 //Database Connection
-const url = "mongodb://localhost/my_db";
+const url = "mongodb://localhost:27017/userdata";
+
+
 mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology:true})
 const db = mongoose.connection
 db.on('open',()=>console.log('db connected'));
@@ -27,5 +32,5 @@ app.use('/users',userRoutes)
 //Listening on PORT
 PORT = process.env.PORT || 4000;
 app.listen(PORT,()=>{
-    console.log(`Server is listening on ${PORT}`)
+    console.log(`Server is listening on: http://localhost:${PORT}`)
 })

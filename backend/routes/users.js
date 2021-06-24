@@ -48,13 +48,6 @@ router.post('/register', async (req, res) => {
         }
         else {
 
-<<<<<<< HEAD
-            await user.save() //To add new user
-            res.send("user created-"+"name:"+user.firstName)
-            res.json({
-                message:"success",
-             });
-=======
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
             await user.save()
@@ -62,7 +55,6 @@ router.post('/register', async (req, res) => {
 
                     res.send("user created - name:" + user.firstName)
                 })
->>>>>>> 82b8fc471f0ae94c52d116f67468f203580f14f7
         }
     } catch (err) {
         res.send("error" + err)

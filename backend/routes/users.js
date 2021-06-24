@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
         }
         else {
 
-            await user.save()
+            await user.save() //To add new user
             res.send("user created")
         }
     } catch (err) {

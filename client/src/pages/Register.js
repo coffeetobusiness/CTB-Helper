@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
+import { handleErrors } from './Login';
 export default function Register(){
 
     const [firstName,setfirstName] = useState("");
@@ -13,13 +14,7 @@ export default function Register(){
     const [password2,setPassword2] = useState("");
     const [error, setError] = useState("");
 
-    const handleErrors = async (response) => {
-        if (!response.ok) {
-          const { message } = await response.json();
-          throw Error(message);
-        }
-        return response.json();
-      };
+    
 
     const register =(e) =>{
         e.preventDefault();

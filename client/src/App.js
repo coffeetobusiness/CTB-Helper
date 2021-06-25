@@ -4,6 +4,7 @@ import './App.scss';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
+import Home from './pages/Home';
 function App() {
   return (
     <div className="main">
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route exact path="/reset">
             <Reset/>
+          </Route>
+          <Route exact path="/home">
+            <Home/>
           </Route>
         </Switch>
       </Router>

@@ -7,27 +7,36 @@ const router = express.Router();
 
 //logIn
 router.post('/login', async (req, res) => {
-    const user = new User({
+    const user = ({
         email: req.body.email,
         password: req.body.password
     })                      
-    try {     //find user with email id
+    try{     //find user with email id
         const user1 = await User.findOne({ email: user.email });
         if (!user1 ){
-            res.send("Login failed Incorrect Email")
+            res.status(404)
+            res.json({
+                message: "User not found incorrect Email",
+            });
             return;
         }
-        else {           //password match
-            bcrypt.compare(user.password,user1.password,(err,isMatch)=>{
-                if(isMatch) {
-                    res.send("Log in success")
-                   return;
+                  //password match
+        bcrypt.compare(user.password,user1.password,(err,isMatch)=>{
+            if(isMatch) {
+                 res.status(200)
+                 res.json({
+                    message: "LogIn Success"
+                  })
+                return;
                 }
-                else{
-                    res.send("pass incorrect")
+            else{
+                  res.status(500)
+                  res.json({
+                      message: "Incorrect password"
+                    })
                 }
             })
-        }
+        
     }
     catch (err) {
         res.send("error" + err)

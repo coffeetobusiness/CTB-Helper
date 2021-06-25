@@ -42,35 +42,27 @@ router.post('/register', async (req, res,) => {
         email: req.body.email,
         password: req.body.password
     })
-
-
     try {
-
         const user1 = await User.findOne({ email: user.email });
         if (user1) {
-
+            res.status(500)
             res.json({
-                message: "email already exists",
+                message: "Email already Registered",
             });
             return;
         }
-        else {
 
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(user.password, salt);
-            await user.save()
-            res.json({
-                message:"success",
-            })
-               .then((user) => {
-
-                 res.send("user created - name:" + user.firstName)
-                })
-        }
-    } catch (error) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+    }catch (error) {
         res.send("error" + error)
-    }
-})
+   }
+});
 
 //Delete
 router.delete('/:id', async (req, res) => {

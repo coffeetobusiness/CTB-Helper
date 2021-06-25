@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from 'react-router';
 //import './page.scss';
-import { Link, Redirect  } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 export default function Register(){
@@ -10,6 +10,7 @@ export default function Register(){
     const [lastName,setlastName] = useState("");
     const [email,setemail] = useState("");
     const [password,setPassword] = useState("");
+    const [password2,setPassword2] = useState("");
     const [error, setError] = useState("");
 
     const handleErrors = async (response) => {
@@ -22,6 +23,10 @@ export default function Register(){
 
     const register =(e) =>{
         e.preventDefault();
+        if(password!==password2){
+            setError("Password does not match")
+        }else{
+        
         fetch(`http://localhost:4000/users/register`,
             {
                 method: "POST",
@@ -37,11 +42,14 @@ export default function Register(){
         })
         .then(handleErrors)
         .then(() => {
-           Redirect('/')
+            alert("You Are Register Please Login")
+            history.push('/')
+           //setError(`Welcome ${firstName} please Login`);
         })
         .catch((error) =>{
             setError(error.message);
         });
+    };
     };
     const history = useHistory();
     return(
@@ -49,7 +57,7 @@ export default function Register(){
         <div><Header/></div> 
         <div className="row App-conatiner">
             <div className="col-6">
-            {error && <span style={{ color: "red" }}>{error}</span>}
+           
                <form onSubmit={register}>
 
                 <h3><i class="fas fa-hands-helping"></i> Helpo Register</h3>
@@ -57,21 +65,26 @@ export default function Register(){
                 
 
                 <div className="form-group mt-5">
-                    <input required type="text" className="form-control input-line" placeholder="name" onChange={(e) => setfirstName(e.target.value)}/>
+                    <input required minLength="3" type="text" className="form-control input-line" placeholder="firstname" onChange={(e) => setfirstName(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                    <input type="text" className="form-control input-line" placeholder="lastname" onChange={(e) => setlastName(e.target.value)}/>
+                    <input required minLength="3" type="text" className="form-control input-line" placeholder="lastname" onChange={(e) => setlastName(e.target.value)}/>
+                </div>
+             
+                <div className="form-group">
+                    <input required type="email" className="form-control input-line" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                    <input type="email" className="form-control input-line" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
+                    <input required minLength="5" type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                    <input required minLength="5" type="password" className="form-control input-line" placeholder="confirm password" onChange={(e) => setPassword2(e.target.value)}/>
                 </div>
 
                
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                {error && <span id="reg-msg" >{error}</span>}
                 <p className=" text-right">
                     Back to <Link  to="/">Login</Link>
                 </p>

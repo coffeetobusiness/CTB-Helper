@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{} from 'react';
 //import './page.scss';
 import { Link  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 export default function Login(){
+    
     return(
         <div className="app">
         <div><Header/></div> 
@@ -12,6 +13,7 @@ export default function Login(){
                <form>
 
                 <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
+               
                 <p className=" mt-5">
                     New User?? <Link  to="/register">Register</Link>
                 </p>

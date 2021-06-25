@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from 'react-router';
 //import './page.scss';
-import { Link  } from "react-router-dom";
+import { Link, Redirect  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 export default function Register(){
@@ -37,7 +37,7 @@ export default function Register(){
         })
         .then(handleErrors)
         .then(() => {
-            history.push("/");
+           Redirect('/')
         })
         .catch((error) =>{
             setError(error.message);

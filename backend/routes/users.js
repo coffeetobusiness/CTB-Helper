@@ -10,15 +10,23 @@ router.post('/login', async (req, res) => {
     const user = new User({
         email: req.body.email,
         password: req.body.password
-    })
-    try {
+    })                      
+    try {     //find user with email id
         const user1 = await User.findOne({ email: user.email });
-        if (!user1 || user1.password !== user.password) {
-            res.send("Login failed plz register first")
+        if (!user1 ){
+            res.send("Login failed Incorrect Email")
             return;
         }
-        else {
-            res.send("Log In Suceess");
+        else {           //password match
+            bcrypt.compare(user.password,user1.password,(err,isMatch)=>{
+                if(isMatch) {
+                    res.send("Log in success")
+                   return;
+                }
+                else{
+                    res.send("pass incorrect")
+                }
+            })
         }
     }
     catch (err) {
@@ -27,7 +35,7 @@ router.post('/login', async (req, res) => {
 })
 
 //Register
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res,) => {
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -51,13 +59,16 @@ router.post('/register', async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
             await user.save()
-                .then((user) => {
+            res.json({
+                message:"success",
+            })
+               .then((user) => {
 
-                    res.send("user created - name:" + user.firstName)
+                 res.send("user created - name:" + user.firstName)
                 })
         }
-    } catch (err) {
-        res.send("error" + err)
+    } catch (error) {
+        res.send("error" + error)
     }
 })
 

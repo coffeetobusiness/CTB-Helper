@@ -10,7 +10,7 @@ app.use(cors());
 
 //Database Connection
 const url = "mongodb://localhost/my_db";
-mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology:true})
+mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology:true,useFindAndModify: false})
 const db = mongoose.connection
 db.on('open',()=>console.log('db connected'));
 
@@ -18,7 +18,7 @@ db.on('open',()=>console.log('db connected'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
-}))
+}));
 
 
 //Setting up routes

@@ -1,5 +1,6 @@
-import React,{ useState  } from 'react';
+import React,{ useState , useContext } from 'react';
 import { useHistory } from 'react-router';
+import { CredentialsContext } from "../App";
 //import './page.scss';
 import { Link  } from "react-router-dom";
 import Header from '../header/Header';
@@ -17,6 +18,7 @@ export default function Login(){
     const [email,setemail] = useState("");
     const [password,setPassword] = useState("");
     const [error, setError] = useState("");
+    const [, setCredentials] = useContext(CredentialsContext);
 
     const login =(e) =>{
         e.preventDefault();
@@ -33,9 +35,12 @@ export default function Login(){
         })
         .then(handleErrors)
         .then(() => {
-            history.push('/home')
-           //setError(`Welcome ${firstName} please Login`);
-        })
+            setCredentials({
+              email,
+              password,
+            });
+            history.push("/home");
+          })
         .catch((error) =>{
             setError(error.message);
         });

@@ -6,7 +6,7 @@ export default function Header(){
     return(
         <div>
            <nav className="navbar  navbar-expand-lg  ">
-            <Link className="navbar-brand" to={"/"}><h3><i class="fas fa-hands-helping"></i> Helpo</h3></Link>
+            <a className="navbar-brand" href="/"><h3><i class="fas fa-hands-helping"></i> Helpo</h3></a>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
                <li className="nav-item">

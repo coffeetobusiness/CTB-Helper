@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 //logIn
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     const user = ({
         email: req.body.email,
         password: req.body.password
@@ -99,7 +99,7 @@ router.get('/home', async (req, res) => {
       });
       return;
     }
-    res.send("user find in home")
+    res.send(user)
   }
   catch (err) {
     res.send("error" + err);

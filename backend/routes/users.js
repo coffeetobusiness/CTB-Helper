@@ -91,7 +91,7 @@ router.get('/home', async (req, res) => {
     const { authorization } = req.headers;
     const [, token] = authorization.split(" ");
     const [email] = token.split(":");
-    const user = await User.findOne({ emai }).exec();
+    const user = await User.findOne({ email }).exec();
     if (!user ) {
       res.status(403);
       res.json({

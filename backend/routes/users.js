@@ -86,9 +86,24 @@ router.delete('/:id', async (req, res) => {
 
 
 //Home
-router.get('/home', (req, res) => {
-    res.send('This is Home');
-})
+router.get('/home', async (req, res) => {
+  try{
+    const { authorization } = req.headers;
+    const [, token] = authorization.split(" ");
+    const [email] = token.split(":");
+    const user = await User.findOne({ emai }).exec();
+    if (!user ) {
+      res.status(403);
+      res.json({
+        message: "invalid access",
+      });
+      return;
+    }
+  }
+  catch (err) {
+    res.send("error" + err);
+  }
+  });
 
 
 module.exports = router;

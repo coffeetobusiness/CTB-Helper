@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Home from './pages/Home';
 
-export const CredentialsContext = React.createContext('');///////////////:  null karna hai
+export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
 function App() {
   const credentialsState = useState('');///////////////:  null karna hai

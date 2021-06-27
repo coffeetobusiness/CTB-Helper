@@ -8,7 +8,8 @@ export default function Home(){
     const [ credentials,setCredentials ] = useContext(CredentialsContext)
 
     const logout =() => {
-        setCredentials('');/////////////:  null karna hai
+        //setCredentials(null);/////////////:  null karna hai
+        setCredentials('');
     }
 
     useEffect(() => {
@@ -16,7 +17,7 @@ export default function Home(){
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Basic ${credentials.email}:${credentials.password}`,
+            Authorization: `Basic ${credentials.email}`,
           },
         })
           .then((response) => response.json("auth done"))

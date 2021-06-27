@@ -92,13 +92,14 @@ router.get('/home', async (req, res) => {
     const [, token] = authorization.split(" ");
     const [email] = token.split(":");
     const user = await User.findOne({ email }).exec();
-    if (!user ) {
+    if (!user) {
       res.status(403);
       res.json({
         message: "invalid access",
       });
       return;
     }
+    res.send("user find in home")
   }
   catch (err) {
     res.send("error" + err);

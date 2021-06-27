@@ -19,6 +19,7 @@ export default function Login(){
     const [password,setPassword] = useState("");
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
+    const [loginStatus, setloginStatus] = useState(false);
 
     const login =(e) =>{
         e.preventDefault();
@@ -34,21 +35,43 @@ export default function Login(){
               }),
         })
         .then(handleErrors)
-        .then(() => {
+        .then((response) => {
+            setloginStatus(true);
+            localStorage.setItem("token",response.token)
             setCredentials({
               email,
               password,
             });
-            history.push("/home");
+            history.push("/");
           })
         .catch((error) =>{
             setError(error.message);
         });
     };
-    const history = useHistory();
+        const history = useHistory();
+       //Button
+    const ClickAuth = () => {
+        fetch(`http://localhost:4000/users/isUserAuth`,
+        {
+            method: "GET",
+            headers: {
+                "x-access-token": localStorage.getItem("token"),
+              "Content-Type": "application/json",
+        },
+    })
+   // .then(handleErrors)
+    .then((response) => {
+        history.push("/home");
+      })
+    .catch((error) =>{
+        setError(error.message);
+    });
+    }
+
     return(
         <div className="app">
         <div><Header/></div> 
+        {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
         <div className="row App-conatiner">
             <div className="col-6 container-fluid">
                <form onSubmit={login}>

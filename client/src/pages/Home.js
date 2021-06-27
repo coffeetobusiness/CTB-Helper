@@ -8,6 +8,7 @@ export default function Home(){
     const [ credentials,setCredentials ] = useContext(CredentialsContext)
 
     const logout =() => {
+      localStorage.removeItem("token");
         //setCredentials(null);/////////////:  null karna hai
         setCredentials('');
     }
@@ -17,6 +18,7 @@ export default function Home(){
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-access-token": localStorage.getItem("token"),
             Authorization: `Basic ${credentials.email}`,
           },
         })

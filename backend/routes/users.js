@@ -32,7 +32,7 @@ router.post('/login', async(req, res) => {
             else{
                   res.status(500)
                   res.json({
-                      message: "Incorrect password"
+                      message: "Incorrect password"//pratik
                     })
                 }
             })

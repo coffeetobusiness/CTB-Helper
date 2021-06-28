@@ -1,10 +1,12 @@
 import React,{ useContext,useEffect }  from 'react';
 import {  CredentialsContext } from '../App';
 import { useHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 //import './page.scss';
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
-export default function Home(){
+
+function Home(){
 
     const [ credentials,setCredentials ] = useContext(CredentialsContext)
     const history = useHistory();
@@ -44,3 +46,4 @@ export default function Home(){
        </div>
     )
 }
+export default  withRouter(Home);

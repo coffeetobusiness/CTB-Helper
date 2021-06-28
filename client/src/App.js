@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Home from './pages/Home';
+import ProtectedRoute from './ProtectedRoute'
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -24,10 +25,10 @@ function App() {
           <Route exact path="/reset">
             <Reset/>
           </Route>
-          <Route exact path="/home">
-            <Home/>
-          </Route>
         </Switch>
+
+        <ProtectedRoute path="/home" component={Home}/>
+        
       </Router>
       </CredentialsContext.Provider>
     </div>

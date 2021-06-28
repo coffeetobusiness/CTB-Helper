@@ -1,16 +1,19 @@
 import React,{ useContext,useEffect }  from 'react';
 import {  CredentialsContext } from '../App';
+import { useHistory } from 'react-router';
 //import './page.scss';
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 export default function Home(){
 
     const [ credentials,setCredentials ] = useContext(CredentialsContext)
+    const history = useHistory();
 
     const logout =() => {
       localStorage.removeItem("token");
         //setCredentials(null);/////////////:  null karna hai
         setCredentials('');
+        history.push("/");
     }
 
     useEffect(() => {

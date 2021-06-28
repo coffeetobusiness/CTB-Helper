@@ -11,10 +11,12 @@ const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
 
     if(!token){
-        res.send("you don't have token");
+        res.status(403)
+        res.json({ auth: false, message:"you dont have token"});
     }else{
         jwt.verify(token,"jwtSecret",(err,decoded) => {
             if(err){
+                res.status(403)
                 res.json({ auth: false, message:"failed to authenticate"});
             }else{
                 req.userId = decoded.id;

@@ -2,7 +2,7 @@ import React,{ useState , useContext } from 'react';
 import { useHistory } from 'react-router';
 import { CredentialsContext } from "../App";
 //import './page.scss';
-import { Link  } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 
@@ -19,7 +19,7 @@ export default function Login(){
     const [password,setPassword] = useState("");
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
-    const [loginStatus, setloginStatus] = useState(false);
+    const  [loginStatus, setloginStatus] = useState(false);
 
     const login =(e) =>{
         e.preventDefault();
@@ -40,7 +40,6 @@ export default function Login(){
             localStorage.setItem("token",response.token)
             setCredentials({
               email,
-              password,
             });
             history.push("/");
           })
@@ -58,20 +57,22 @@ export default function Login(){
                 "x-access-token": localStorage.getItem("token"),
               "Content-Type": "application/json",
         },
-    })
-   // .then(handleErrors)
-    .then((response) => {
+       })
+       .then(handleErrors)
+       .then(() => {
         history.push("/home");
-      })
-    .catch((error) =>{
+        })
+       .catch((error) =>{
         setError(error.message);
-    });
+       });
     }
 
     return(
         <div className="app">
         <div><Header/></div> 
+
         {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
+
         <div className="row App-conatiner">
             <div className="col-6 container-fluid">
                <form onSubmit={login}>

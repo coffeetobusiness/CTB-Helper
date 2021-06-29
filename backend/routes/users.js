@@ -2,15 +2,26 @@ const express = require('express');
 const User = require('../Models/UserModel');
 const bcrypt = require('bcryptjs');
 
+// const jwt = require('jsonwebtoken');
+// const { json } = require('body-parser');
+// require("dotenv").config();
+
+
 const router = express.Router();
 
 
 //logIn
 router.post('/login', async (req, res) => {
+
+   //Authenticate User
+
     const user = ({
         email: req.body.email,
         password: req.body.password
-    })                      
+    })
+    
+
+    
     try{     //find user with email id
         const user1 = await User.findOne({ email: user.email });
         if (!user1 ){
@@ -36,7 +47,10 @@ router.post('/login', async (req, res) => {
                     })
                 }
             })
-        
+            // const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+            // res,json({accessToken:accessToken})
+            // console.log("accesToken is",accessToken);
+           
     }
     catch (err) {
         res.send("error" + err)

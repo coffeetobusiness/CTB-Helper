@@ -41,7 +41,7 @@ export default function Login(){
             setCredentials({
               email,
             });
-            history.push("/");
+            history.push("/home");
           })
         .catch((error) =>{
             setError(error.message);

@@ -1,6 +1,5 @@
 import React,{ useContext,useEffect }  from 'react';
 import {  CredentialsContext } from '../App';
-import { useHistory } from 'react-router';
 import { withRouter } from 'react-router-dom';
 //import './page.scss';
 import Header from '../header/Header';
@@ -8,15 +7,10 @@ import Header from '../header/Header';
 
 function Home(){
 
-    const [ credentials,setCredentials ] = useContext(CredentialsContext)
-    const history = useHistory();
+    const [ credentials, ] = useContext(CredentialsContext)
+    
 
-    const logout =() => {
-      localStorage.removeItem("token");
-        //setCredentials(null);/////////////:  null karna hai
-        setCredentials('');
-        history.push("/");
-    }
+  
 
     useEffect(() => {
         fetch(`http://localhost:4000/users/home`, {
@@ -32,17 +26,10 @@ function Home(){
 
     return(
         <div className="app">
-        <div><Header/></div> 
-       {!credentials && <h3>Please LogIn........ </h3>}<br/><br/><br/>
+          <div><Header/></div> 
+          
+          <h1>Welcome back... {credentials.email}</h1>
 
-       {credentials && <div>
-
-        <h1>Welcome... {credentials.email}</h1>
-        <button className="btn btn-danger" onClick={logout}>Logout</button>
-
-        </div>
-       
-       }
        </div>
     )
 }

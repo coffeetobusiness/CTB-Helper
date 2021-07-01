@@ -22,11 +22,10 @@ export default function Register(){
             setError("Password does not match")
         }else{
         
-        fetch(`http://localhost:4000/users/register`,
-            {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
+        fetch(`http://localhost:4000/users/register`,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 firstName,
@@ -37,7 +36,7 @@ export default function Register(){
         })
         .then(handleErrors)
         .then(() => {
-            alert("You Are Register Please Login")
+            alert("You Are Registered Please Login")
             history.push('/')
            //setError(`Welcome ${firstName} please Login`);
         })

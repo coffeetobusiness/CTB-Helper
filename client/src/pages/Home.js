@@ -1,41 +1,47 @@
-import React,{ useContext,useEffect }  from 'react';
-import {  CredentialsContext } from '../App';
-//import './page.scss';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as actionType from '../constants/actionTypes';
+
 import Header from '../header/Header';
-// <Link  to="/register">Register</Link>
 export default function Home(){
+  
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
 
-    const [ credentials,setCredentials ] = useContext(CredentialsContext)
+  const logout = () => {
+    dispatch({ type: actionType.LOGOUT });
 
-    const logout =() => {
-        //setCredentials(null);/////////////:  null karna hai
-        setCredentials('');
-    }
+    history.push('/');
 
-    useEffect(() => {
-        fetch(`http://localhost:4000/users/home`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${credentials.email}`,
-          },
-        })
-          .then((response) => response.json("auth done"))
-      });
+    // setUser(null);
+  };
+  console.log()
 
+  useEffect(() => {
+
+     setUser(JSON.parse(localStorage.getItem('profile')));
+     console.log(user)
+
+  }, [location]);
+
+    
     return(
         <div className="app">
         <div><Header/></div> 
-       {!credentials && <h3>Please LogIn........ </h3>}<br/><br/><br/>
-
-       {credentials && <div>
-
-        <h1>Welcome... {credentials.email}</h1>
-        <button className="btn btn-danger" onClick={logout}>Logout</button>
+        <h1>Welcome</h1>
+        {user? (
+          <div>
+            <p>{user.result.firstName}</p>
+            <button variant="contained"color="secondary" onClick={logout}>Logout</button>
+          </div>
+        ) : ""
+        }
 
         </div>
        
-       }
-       </div>
+      
     )
 }

@@ -6,13 +6,10 @@ import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Home from './pages/Home';
 
-export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
 function App() {
-  const credentialsState = useState('');///////////////:  null karna hai
   return (
     <div className="main">
-      <CredentialsContext.Provider value={credentialsState}>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -29,8 +26,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      </CredentialsContext.Provider>
-    </div>
+\    </div>
   );
 }
 

@@ -7,6 +7,7 @@ import Reset from './pages/Reset';
 import Home from './pages/Home';
 import ProtectedRoute from './ProtectedRoute'
 import Newpassword from './pages/Newpassword'
+import VerifyMail from './pages/VerifyMail'
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route exact path="/reset/:token">
             <Newpassword/>
+          </Route>
+          <Route exact path="/verify/:token">
+            <VerifyMail/>
           </Route>
         </Switch>
 

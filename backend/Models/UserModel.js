@@ -21,7 +21,10 @@ var UserSchema = new mongoose.Schema(
      type:String,
      require:true
  },
-
+ verify:{
+    type:Boolean,
+    default:false
+ },
  resetToken:String,
 
  expireToken:String,

@@ -99,6 +99,7 @@ export default function Login(){
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
 
+                
                 {error && <span id="reg-msg" >{error}</span>}
 
                 <p className="forgot-password text-right">

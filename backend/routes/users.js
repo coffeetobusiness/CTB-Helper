@@ -143,7 +143,7 @@ router.post('/reset-password',(req,res)=>{
                         `
                     })
                 res.json({
-                    message:"check your email",
+                    message:"check your email and update password with 60 Min",
                 })
                 })
     
@@ -169,6 +169,62 @@ router.post('/new-password',(req,res)=>{
                res.json({message:"password updated success"})
            })
         })
+    })
+    .catch(error=>{
+        console.log(error)
+    })
+})
+
+
+router.post('/verifyclick',(req,res)=>{
+    crypto.randomBytes(32,(err,buffer)=>{
+        if(err){
+            console.log(err)
+        }
+        const token = buffer.toString("hex")
+        User.findOne({email:req.body.email})
+        .then(user=>{
+            if(!user){
+                res.status(422)
+                res.json({error: "User not found with this email"})
+                return;
+            }
+            user.resetToken = token
+            user.expireToken = Date.now() + 3600000
+            user.save()
+            .then((result)=>{
+                transporter.sendMail({
+                    to:user.email,
+                    from:"uditmehra80@gmail.com",
+                    subject:"EMAIL VERIFY",
+                    html:`
+                    <p>You requested for verify email</p>
+                    <h2>Click in this <a href="http://localhost:3000/verify/${token}">link</a> to reset your password</h2>
+                    `
+                })
+            res.json({
+                message:"check your email",
+            })
+            })
+
+        })
+    })
+})
+router.post('/verify-email',(req,res)=>{
+    const sentToken = req.body.token
+    User.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})
+    .then(user=>{
+        if(!user){
+             res.status(422)
+             res.json({error:"Try again session expired"})
+            return;
+        }else{
+            user.resetToken = undefined
+            user.expireToken = undefined
+            user.verify = true
+            user.save()
+            res.json({message:"verified"})
+        }
     })
     .catch(error=>{
         console.log(error)

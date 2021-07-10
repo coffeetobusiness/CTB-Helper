@@ -11,7 +11,7 @@ const router = express.Router();
 
 
 //logIn
-router.post('/login', async (req, res) => {
+router.post('/login1', async (req, res) => {
 
    //Authenticate User
 
@@ -58,34 +58,34 @@ router.post('/login', async (req, res) => {
 })
 
 //Register
-router.post('/register', async (req, res,) => {
-    const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password
-    })
-    try {
-        const user1 = await User.findOne({ email: user.email });
-        if (user1) {
-            res.status(500)
-            res.json({
-                message: "Email already Registered",
-            });
-            return;
-        }
+// router.post('/register', async (req, res,) => {
+//     const user = new User({
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         email: req.body.email,
+//         password: req.body.password
+//     })
+//     try {
+//         const user1 = await User.findOne({ email: user.email });
+//         if (user1) {
+//             res.status(500)
+//             res.json({
+//                 message: "Email already Registered",
+//             });
+//             return;
+//         }
 
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(user.password, salt);
-        await user.save()
-        res.json({
-            message:"success",
-        });
+//         const salt = await bcrypt.genSalt(10);
+//         user.password = await bcrypt.hash(user.password, salt);
+//         await user.save()
+//         res.json({
+//             message:"success",
+//         });
         
-    }catch (error) {
-        res.send("error" + error)
-   }
-});
+//     }catch (error) {
+//         res.send("error" + error)
+//    }
+// });
 
 //Delete
 router.delete('/:id', async (req, res) => {

@@ -1,22 +1,50 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
+const User = require('./Models/UserModel')
+const express = require('express')
 
 function initialize(passport){
     const authenticateUser = async(email,password,done)=>{
         console.log("in authenticate");
-        const user = {user : email};
-        if(user == null){
-            return done(error,false,{message:'No user with that email'})
-        }
-        try{
-            return done(null,user);
-            if(await bcrypt.compare(password,user.password)) {
-              
-            }else{
-                return done(null,false,{message:'Password incorrect'})
+        const user = ({
+            email: req.body.email,
+            password: req.body.password
+        })
+        
+    
+        
+        try{     //find user with email id
+            const user1 = await User.findOne({ email: user.email });
+            if (!user1 ){
+                res.status(404)
+                res.json({
+                    message: "User not found incorrect Email",
+                });
+                return;
             }
-        }catch (e){
-          return done(e)
+                      //password match
+            bcrypt.compare(user.password,user1.password,(err,isMatch)=>{
+                if(isMatch) {
+                     res.status(200)
+                     res.json({
+                        message: "LogIn Success"
+                      })
+                    return;
+                    }
+                else{
+                      res.status(500)
+                      res.json({
+                          message: "Incorrect password"
+                        })
+                    }
+                })
+                // const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+                // res,json({accessToken:accessToken})
+                // console.log("accesToken is",accessToken);
+               
+        }
+        catch (err) {
+            res.send("error" + err)
         }
     }
 

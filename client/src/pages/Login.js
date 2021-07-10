@@ -42,7 +42,7 @@ export default function Login(){
             history.push("/home");
           })
         .catch((error) =>{
-            setError(error.message);
+            setError(error.message); 
         });
     };
     const history = useHistory();
@@ -59,7 +59,7 @@ export default function Login(){
                     New User?? <Link  to="/register">Register</Link>
                 </p>
                 
-                <div className="form-group">
+                <div className="form-group"> 
                     <input required type="email" className="form-control input-line" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
                 </div>
 

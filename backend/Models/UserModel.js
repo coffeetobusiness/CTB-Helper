@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 
-var UserSchema = new mongoose.Schema(
+var userSchema = new mongoose.Schema(
 
 {
    
@@ -28,4 +28,4 @@ var UserSchema = new mongoose.Schema(
 }
 )
 
-module.exports = mongoose.model('user',UserSchema)
+module.exports = mongoose.model('user',userSchema)

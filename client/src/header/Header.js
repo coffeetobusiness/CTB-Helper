@@ -21,6 +21,9 @@ export default function Header(){
               <li className="nav-item">
                 <Link className="nav-link btnsign"  to={"/register"}>Sign up</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link btnsign"  to={"/helpform"}>Sign up</Link>
+              </li>
             </ul>
          
             </div>

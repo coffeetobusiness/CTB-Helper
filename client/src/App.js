@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Home from './pages/Home';
+import HelpForm from './pages/HelpForm';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home/>
+          </Route>
+          <Route exact path="/helpform">
+            <HelpForm/>
           </Route>
         </Switch>
       </Router>

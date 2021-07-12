@@ -2,7 +2,6 @@ import React,{ useState,useContext,useEffect }  from 'react';
 import {  CredentialsContext } from '../App';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
-//import './page.scss';
 import Header from '../header/Header';
 import HomeSearch from './HomeSearch';
 import HomeMain from './HomeMain'
@@ -62,6 +61,7 @@ function Home(){
           },
         })
           .then((response) => response.json("auth done"))
+          
       });
 
     return(

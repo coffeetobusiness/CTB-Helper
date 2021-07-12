@@ -28,7 +28,7 @@ const verifyJWT = (req, res, next) => {
                 res.json({ auth: false, message:"failed to authenticate"});
             }else{
                 req.userId = decoded.id;
-                res.json({ auth: true, message:"you are authenticated"});
+                res.json({ userId:decoded.id, auth: true, message:"you are authenticated"});
                 next();
             }
         })
@@ -62,7 +62,7 @@ router.post('/login', async(req, res) => {
                   //jwt 
                 const id = user1._id;
                 const token = jwt.sign({id},"jwtSecret",{
-                    expiresIn: "10h",
+                    expiresIn: "7d",
                 })
                 res.json({auth:true, token:token, 
                    // result:user1
@@ -112,6 +112,44 @@ router.post('/register', async (req, res,) => {
         
     }catch (error) {
         res.send("error" + error)
+   }
+});
+
+
+const Help = require('../Models/HelpModel');
+//////////Help Post
+router.post('/help', verifyJWT , async (req, res,) => {
+    const help = new Help({
+        title: req.body.title,
+        phone: req.body.phone,
+        location: req.body.location, 
+        category: req.body.category ,
+        address: req.body.address, 
+        city: req.body.city, 
+        state: req.body.state, 
+        description: req.body.description,
+        userId:req.userId,
+        time:"08:45am",
+    })
+    try {
+        await help.save()
+        res.json({
+            message:"success",
+        });
+        
+    }catch (error) {
+        res.send("error" + error)
+   }
+});
+
+//Help Get
+router.get('/help', async (req, res,) => {
+    try {
+        await  Help.find({}, function (err, users) {
+            res.send(users);
+        });
+    }catch (error) {
+        res.json("error" + error)
    }
 });
 

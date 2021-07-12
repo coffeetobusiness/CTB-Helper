@@ -1,19 +1,42 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import { Link,  } from "react-router-dom";
 
-const Card = () =>{
-    return(
-        <div className="card w-100">
-            <div className="card-body">
-              <h5 className="card-title">Need B+ blood</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Jabalpur,12/05/2021 05:55pm</h6>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/" className="card-link">Contact</a>
-              <a href="/" className="card-link">Share</a>
-            </div>
+const ApiCardData =()=>{
+
+  const [result, setresult] = useState([]);
+
+  const LoadData =() =>{
+    fetch('http://localhost:4000/users/help')
+    .then(response => response.json())
+    .then(data => 
+      setresult(data));  
+      console.log(result)
+  }
+  
+  useEffect(() =>{
+    LoadData();
+  }, []);
+
+    return(<>
+        <div>
+        {result.map((help,index) => (
+        <div className="card">
+        <div className="card-body" key={help._id}>
+            <button type="button" className="ml-2 mb-1 close text-danger">
+               <span >&times;</span>
+            </button>
+          <h5 className="card-title">{help.title}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{help.city},{help.time}</h6>
+          <p className="card-text">{help.description}</p>
+          <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
+          <a href="/" className="card-link">Share</a>
         </div>
+    </div>
+      ))}
+        </div>
+        </>
     )
-}
-
+  }
 const FilterForm = () =>{
     return(
         <div>
@@ -67,7 +90,7 @@ const RightBar = () =>{
 const Postbutton = () =>{
   return(
       <div className="mt-2">
-           <button className="btn btn-primary btn-block">Post A help</button>
+        <Link className="btn btn-primary btn-block" to="/helpform">Post A help</Link>
       </div>
   )
 }
@@ -89,9 +112,7 @@ export default function HomeMain(){
                     <a className="ml-3" href="/home">Minimum-time</a>
                    </h5> 
                </div>
-               <Card/>
-               <Card/>
-               <Card/>
+               <ApiCardData/>
            </div>
            <div className="col-2">
              <Postbutton/>

@@ -6,6 +6,7 @@ import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 
+
 export const handleErrors = async (response) => {
     if (!response.ok) {
       const { message } = await response.json();
@@ -69,14 +70,12 @@ export default function Login(){
 
     return(
         <div className="app">
-        <div><Header/></div> 
-
+        <div><Header/></div>
         {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
 
         <div className="row App-conatiner">
             <div className="col-6 container-fluid">
                <form onSubmit={login}>
-
                 <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
                
                 <p className=" mt-5">

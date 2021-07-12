@@ -5,9 +5,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
 import Home from './pages/Home';
-import ProtectedRoute from './ProtectedRoute'
-import Newpassword from './pages/Newpassword'
-import VerifyMail from './pages/VerifyMail'
+import ProtectedRoute from './ProtectedRoute';
+import Newpassword from './pages/Newpassword';
+import VerifyMail from './pages/VerifyMail';
+import HelpForm from './pages/HelpForm';
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -36,6 +37,7 @@ function App() {
         </Switch>
 
         <ProtectedRoute path="/home" component={Home}/>
+        <ProtectedRoute path="/helpform" component={HelpForm}/>
         
       </Router>
       </CredentialsContext.Provider>

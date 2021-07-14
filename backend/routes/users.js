@@ -119,6 +119,9 @@ router.post('/register', async (req, res,) => {
 const Help = require('../Models/HelpModel');
 //////////Help Post
 router.post('/help', verifyJWT , async (req, res,) => {
+    const date1 = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
+    const dateTime = new Date()
+    const time1 = dateTime.getHours()+':'+dateTime.getMinutes()
     const help = new Help({
         title: req.body.title,
         phone: req.body.phone,
@@ -129,7 +132,9 @@ router.post('/help', verifyJWT , async (req, res,) => {
         state: req.body.state, 
         description: req.body.description,
         userId:req.userId,
-        time:"08:45am",
+        // time:"08:45am",
+        time:date1,
+        date:time1
     })
     try {
         await help.save()

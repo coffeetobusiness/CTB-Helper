@@ -26,8 +26,7 @@ const ApiCardData =()=>{
                <span >&times;</span>
             </button>
           <h5 className="card-title">{help.title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{help.city},{help.time}</h6>
-          <h6 className="card-subtitle mb-2 text-muted">{help.date}</h6>
+          <h6 className="card-subtitle mb-2 text-muted">{help.city},{help.time},{help.date}</h6>
           <p className="card-text">{help.description}</p>
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
           <a href="/" className="card-link">Share</a>

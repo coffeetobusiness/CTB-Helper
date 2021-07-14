@@ -28,7 +28,7 @@ var UserSchema = new mongoose.Schema(
 
  phone:String,
 
- date: {type: Date, default: Date.now},
+ date:String,
 
  location:String,
 

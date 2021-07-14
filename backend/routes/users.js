@@ -133,7 +133,7 @@ router.post('/help', verifyJWT , async (req, res,) => {
         description: req.body.description,
         userId:req.userId,
         // time:"08:45am",
-        time:date1,
+        time:time1,
         date:time1
     })
     try {

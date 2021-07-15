@@ -21,3 +21,16 @@
     color: rgb(17, 2, 2);
     border: 1px solid black;
   }
+  .btnlogout{
+    font-weight: 700;
+    font-family:'Lucida Sans';
+    margin-top: 2px;
+    background: transparent;
+    color: red;
+    border: none; 
+  }
+  .btnlogout:hover{
+    background: transparent;
+    color: red;
+    text-decoration: 2px red underline;
+  }

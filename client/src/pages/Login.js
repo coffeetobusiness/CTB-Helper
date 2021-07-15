@@ -2,9 +2,10 @@ import React,{ useState , useContext } from 'react';
 import { useHistory } from 'react-router';
 import { CredentialsContext } from "../App";
 //import './page.scss';
-import { Link  } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
+
 
 export const handleErrors = async (response) => {
     if (!response.ok) {
@@ -19,6 +20,7 @@ export default function Login(){
     const [password,setPassword] = useState("");
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
+    const  [loginStatus, setloginStatus] = useState(false);
 
     const login =(e) =>{
         e.preventDefault();
@@ -34,10 +36,11 @@ export default function Login(){
               }),
         })
         .then(handleErrors)
-        .then(() => {
+        .then((response) => {
+            setloginStatus(true);
+            localStorage.setItem("token",response.token)
             setCredentials({
               email,
-              password,
             });
             history.push("/home");
           })
@@ -45,14 +48,34 @@ export default function Login(){
             setError(error.message);
         });
     };
-    const history = useHistory();
+        const history = useHistory();
+       //Button
+    const ClickAuth = () => {
+        fetch(`http://localhost:4000/users/isUserAuth`,
+        {
+            method: "GET",
+            headers: {
+                "x-access-token": localStorage.getItem("token"),
+              "Content-Type": "application/json",
+        },
+       })
+       .then(handleErrors)
+       .then(() => {
+        history.push("/home");
+        })
+       .catch((error) =>{
+        setError(error.message);
+       });
+    }
+
     return(
         <div className="app">
-        <div><Header/></div> 
+        <div><Header/></div>
+        {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
+
         <div className="row App-conatiner">
             <div className="col-6 container-fluid">
                <form onSubmit={login}>
-
                 <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
                
                 <p className=" mt-5">
@@ -75,6 +98,7 @@ export default function Login(){
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
 
+                
                 {error && <span id="reg-msg" >{error}</span>}
 
                 <p className="forgot-password text-right">

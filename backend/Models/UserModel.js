@@ -20,11 +20,14 @@ var UserSchema = new mongoose.Schema(
  password:{
      type:String,
      require:true
- }
+ },
+ verify:{
+    type:Boolean,
+    default:false
+ },
+ resetToken:String,
 
-
-
-
+ expireToken:String,
 }
 )
 

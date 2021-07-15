@@ -1,12 +1,19 @@
 import React,{useState,useEffect} from 'react';
 import { Link,  } from "react-router-dom";
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
+import axios from 'axios'
+import { Button } from '@material-ui/core';
 
 const ApiCardData =()=>{
 
   const [result, setresult] = useState([]);
+  const [like,setLike] = useState([0]);
+
+  const url = 'http://localhost:4000/users';
 
   const LoadData =() =>{
-    fetch('http://localhost:4000/users/help')
+    fetch(`${url}/help`)
     .then(response => response.json())
     .then(data => 
       setresult(data));  
@@ -16,6 +23,22 @@ const ApiCardData =()=>{
   useEffect(() =>{
     LoadData();
   }, []);
+
+  const likePost = (id) =>{
+    console.log(id)
+    const response = axios.put(`${url}/${id}`)
+    console.log(response._id)
+
+      response.then((res) => {
+        const items = res.data;
+        setLike(items)
+        console.log(items);
+      })
+    
+    
+    // console.log(items)
+    
+  }
 
     return(<>
         <div>
@@ -30,6 +53,16 @@ const ApiCardData =()=>{
           <p className="card-text">{help.description}</p>
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
           <a href="/" className="card-link">Share</a>
+          <br></br>
+          <Button onClick={()=>{likePost(help._id)}}>
+            <ThumbUpAltIcon />
+          </Button>
+          <span>{like}</span>
+          <Button>
+            <ThumbDownAltIcon/>
+          </Button>
+          <span>0</span>
+
         </div>
     </div>
       ))}

@@ -50,7 +50,9 @@ var UserSchema = new mongoose.Schema(
  
  comments:String,
 
- upvotes:String,
+ likeCount: {
+   type: Number,
+},
 
  resetToken:String,
 

@@ -3,6 +3,7 @@ const User = require('../Models/UserModel');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const router = express.Router();
+const help = require('../Models/HelpModel')
 //------------JSON WEB TOKEN---------------------
 
 const jwt = require('jsonwebtoken');
@@ -133,6 +134,7 @@ router.post('/help', verifyJWT , async (req, res,) => {
         userId:req.userId,
         time:currentTime,
         date:currentDate,
+        likeCount:0,
         
     })
     try {
@@ -287,6 +289,28 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+
+//upvote
+router.put('/:id',async (req,res)=>{
+    console.log("i was here")
+    console.log(req.params)
+    const {id} = req.params
+
+    try{
+
+    
+    const post = await help.findById(id);
+
+    const updatedPost = await help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+    console.log(updatedPost.likeCount)
+    
+    res.json(updatedPost.likeCount)
+    }
+    catch(err){
+        console.error(err.message)
+        res.status(500).send('server error')
+    }
+})
 
 //Home
 router.get('/home',verifyJWT, async (req, res) => {

@@ -15,7 +15,7 @@ const ApiCardData =()=>{
   
   useEffect(() =>{
     LoadData();
-  }, []);
+  }, [result]);
 
     return(<>
         <div>

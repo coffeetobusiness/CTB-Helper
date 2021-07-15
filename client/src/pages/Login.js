@@ -7,6 +7,8 @@ import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 
 
+
+
 export const handleErrors = async (response) => {
     if (!response.ok) {
       const { message } = await response.json();
@@ -71,6 +73,7 @@ export default function Login(){
     return(
         <div className="app">
         <div><Header/></div>
+       
         {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
 
         <div className="row App-conatiner">

@@ -119,31 +119,50 @@ router.post('/register', async (req, res,) => {
 const Help = require('../Models/HelpModel');
 //////////Help Post
 router.post('/help', verifyJWT , async (req, res,) => {
-    const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
-    const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-    const help = new Help({
-        title: req.body.title,
-        phone: req.body.phone,
-        location: req.body.location, 
-        category: req.body.category ,
-        address: req.body.address, 
-        city: req.body.city, 
-        state: req.body.state, 
-        description: req.body.description,
-        userId:req.userId,
-        time:currentTime,
-        date:currentDate,
-        
-    })
-    try {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+        const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
+        const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        const help = new Help({
+            title: req.body.title,
+            phone: req.body.phone,
+            category: req.body.category,
+            description: req.body.description,
+
+            location: req.body.location,
+            latitude:req.body.latitude,
+            longitude:req.body.longitude,
+
+            address: req.body.address, 
+            city: req.body.city, 
+            state: req.body.state, 
+            country: req.body.country, 
+
+            time:currentTime,
+            date:currentDate,
+            
+            userId:user._id,
+            email:user.email,
+            firstName:user.firstName,
+            lastName:user.lastName
+            
+        })
+    
+        try {
         await help.save()
         res.json({
             message:"success",
         });
         
-    }catch (error) {
+        }catch (error) {
         res.send("error" + error)
-   }
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
 });
 
 //Help Get

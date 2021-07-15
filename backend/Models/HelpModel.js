@@ -12,17 +12,29 @@ var UserSchema = new mongoose.Schema(
     type:String,
     required:true
  },
+ 
+ firstName:String,
+ lastName:String,
+ email:String,
 
  userId:{
     type:String,
     required:true
  },
 
+ location:String,
+
+ latitude:String,
+
+ longitude:String,
+
+ address:String,
+
  city:String,
 
  state:String,
 
- address:String,
+ country:String,
 
  category:String,
 
@@ -30,11 +42,12 @@ var UserSchema = new mongoose.Schema(
 
  date:String,
 
- location:String,
-
  time:String,
 
- created_at:String,
+ created_at: {
+   type: Date,
+   default: Date.now
+},
 
  updated_at:String,
 

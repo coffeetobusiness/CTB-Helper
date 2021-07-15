@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/src/Location/Location.js
+/src/Location/Location2.js
 /.pnp
 .pnp.js
 

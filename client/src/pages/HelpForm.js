@@ -24,43 +24,6 @@ export default function HelpForm() {
                     history.push('/home')
         })
     }
-
-
-
-
-    // const [title,setTitle] = useState("");
-    // const [phone,setPhone] = useState("");
-    // const [location,setLocation] = useState("");
-    // const [category,setCategory] = useState("");
-    // const [address,setAddress] = useState("");
-    // const [city, setCity] = useState("");
-    // const [state,setState] = useState("");
-    // const [description,setDescription] = useState("");
-
-    // const [error, setError] = useState("");
-
-    // const PostHelpClick =(e) =>{
-    //     e.preventDefault();
-    //     fetch(`http://localhost:4000/users/help`,{
-    //         method: "POST",
-    //         headers:{
-    //             "Content-Type": "application/json",
-    //             "x-access-token": localStorage.getItem("token"),
-    //         },
-    //         body: JSON.stringify({
-    //             title, phone, location, category ,address, city, state, description
-    //           }),
-    //     })
-    //     .then(handleErrors)
-    //     .then(() => {
-    //         alert("Your Post successfully added")
-    //         history.push('/home')
-    //     })
-    //     .catch((error) =>{
-    //         setError(error.message);
-    //     });
-    // };
-    // const history = useHistory();
    
     return(
         <div className="app">

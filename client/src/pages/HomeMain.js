@@ -10,25 +10,12 @@ import { getPosts } from '../redux/actions/posts';
 
 const ApiCardData =()=>{
 
-  // const [result, setresult] = useState([]);
   const [like,setLike] = useState([0]);
   const posts = useSelector(state => state.posts)
   const dispatch = useDispatch()
   console.log(posts)
 
   const url = 'http://localhost:4000/users';
-
-  // const LoadData =() =>{
-  //   // fetch(`${url}/help`)
-  //   // .then(response => response.json())
-  //   // .then(data => 
-  //   //   setresult(data));  
-  //   //   // console.log(result)
-  // }
-  
-  // useEffect(() =>{
-  //   LoadData();
-  // }, []);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -46,7 +33,6 @@ const ApiCardData =()=>{
       })
     
     
-    // console.log(items)
     
   }
 

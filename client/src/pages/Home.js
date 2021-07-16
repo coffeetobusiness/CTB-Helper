@@ -3,7 +3,6 @@ import {  CredentialsContext } from '../App';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Header from '../header/Header';
-import HomeSearch from './HomeSearch';
 import HomeMain from './HomeMain'
 // <Link  to="/register">Register</Link>
 
@@ -70,9 +69,7 @@ function Home(){
           {/* <VerifyButton/>
             <h5>Welcome back... {credentials.email}</h5> */}
          {error && <span id="reg-msg" >{error}</span>} 
-          <div>
-            <HomeSearch/>
-          </div>
+          
           <div>
             <HomeMain/>
           </div>

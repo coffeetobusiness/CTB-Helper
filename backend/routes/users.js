@@ -119,7 +119,8 @@ router.post('/register', async (req, res,) => {
 
 const Help = require('../Models/HelpModel');
 //////////Help Post
-router.post('/help', verifyJWT , async (req, res,) => {
+router.post('/help',verifyJWT,async (req, res,) => {
+    console.log("i was here in users backend")
     const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
     const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     const help = new Help({
@@ -131,10 +132,10 @@ router.post('/help', verifyJWT , async (req, res,) => {
         city: req.body.city, 
         state: req.body.state, 
         description: req.body.description,
-        userId:req.userId,
         time:currentTime,
         date:currentDate,
         likeCount:0,
+        userId:user._id,
         
     })
     try {
@@ -142,6 +143,7 @@ router.post('/help', verifyJWT , async (req, res,) => {
         res.json({
             message:"success",
         });
+        // res.json(help)
         
     }catch (error) {
         res.send("error" + error)
@@ -149,10 +151,12 @@ router.post('/help', verifyJWT , async (req, res,) => {
 });
 
 //Help Get
-router.get('/help', async (req, res,) => {
+router.get('/help/post', async (req, res,) => {
+    console.log("i was hre in get methoc")
     try {
         await  Help.find({}, function (err, users) {
             res.send(users);
+            console.log(users)
         });
     }catch (error) {
         res.json("error" + error)

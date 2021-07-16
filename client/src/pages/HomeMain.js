@@ -4,25 +4,35 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import axios from 'axios'
 import { Button } from '@material-ui/core';
+import {useSelector} from 'react-redux'
+import { useDispatch } from 'react-redux';
+import { getPosts } from '../redux/actions/posts';
 
 const ApiCardData =()=>{
 
-  const [result, setresult] = useState([]);
+  // const [result, setresult] = useState([]);
   const [like,setLike] = useState([0]);
+  const posts = useSelector(state => state.posts)
+  const dispatch = useDispatch()
+  console.log(posts)
 
   const url = 'http://localhost:4000/users';
 
-  const LoadData =() =>{
-    fetch(`${url}/help`)
-    .then(response => response.json())
-    .then(data => 
-      setresult(data));  
-      console.log(result)
-  }
+  // const LoadData =() =>{
+  //   // fetch(`${url}/help`)
+  //   // .then(response => response.json())
+  //   // .then(data => 
+  //   //   setresult(data));  
+  //   //   // console.log(result)
+  // }
   
-  useEffect(() =>{
-    LoadData();
-  }, []);
+  // useEffect(() =>{
+  //   LoadData();
+  // }, []);
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
 
   const likePost = (id) =>{
     console.log(id)
@@ -42,7 +52,7 @@ const ApiCardData =()=>{
 
     return(<>
         <div>
-        {result.map((help,index) => (
+        {posts.map((help,index) => (
         <div className="card">
         <div className="card-body" key={help._id}>
             <button type="button" className="ml-2 mb-1 close text-danger">

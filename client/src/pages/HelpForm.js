@@ -2,43 +2,65 @@ import React, {useState} from 'react'
 import Header from '../header/Header';
 import { useHistory } from 'react-router';
 import { handleErrors } from './Login';
+import { useDispatch } from 'react-redux';
+import { createPost } from '../redux/actions/posts';
 
 
 export default function HelpForm() {
 
-    const [title,setTitle] = useState("");
-    const [phone,setPhone] = useState("");
-    const [location,setLocation] = useState("");
-    const [category,setCategory] = useState("");
-    const [address,setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state,setState] = useState("");
-    const [description,setDescription] = useState("");
-
-    const [error, setError] = useState("");
-
-    const PostHelpClick =(e) =>{
-        e.preventDefault();
-        fetch(`http://localhost:4000/users/help`,{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json",
-                "x-access-token": localStorage.getItem("token"),
-            },
-            body: JSON.stringify({
-                title, phone, location, category ,address, city, state, description
-              }),
-        })
-        .then(handleErrors)
-        .then(() => {
-            alert("Your Post successfully added")
-            history.push('/home')
-        })
-        .catch((error) =>{
-            setError(error.message);
-        });
-    };
+    const dispatch = useDispatch();
     const history = useHistory();
+
+    const [postData, setPostData] = useState({ title: '', phone: '', location: '', category: '', address: '',city:'',state:'',description:'' });
+    
+    const [error, setError] = useState(""); 
+
+    const PostHelpClick = async (e) => {
+        e.preventDefault();
+
+        dispatch(createPost(postData))
+        .then(() => {
+                    alert("Your Post successfully added")
+                    history.push('/home')
+        })
+    }
+
+
+
+
+    // const [title,setTitle] = useState("");
+    // const [phone,setPhone] = useState("");
+    // const [location,setLocation] = useState("");
+    // const [category,setCategory] = useState("");
+    // const [address,setAddress] = useState("");
+    // const [city, setCity] = useState("");
+    // const [state,setState] = useState("");
+    // const [description,setDescription] = useState("");
+
+    // const [error, setError] = useState("");
+
+    // const PostHelpClick =(e) =>{
+    //     e.preventDefault();
+    //     fetch(`http://localhost:4000/users/help`,{
+    //         method: "POST",
+    //         headers:{
+    //             "Content-Type": "application/json",
+    //             "x-access-token": localStorage.getItem("token"),
+    //         },
+    //         body: JSON.stringify({
+    //             title, phone, location, category ,address, city, state, description
+    //           }),
+    //     })
+    //     .then(handleErrors)
+    //     .then(() => {
+    //         alert("Your Post successfully added")
+    //         history.push('/home')
+    //     })
+    //     .catch((error) =>{
+    //         setError(error.message);
+    //     });
+    // };
+    // const history = useHistory();
    
     return(
         <div className="app">
@@ -52,21 +74,21 @@ export default function HelpForm() {
             <form onSubmit={PostHelpClick}>
                     <div class="form-row">
                         <div className="form-group col-md-6 input-line01">
-                        <input required type="text" class="form-control" placeholder="Title of help" onChange={(e) => setTitle(e.target.value)}/>
+                            <input required type="text" className="form-control" placeholder="Title of help" value={postData.title} label="title" name="title" onChange={(e) => setPostData({...postData,title:e.target.value})}/>
                         </div>
                         <div class="form-group col-md-6">
-                        <input  type="number" class="form-control"  placeholder="Phone" onChange={(e) => setPhone(e.target.value)}/>
+                            <input required type="number" className="form-control" placeholder="Phone" value={postData.phone} label="phone" name="phone" onChange={(e) => setPostData({...postData,phone:e.target.value})}/>
                         </div>
                     </div>
                     <div class="form-row">
                     <div class="form-group col-md-6">
-                        <select  class="form-control" onChange={(e) => setLocation(e.target.value)}>
+                        <select  className="form-control" value={postData.location} label="location" name="location" onChange={(e) => setPostData({...postData,location:e.target.value})}>
                             <option selected>Location</option>
                             <option>...</option>
                         </select>
                         </div>
                         <div class="form-group col-md-6">
-                        <select  class="form-control" onChange={(e) => setCategory(e.target.value)}>
+                        <select  className="form-control" value={postData.category} label="category" name="category" onChange={(e) => setPostData({...postData,category:e.target.value})}>
                             <option selected>Category</option>
                             <option>Medical</option>
                             <option>Financial</option>
@@ -75,11 +97,11 @@ export default function HelpForm() {
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Address" onChange={(e) => setAddress(e.target.value)}/>
+                    <input required type="text" className="form-control" placeholder="Address" value={postData.address} label="address" name="address" onChange={(e) => setPostData({...postData,address:e.target.value})}/>
                     </div>
                     <div class="form-row">
                     <div class="form-group col-md-6">
-                        <select  class="form-control" onChange={(e) => setCity(e.target.value)}>
+                        <select  className="form-control" value={postData.city} label="city" name="city" onChange={(e) => setPostData({...postData,city:e.target.value})}>
                             <option selected>City</option>
                             <option>jabalpur</option>
                             <option>Narsinghpur</option>
@@ -88,7 +110,7 @@ export default function HelpForm() {
                         </select>
                         </div>
                         <div class="form-group col-md-6">
-                        <select  class="form-control" onChange={(e) => setState(e.target.value)}>
+                        <select  className="form-control" value={postData.state} label="state" name="state" onChange={(e) => setPostData({...postData,state:e.target.value})}>
                             <option selected>State</option>
                             <option>M.P.</option>
                             <option>U.P.</option>
@@ -99,7 +121,7 @@ export default function HelpForm() {
                     
                     <div class="form-group">
                     <div class="form-group">
-                        <textarea required class="form-control"  rows="3" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
+                        <textarea required class="form-control"  rows="3" placeholder="Description" label="description" name="description" value={postData.description} onChange={(e) => setPostData({...postData,description:e.target.value})}></textarea>
                     </div>
                     </div>
                     {error && <span id="reg-msg" >{error}</span>}

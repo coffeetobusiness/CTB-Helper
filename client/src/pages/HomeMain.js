@@ -6,35 +6,35 @@ import axios from 'axios'
 import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux';
-import { getPosts } from '../redux/actions/posts';
+import { getPosts,likePost } from '../redux/actions/posts';
 
 const ApiCardData =()=>{
 
-  const [like,setLike] = useState([0]);
+  // const [like,setLike] = useState([0]);
   const posts = useSelector(state => state.posts)
   const dispatch = useDispatch()
   console.log(posts)
 
-  const url = 'http://localhost:4000/users';
+  // const url = 'http://localhost:4000/users';
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  const likePost = (id) =>{
-    console.log(id)
-    const response = axios.put(`${url}/${id}`)
-    console.log(response._id)
+  // const likePost = (id) =>{
+  //   console.log(id)
+  //   const response = axios.put(`${url}/${id}`)
+  //   console.log(response._id)
 
-      response.then((res) => {
-        const items = res.data;
-        setLike(items)
-        console.log(items);
-      })
+  //     response.then((res) => {
+  //       const items = res.data;
+  //       setLike(items)
+  //       console.log(items);
+  //     })
     
     
     
-  }
+  // }
 
     return(<>
         <div>
@@ -50,11 +50,11 @@ const ApiCardData =()=>{
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
           <a href="/" className="card-link">Share</a>
           <br></br>
-          <Button onClick={()=>{likePost(help._id)}}>
+          <Button onClick={()=>dispatch(likePost(help._id))}>
             <ThumbUpAltIcon />
           </Button>
-          <span>{like}</span>
-          <Button>
+          <span>{help.likeCount}</span>
+          <Button onClick={()=>dispatch(likePost(help._id))}>
             <ThumbDownAltIcon/>
           </Button>
           <span>0</span>

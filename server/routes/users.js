@@ -3,7 +3,6 @@ const User = require('../Models/UserModel');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const router = express.Router();
-const help = require('../Models/HelpModel')
 //------------JSON WEB TOKEN---------------------
 
 const jwt = require('jsonwebtoken');
@@ -295,7 +294,7 @@ router.delete('/:id', async (req, res) => {
 
 
 //upvote
-router.put('/:id',async (req,res)=>{
+router.put('/:id/likePost',async (req,res)=>{
     console.log("i was here")
     console.log(req.params)
     const {id} = req.params
@@ -303,12 +302,12 @@ router.put('/:id',async (req,res)=>{
     try{
 
     
-    const post = await help.findById(id);
+    const post = await Help.findById(id);
 
-    const updatedPost = await help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+    const updatedPost = await Help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
     console.log(updatedPost.likeCount)
     
-    res.json(updatedPost.likeCount)
+    res.json(updatedPost)
     }
     catch(err){
         console.error(err.message)

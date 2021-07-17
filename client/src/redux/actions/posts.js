@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE,LIKE } from '../constants/actionTypes';
 
 import * as api from '../api/index';
 
@@ -25,3 +25,20 @@ export const createPost = (post) => async (dispatch) => {
   }
 };
 
+export const likePost = (id) => async (dispatch) => {
+  console.log("i was here in actions")
+  console.log(id)
+
+  try {
+    const { data } = await api.likePost(id);
+  console.log("i was here in actions twice")
+
+    
+  console.log(data)
+
+
+    dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

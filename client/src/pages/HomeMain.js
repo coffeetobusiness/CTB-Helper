@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import { Link,  } from "react-router-dom";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
-import axios from 'axios'
 import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux';

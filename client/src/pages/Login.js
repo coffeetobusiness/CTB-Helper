@@ -1,9 +1,11 @@
-import React,{ useState } from 'react';
+import React,{ useState,useContext } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { signin } from '../redux/actions/auth';
 import { Link  } from "react-router-dom";
 import Header from '../header/Header';
+import { CredentialsContext } from "../App";
+
 
 export default function Login(){
 
@@ -11,6 +13,7 @@ export default function Login(){
     const history = useHistory();
 
     const [postData, setPostData] = useState({ email: '', password: '' });
+    const [, setCredentials] = useContext(CredentialsContext);
 
    
 
@@ -18,6 +21,9 @@ export default function Login(){
         e.preventDefault();
     
         console.log(postData)
+        setCredentials(
+            {postData}
+          );
         dispatch(signin(postData,history))     
         // history.push("/register")          
           

@@ -1,82 +1,61 @@
 import React, {useState} from 'react';
 import { useHistory } from 'react-router';
-//import './page.scss';
-import { Link,  } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { signup } from '../redux/actions/auth';
+import { Link } from "react-router-dom";
 import Header from '../header/Header';
-// <Link  to="/register">Register</Link>
-import { handleErrors } from './Login';
+
 
 export default function Register(){
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const [firstName,setfirstName] = useState("");
-    const [lastName,setlastName] = useState("");
-    const [email,setemail] = useState("");
-    const [password,setPassword] = useState("");
-    const [password2,setPassword2] = useState("");
-    const [error, setError] = useState("");
-
+  const [postData, setPostData] = useState({ firstName: '', lastName: '', email: '', password: '', password2: '' });
     
+  const [error, setError] = useState(""); 
 
-    const register =(e) =>{
+  const handleSubmit = async (e) => {
         e.preventDefault();
-        if(password!==password2){
+
+        e.preventDefault();
+        if(postData.password!==postData.password2){
             setError("Password does not match")
-        }else{
-        
-        fetch(`http://localhost:4000/users/register`,{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                firstName,
-                lastName,
-                email,
-                password,
-              }),
-        })
-        .then(handleErrors)
-        .then(() => {
-            alert("You Are Registered Please Login")
+        }else{    
+            console.log(postData)
+            dispatch(signup(postData,history));        
+            alert("You Are Register Please Login")
             history.push('/')
-           //setError(`Welcome ${firstName} please Login`);
-        })
-        .catch((error) =>{
-            setError(error.message);
-        });
+        } 
     };
-    };
-    const history = useHistory();
+
     return(
         <div className="app">
         <div><Header/></div> 
         <div className="row App-conatiner">
             <div className="col-6">
            
-               <form onSubmit={register}>
+               <form onSubmit={handleSubmit}>
 
                 <h3><i class="fas fa-hands-helping"></i> Helpo Register</h3>
                 
                 
 
                 <div className="form-group mt-5">
-                    <input required minLength="3" type="text" className="form-control input-line" placeholder="firstname" onChange={(e) => setfirstName(e.target.value)}/>
+                    <input value={postData.firstName} label="firstName" name="firstName" required minLength="3" type="text" className="form-control input-line" placeholder="firstname" onChange={(e) => setPostData({ ...postData, firstName: e.target.value })}/>
                 </div>
                 <div className="form-group">
-                    <input required minLength="3" type="text" className="form-control input-line" placeholder="lastname" onChange={(e) => setlastName(e.target.value)}/>
+                    <input value={postData.lastName} name="lastName" label="lastName" required minLength="3" type="text" className="form-control input-line" placeholder="lastname" onChange={(e) => setPostData({ ...postData, lastName: e.target.value })}/>
                 </div>
              
                 <div className="form-group">
-                    <input required type="email" className="form-control input-line" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
+                    <input value={postData.email} name="email" label="email" required type="email" className="form-control input-line" placeholder="email" onChange={(e) => setPostData({ ...postData, email: e.target.value })}/>
                 </div>
                 <div className="form-group">
-                    <input required minLength="5" type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                    <input value={postData.password} name="password" label="password" required minLength="5" type="text" className="form-control input-line" placeholder="password" onChange={(e) => setPostData({ ...postData, password: e.target.value })}/>
                 </div>
                 <div className="form-group">
-                    <input required minLength="5" type="password" className="form-control input-line" placeholder="confirm password" onChange={(e) => setPassword2(e.target.value)}/>
+                    <input value={postData.password2} name="password2" label="password2" required minLength="5" type="text" className="form-control input-line" placeholder="confirm password" onChange={(e) => setPostData({ ...postData, password2: e.target.value })}/>
                 </div>
-
-               
 
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                 {error && <span id="reg-msg" >{error}</span>}

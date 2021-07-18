@@ -41,6 +41,7 @@ router.get('/isUserAuth', verifyJWT , (req,res) => {
 
 //logIn
 router.post('/login', async(req, res) => {
+    console.log("i was here")
     const user = ({
         email: req.body.email,
         password: req.body.password

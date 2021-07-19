@@ -9,31 +9,17 @@ import { getPosts,likePost } from '../redux/actions/posts';
 
 const ApiCardData =()=>{
 
-  // const [like,setLike] = useState([0]);
   const posts = useSelector(state => state.posts)
   const dispatch = useDispatch()
   console.log(posts)
 
-  // const url = 'http://localhost:4000/users';
 
   useEffect(() => {
+    console.log("i was in use effect")
     dispatch(getPosts());
   }, [dispatch]);
 
-  // const likePost = (id) =>{
-  //   console.log(id)
-  //   const response = axios.put(`${url}/${id}`)
-  //   console.log(response._id)
-
-  //     response.then((res) => {
-  //       const items = res.data;
-  //       setLike(items)
-  //       console.log(items);
-  //     })
-    
-    
-    
-  // }
+  
 
     return(<>
         <div>

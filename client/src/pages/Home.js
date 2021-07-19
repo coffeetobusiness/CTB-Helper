@@ -51,18 +51,18 @@ function Home(){
 
   
 
-    useEffect(() => {
-        fetch(`http://localhost:4000/users/home`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.getItem("token"),
-            Authorization: `Basic ${credentials.email}`,
-          },
-        })
-          .then((response) => response.json("auth done"))
+    // useEffect(() => {
+    //     fetch(`http://localhost:4000/users/home`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "x-access-token": localStorage.getItem("token"),
+    //         Authorization: `Basic ${credentials.email}`,
+    //       },
+    //     })
+    //       .then((response) => response.json("auth done"))
           
-      });
+    //   });
 
     return(
         <div className="app">

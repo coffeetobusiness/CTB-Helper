@@ -16,7 +16,11 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 }))
 
 const verifyJWT = (req, res, next) => {
-    const token = req.headers["x-access-token"]
+    console.log("i was in jwt")
+
+    // const token = req.headers["x-access-token"]
+    const token = req.headers.authorization.split(" ")[1];
+    // const token = localStorage.getItem('token')
 
     if(!token){
         res.status(403)
@@ -119,13 +123,16 @@ router.post('/register', async (req, res,) => {
 
 const Help = require('../Models/HelpModel');
 //////////Help Post
-router.post('/help',async (req, res,) => {
+router.post('/help', verifyJWT, async (req, res) => {
     console.log("i was here in users backend")
+    const user = await User.findOne({ _id: req.userId });
+    console.log(req.body)
     const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
     const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     const help = new Help({
         title: req.body.title,
         phone: req.body.phone,
+        userId:user._id,
         location: req.body.location, 
         category: req.body.category ,
         address: req.body.address, 
@@ -135,28 +142,30 @@ router.post('/help',async (req, res,) => {
         time:currentTime,
         date:currentDate,
         likeCount:0,
-        // userId:user._id,
         
     })
-    try {
-        await help.save()
+     help.save()
         res.json({
             message:"success",
         });
-        // res.json(help)
+//     try {
+//         await help.save()
+//         res.json({
+//             message:"success",
+//         });
         
-    }catch (error) {
-        res.send("error" + error)
-   }
+//     }catch (error) {
+//         res.send("error" + error)
+//    }
 });
 
 //Help Get
 router.get('/help/post', async (req, res,) => {
-    console.log("i was hre in get methoc")
+    // console.log("i was hre in get methoc")
     try {
         await  Help.find({}, function (err, users) {
             res.send(users);
-            console.log(users)
+            // console.log(users)
         });
     }catch (error) {
         res.json("error" + error)

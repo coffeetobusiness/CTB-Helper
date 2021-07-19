@@ -15,8 +15,9 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
   console.log("i was here in actions")
   try {
+    console.log(post)
     const { data } = await api.createPost(post);
-  console.log(data)
+    console.log(data)
 
 
     dispatch({ type: CREATE, payload: data });
@@ -32,6 +33,7 @@ export const likePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id);
   console.log("i was here in actions twice")
+  console.log(data)
 
     
   console.log(data)

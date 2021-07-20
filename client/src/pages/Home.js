@@ -3,7 +3,7 @@ import {  CredentialsContext } from '../App';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Header from '../header/Header';
-import HomeMain from './HomeMain'
+import HomeMain from '../components/HomeMain'
 // <Link  to="/register">Register</Link>
 
 

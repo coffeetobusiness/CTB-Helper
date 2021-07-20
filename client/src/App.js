@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import ProtectedRoute from './ProtectedRoute';
 import Newpassword from './pages/Newpassword';
 import VerifyMail from './pages/VerifyMail';
-import HelpForm from './pages/HelpForm';
+import HelpForm from '../src/components/HelpForm';
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 

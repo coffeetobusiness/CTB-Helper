@@ -1,7 +1,7 @@
 import React, {useState ,useEffect} from 'react'
 import Header from '../header/Header';
 import { useHistory } from 'react-router';
-import { handleErrors } from './Login';
+import { handleErrors } from '../pages/Login';
 
 
 export default function HelpForm() {

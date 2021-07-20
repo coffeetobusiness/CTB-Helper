@@ -17,9 +17,14 @@ const ApiCardData =()=>{
   useEffect(() => {
     console.log("i was in use effect")
     dispatch(getPosts());
-  },);
+  },[dispatch]);
 
-  
+  const like = async (id) => {
+    dispatch(likePost(id))
+    .then(()=>{
+      dispatch(getPosts());
+    })
+  }
 
     return(<>
         <div>
@@ -35,7 +40,7 @@ const ApiCardData =()=>{
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
           <a href="/" className="card-link">Share</a>
           <br></br>
-          <Button onClick={()=>dispatch(likePost(help._id))}>
+          <Button onClick={()=>like(help._id)}>
             <ThumbUpAltIcon />
           </Button>
           <span>{help.likes.length}</span>

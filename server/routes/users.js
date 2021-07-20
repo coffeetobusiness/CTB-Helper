@@ -142,7 +142,7 @@ router.post('/help', verifyJWT, async (req, res) => {
         time:currentTime,
         date:currentDate,
         likeCount:0,
-        likes:likes.length,
+        likes:[],
         
     })
     console.log(help)

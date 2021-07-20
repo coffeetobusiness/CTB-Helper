@@ -17,7 +17,7 @@ export const fetchPosts = () => axios.get(`${url}/help/post`);
 // export const createPost = (newPost) => axios.post(`${url}/help`, newPost);
 export const createPost = (newPost) => API.post('/help', newPost);
 
-export const likePost = (id) => axios.put(`${url}/${id}/likePost`)
+export const likePost = (id) => API.put(`/${id}/likePost`)
 
 export const signUp = (newPost) => axios.post(`${url}/register`, newPost);
 export const signIn = (newPost) => axios.post(`${url}/login`, newPost);

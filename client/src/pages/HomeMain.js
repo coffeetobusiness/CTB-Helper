@@ -17,7 +17,7 @@ const ApiCardData =()=>{
   useEffect(() => {
     console.log("i was in use effect")
     dispatch(getPosts());
-  }, [dispatch]);
+  },);
 
   
 
@@ -38,11 +38,7 @@ const ApiCardData =()=>{
           <Button onClick={()=>dispatch(likePost(help._id))}>
             <ThumbUpAltIcon />
           </Button>
-          <span>{help.likeCount}</span>
-          <Button onClick={()=>dispatch(likePost(help._id))}>
-            <ThumbDownAltIcon/>
-          </Button>
-          <span>0</span>
+          <span>{help.likes.length}</span>
 
         </div>
     </div>

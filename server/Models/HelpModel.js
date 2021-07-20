@@ -53,6 +53,7 @@ var UserSchema = new mongoose.Schema(
  likeCount: {
    type: Number,
 },
+likes: { type: [String], default: [] },
 
  resetToken:String,
 

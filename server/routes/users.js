@@ -142,8 +142,10 @@ router.post('/help', verifyJWT, async (req, res) => {
         time:currentTime,
         date:currentDate,
         likeCount:0,
+        likes:likes.length,
         
     })
+    console.log(help)
      help.save()
         res.json({
             message:"success",
@@ -304,25 +306,49 @@ router.delete('/:id', async (req, res) => {
 
 
 //upvote
-router.put('/:id/likePost',async (req,res)=>{
-    console.log("i was here")
-    console.log(req.params)
-    const {id} = req.params
+router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
+    // console.log("i was here in likes backend")
+    // console.log(req.params)
+    // const {id} = req.params
 
-    try{
+    // try{
+
+    
+    // const post = await Help.findById(id);
+    // console.log(post)
+
+
+    // const updatedPost = await Help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+    // console.log(updatedPost.likeCount)
+    
+    // res.json(updatedPost)
+    // }
+    // catch(err){
+    //     console.error(err.message)
+    //     res.status(500).send('server error')
+    // }
+    const user = await User.findOne({ _id: req.userId });
+    
+    const { id } = req.params
+    console.log(id)
+    console.log(user._id)
 
     
     const post = await Help.findById(id);
 
-    const updatedPost = await Help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
-    console.log(updatedPost.likeCount)
-    
-    res.json(updatedPost)
+    const index = post.likes.findIndex((id) => id ===String(user._id));
+    console.log(index)
+
+    if (index === -1) {
+        //new like
+      post.likes.push(user._id);
+    } else {
+        //remove like
+      post.likes = post.likes.filter((id) => id !== String(user._id));
     }
-    catch(err){
-        console.error(err.message)
-        res.status(500).send('server error')
-    }
+    const updatedPost = await Help.findByIdAndUpdate(id, post, { new: true });
+    console.log(updatedPost)
+    res.status(200).json(updatedPost);
 })
 
 //Home

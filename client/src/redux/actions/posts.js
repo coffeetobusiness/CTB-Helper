@@ -32,12 +32,9 @@ export const likePost = (id) => async (dispatch) => {
 
   try {
     const { data } = await api.likePost(id);
-  console.log("i was here in actions twice")
-  console.log(data)
-
-    
-  console.log(data)
-
+    console.log("i was here in actions twice")
+    console.log(data)
+    console.log(data.likes)
 
     dispatch({ type: LIKE, payload: data });
   } catch (error) {

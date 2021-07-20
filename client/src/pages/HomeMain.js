@@ -17,7 +17,7 @@ const ApiCardData =()=>{
   useEffect(() => {
     console.log("i was in use effect")
     dispatch(getPosts());
-  },[dispatch]);
+  },[]);
 
   const like = async (id) => {
     dispatch(likePost(id))

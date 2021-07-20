@@ -57,3 +57,13 @@
 .homeSlider{
   height: 250px;
 }
+.inputboxlocation{
+ height: 35px;
+ border: none;
+ border-radius: 5px;
+ box-shadow: 2px 4px 8px rgba(113, 116, 136, 0.726);
+}
+.inputboxlocation:focus{
+  outline-style: none;
+  background: transparent;
+ }

@@ -16,7 +16,7 @@ export default function HomeSearch({filterSearch,setFilterSearch}){
              </div>
              <div className="form-group col-3">
              <select  class="form-control" onChange={(e) => setFilterSearch(e.target.value)}>
-                    <option>Category</option>
+                    <option value="">Category</option>
                     <option>Medical</option>
                     <option>Financial</option>
                     <option>Food</option>

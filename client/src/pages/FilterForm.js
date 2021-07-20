@@ -7,19 +7,18 @@ import React,{useState,useEffect} from 'react';
           <form className="FilterForm mt-2">
               <h4 className="text-center text-primary"><i className="fa fa-filter"></i>Filter</h4>
               <select  class="form-control" onChange={(e) => setFilterSearch(e.target.value)}>
-                    <option>Category</option>
+                    <option value="">Category</option>
                     <option>Medical</option>
                     <option>Financial</option>
                     <option>Food</option>
               </select>
-              <select className="form-control  mt-2">
-                <option>Urgency</option>
-                <option>...</option>
+              <select  class="form-control mt-2" onChange={(e) => setFilterSearch(e.target.value)}>
+                    <option value="">State</option>
+                    <option>Maharashtra</option>
+                    <option>Madhya Pradesh</option>
               </select>
-              <select className="form-control  mt-2">
-                <option>Location</option>
-                <option>...</option>
-              </select>
+
+              <input onChange={(e) => setFilterSearch(e.target.value)} placeholder="Location - address,place" className="form-control mt-1"/>
 
               <p className="text-center mt-5">
               <div onClick={(e) => setFilterSearch('')} className="btn btn-danger btn-block">

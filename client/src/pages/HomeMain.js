@@ -33,14 +33,6 @@ export default function HomeMain(){
            </div>
 
            <div className="col-8">
-               <div>
-                   <h5>Sort by: 
-                    <a className="ml-2" href="/home">Relavance</a>
-                    <a className="ml-3" href="/home">Newest-first</a>
-                    <a className="ml-3" href="/home">Nearest</a> 
-                    <a className="ml-3" href="/home">Minimum-time</a>
-                   </h5> 
-               </div>
                <ApiCardData
                 filterSearch={filterSearch}
                 setFilterSearch={setFilterSearch}

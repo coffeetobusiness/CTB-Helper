@@ -130,6 +130,7 @@ router.post('/help', verifyJWT , async (req, res,) => {
             phone: req.body.phone,
             category: req.body.category,
             description: req.body.description,
+            image:req.body.image,
 
             location: req.body.location,
             latitude:req.body.latitude,

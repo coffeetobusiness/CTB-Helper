@@ -12,6 +12,7 @@ export default function HelpForm() {
     const [category,setCategory] = useState("");
     const [address,setAddress] = useState("");
     const [city, setCity] = useState("");
+    const [image, setImage] = useState("");
    
     const [description,setDescription] = useState("");
 
@@ -34,7 +35,7 @@ export default function HelpForm() {
               "x-access-token": localStorage.getItem("token"),
           },
           body: JSON.stringify({
-              title, phone, location, latitude, longitude, category ,address, city, state, country, description
+              title, phone, location, latitude, longitude, category ,address, city, state, country, description , image
             }),
       })
       .then(handleErrors)
@@ -104,15 +105,27 @@ export default function HelpForm() {
      })
      .catch(error => console.log(error))
   }
+
   useEffect(() =>{
     CityNameChange();
     }, [city]);
+
+  const  Imagechange = (e) =>{
+      console.log(e.target.files[0])
+      if (e.target.files && e.target.files[0]) {
+        var img = document.getElementById("myImg");
+        img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
+        const fileUrl = URL.createObjectURL(e.target.files[0]);
+        setImage(fileUrl);
+    }
+  }
+
    
     return(
         <div className="app">
         <div><Header/></div> 
         <div className="row App-conatiner">
-            <div className="col-8">
+            <div className="col-9">
                 <h3><i class="fas fa-hands-helping"></i> Helpo </h3>
                 <div>
                     <h3 className="text">Post  Help</h3>
@@ -170,10 +183,14 @@ export default function HelpForm() {
                         <textarea required class="form-control"  rows="3" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                     </div>
                     </div>
+                    <p className="text-right"><input type="file" onChange={Imagechange}></input></p>
                     {error && <span id="reg-msg" >{error}</span>}
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
             </form>
                
+            </div>
+            <div className="col-3">
+                <img src=""  id="myImg"></img>
             </div>
            
         </div>

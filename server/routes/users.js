@@ -143,6 +143,7 @@ router.post('/help', verifyJWT, async (req, res) => {
         date:currentDate,
         likeCount:0,
         likes:[],
+        comment:[],
         
     })
     console.log(help)
@@ -150,15 +151,6 @@ router.post('/help', verifyJWT, async (req, res) => {
         res.json({
             message:"success",
         });
-//     try {
-//         await help.save()
-//         res.json({
-//             message:"success",
-//         });
-        
-//     }catch (error) {
-//         res.send("error" + error)
-//    }
 });
 
 //Help Get
@@ -307,29 +299,10 @@ router.delete('/:id', async (req, res) => {
 
 //upvote
 router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
-    // console.log("i was here in likes backend")
-    // console.log(req.params)
-    // const {id} = req.params
-
-    // try{
-
     
-    // const post = await Help.findById(id);
-    // console.log(post)
-
-
-    // const updatedPost = await Help.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
-    // console.log(updatedPost.likeCount)
+    const user = await User.findOne({ _id: req.userId });// user id
     
-    // res.json(updatedPost)
-    // }
-    // catch(err){
-    //     console.error(err.message)
-    //     res.status(500).send('server error')
-    // }
-    const user = await User.findOne({ _id: req.userId });
-    
-    const { id } = req.params
+    const { id } = req.params//post id
     console.log(id)
     console.log(user._id)
 
@@ -350,6 +323,27 @@ router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
     console.log(updatedPost)
     res.status(200).json(updatedPost);
 })
+
+//comment
+router.put('/:id/comment',async (req,res)=>{
+    
+    
+    const { id } = req.params
+    const data = req.body.comment
+    console.log(id)
+    console.log(data)
+
+
+    
+    const post = await Help.findById(id);
+    post.comment.push(data)
+    
+    const updatedPost = await Help.findByIdAndUpdate(id, post, { new: true });
+    console.log(updatedPost)
+    // res.status(200).json(updatedPost);
+    res.json({
+        message:"success",
+    });})
 
 //Home
 router.get('/home',verifyJWT, async (req, res) => {

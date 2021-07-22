@@ -1,13 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import { Link,  } from "react-router-dom";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
+import CommentIcon from '@material-ui/icons/Comment';
 import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { getPosts,likePost } from '../redux/actions/posts';
+import Popup from './popup/Popup';
 
 const ApiCardData =()=>{
+  const [buttonPops,setButtonPops] = useState(false)
+  // const [modalShow, setModalShow] = React.useState(false);
 
   const posts = useSelector(state => state.posts)
   const dispatch = useDispatch()
@@ -25,6 +28,8 @@ const ApiCardData =()=>{
       dispatch(getPosts());
     })
   }
+
+  
 
     return(<>
         <div>
@@ -45,6 +50,26 @@ const ApiCardData =()=>{
           </Button>
           <span>{help.likes.length}</span>
 
+          <Button onClick={()=>setButtonPops(true)}>
+            <CommentIcon />
+          </Button>
+          <span>{help.comment.length}</span>
+          <Popup trigger={buttonPops} setTrigger={setButtonPops} id={help._id}/>
+          <p>{help.comment}</p>
+          
+          {/* <Button variant="primary" onClick={() => setModalShow(true)}>
+            <CommentIcon />
+          </Button>
+          <span>{help.comment.length}</span>
+
+
+          <Popup
+            id={help._id}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+          console.log({help._id}) */}
+        
         </div>
     </div>
       ))}

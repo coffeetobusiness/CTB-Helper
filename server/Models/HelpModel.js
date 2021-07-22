@@ -50,10 +50,11 @@ var UserSchema = new mongoose.Schema(
  
  comments:String,
 
- likeCount: {
-   type: Number,
-},
+ 
 likes: { type: [String], default: [] },
+
+comment: { type: [String], default: [] },
+
 
  resetToken:String,
 

@@ -340,10 +340,11 @@ router.put('/:id/comment',async (req,res)=>{
     
     const updatedPost = await Help.findByIdAndUpdate(id, post, { new: true });
     console.log(updatedPost)
-    // res.status(200).json(updatedPost);
-    res.json({
-        message:"success",
-    });})
+    res.status(200).json(updatedPost);
+    // res.json({
+    //     message:"success",
+    // });
+})
 
 //Home
 router.get('/home',verifyJWT, async (req, res) => {

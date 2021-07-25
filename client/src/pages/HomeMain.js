@@ -6,15 +6,39 @@ import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { getPosts,likePost } from '../redux/actions/posts';
+import { comment } from '../redux/actions/posts';
 import Popup from './popup/Popup';
 
-const ApiCardData =()=>{
-  const [buttonPops,setButtonPops] = useState(false)
-  // const [modalShow, setModalShow] = React.useState(false);
 
-  const posts = useSelector(state => state.posts)
+const ApiCardData =()=>{
+  const [show,setShow] = useState(false)
+  const [currentId,setCurrentId] = useState("")
   const dispatch = useDispatch()
+  const posts = useSelector(state => state.posts)
   console.log(posts)
+
+// //COMMENT
+//   const [data,setData] = useState({comment:""})
+//   // const dispatch = useDispatch()
+
+//   const comm = async (id) => {   
+//     if(data===""){
+//       console.log("entr data")
+//     }
+//     else{
+//       try{     
+//         console.log(currentId);
+//         console.log(data)
+//         console.log(id)
+//         dispatch(comment(data,id))
+//         setShow(!show)
+//         setData("")
+//       }
+//       catch(error){
+//         console.log(error)
+//       }
+//     }
+//   }
 
 
   useEffect(() => {
@@ -33,50 +57,48 @@ const ApiCardData =()=>{
 
     return(<>
         <div>
-        {posts.map((help,index) => (
-        <div className="card">
-        <div className="card-body" key={help._id}>
-            <button type="button" className="ml-2 mb-1 close text-danger">
-               <span >&times;</span>
-            </button>
-          <h5 className="card-title">{help.title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{help.city},{help.time},{help.date}</h6>
-          <p className="card-text">{help.description}</p>
-          <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
-          <a href="/" className="card-link">Share</a>
-          <br></br>
-          <Button onClick={()=>like(help._id)}>
-            <ThumbUpAltIcon />
-          </Button>
-          <span>{help.likes.length}</span>
+          {posts.map((help,index) => (
+            <div className="card">
+                <div className="card-body" key={help._id}>
+                <h5 className="card-title">{help.title}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">{help.city},{help.time},{help.date}</h6>
+                <p className="card-text">{help.description}</p>
+                <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
+                <a href="/" className="card-link">Share</a>
+                <br></br>
+                <Button onClick={()=>like(help._id)}>
+                  <ThumbUpAltIcon />
+                </Button>
+                <span>{help.likes.length}</span>
 
-          <Button onClick={()=>setButtonPops(true)}>
-            <CommentIcon />
-          </Button>
-          <span>{help.comment.length}</span>
-          <Popup trigger={buttonPops} setTrigger={setButtonPops} id={help._id}/>
-          <p>{help.comment}</p>
-          
-          {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-            <CommentIcon />
-          </Button>
-          <span>{help.comment.length}</span>
-
-
-          <Popup
-            id={help._id}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-          console.log({help._id}) */}
-        
-        </div>
-    </div>
+                <Button onClick={()=>{setCurrentId(help._id);setShow(!show)}}>
+                  <CommentIcon />
+                </Button>
+                <span>{help.comment.length}</span>
+                <br></br>
+                <Popup  
+                  show={show}
+                  setShow={setShow}
+                  currentId={currentId}
+                  setCurrentId={setCurrentId}
+                />
+                {/* {show? 
+                  <div className="popup">
+                      <div className="popup-inner">
+                          <h5>comments</h5>
+                          <h6>{help.comment}</h6>
+                          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
+                          <button className="close-btn" onClick={()=>comm(help._id)} >Add</button>
+                      </div>
+                  </div>
+                :null}         */}
+            </div>
+          </div>
       ))}
-        </div>
-        </>
-    )
-  }
+    </div>
+  </>
+)
+}
 const FilterForm = () =>{
     return(
         <div>

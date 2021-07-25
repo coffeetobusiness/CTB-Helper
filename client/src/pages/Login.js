@@ -66,7 +66,6 @@ export default function Login(){
             </form>
             </div>
             <div className="col" >
-              
             </div>
         </div>
         </div>

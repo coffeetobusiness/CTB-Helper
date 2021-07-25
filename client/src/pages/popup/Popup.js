@@ -1,74 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import {comment} from '../../redux/actions/posts'
-import { Modal,Button } from "react-bootstrap";
+import {comment,getPosts} from '../../redux/actions/posts'
+import {Modal} from 'react-bootstrap'
+import {useSelector} from 'react-redux'
+import { Typography, TextField, Button } from '@material-ui/core/';
 
 
-export default function Popup(props) {
-    console.log(props.id)
-    const [data,setData] = useState({comment:""})
-    const dispatch = useDispatch()
 
-    const like = async (id) => {
+
+export default function Popup({show,setShow,currentId}) {
+  const posts = useSelector(state => state.posts)
+
+    const handleClose = () => setShow(false);
+
+    useEffect(() => {
+        console.log("i was in use effect")
+        dispatch(getPosts());
+      },[]);
+
+//COMMENT
+  const [data,setData] = useState({comment:""})
+  const dispatch = useDispatch()
+
+  const comm = async (id) => {   
+    if(data===""){
+      console.log("entr data")
+    }
+    else{
+      try{     
+        console.log(currentId);
+        console.log(data)
         console.log(id)
         dispatch(comment(data,id))
-        props.setTrigger(false)
-        // .then(()=>{
-        //   dispatch(getPosts());
-        // })
+        setShow(!show)
+        setData("")
+      }
+      catch(error){
+        console.log(error)
+      }
     }
+  }
 
-
-    return (props.trigger) ? (
-        <div className="popup">
-            <div className="popup-inner">
-                {/* <input type="text" onChange={(e)=>setData(e.target.value)} /> */}
-                <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
-
-                <button className="close-btn" onClick={()=>like(props.id)} >Close</button>
-            </div>
-        </div>
-    ):""
+return (
+    <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            {posts.filter(post => post._id === currentId).map((filteredPerson,index) => (
+            <li>
+               {filteredPerson.comment[index]}
+            </li>
+      ))}
+        </Modal.Body>
+        <Modal.Footer>
+          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
+          <Button variant="contained" color="primary" onClick={()=>comm(currentId)}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
-
-// // export default Popup
-
-// export default function Popup(props) {
-//     console.log(props.id)
-//     const [data,setData] = useState({comment:""})
-//     const dispatch = useDispatch()
-
-//     const like = async (id) => {
-//         console.log(data)
-//         console.log(id)
-//         dispatch(comment(data,id))
-//         props.onHide()
-//     }
-
-//     return (
-//       <Modal
-//         size="lg"
-//         aria-labelledby="contained-modal-title-vcenter"
-//         centered
-//       >
-//         <Modal.Header closeButton>
-//           <Modal.Title id="contained-modal-title-vcenter">
-//             Modal heading
-//           </Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <h4>Comments</h4>
-//           <p>
-//             Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-//             dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-//             consectetur ac, vestibulum at eros.
-//           </p>
-//         </Modal.Body>
-//         <Modal.Footer>
-//          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
-//          <Button onClick={()=>like(props.id)}>Add</Button>
-//         </Modal.Footer>
-//       </Modal>
-//     );
-  
-// }

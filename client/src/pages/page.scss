@@ -68,12 +68,15 @@
   background: transparent;
  }
 #myImg{
-  visibility: hidden;
-  display: none;
-  border: transparent;
- height: 25rem;
- width: 18rem;
+ height: 45vh;
+ width: 38vh;
  border-radius: 5px;
- align-items: center;
-  justify-content: center;
+}
+.cardImg{
+  height: 45vh;
+  width: 38vh;
+}
+.cardDescription{
+ color: rgb(0, 117, 68);
+ font-family: Tahoma;
 }

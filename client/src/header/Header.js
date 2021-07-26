@@ -18,7 +18,7 @@ export default function Header(){
     return(
         <div>
           <nav className="navbar  navbar-expand-lg">
-            <a className="navbar-brand" href="/"><h3><i class="fas fa-hands-helping"></i> Helpo</h3></a>
+            <Link className="navbar-brand" href="/" to="/home"><h3><i class="fas fa-hands-helping"></i> Helpo</h3></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <i className="fa fa-bars"></i>
             </button>

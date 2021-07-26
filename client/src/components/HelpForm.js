@@ -115,6 +115,7 @@ export default function HelpForm() {
       if (e.target.files && e.target.files[0]) {
         var img = document.getElementById("myImg");
         img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
+       
         const fileUrl = URL.createObjectURL(e.target.files[0]);
         setImage(fileUrl);
     }
@@ -189,10 +190,9 @@ export default function HelpForm() {
             </form>
                
             </div>
-            <div className="col-3">
-                <img src=""  id="myImg"></img>
+            <div className="">
+              <img src="https://www.autoserviceworld.com/wp-content/uploads/2018/08/deal-merger-shake-hands.jpg" alt=" "  id="myImg" ></img>
             </div>
-           
         </div>
         </div>
     )

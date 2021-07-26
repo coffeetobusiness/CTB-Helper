@@ -50,8 +50,10 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
             </button>
           <h5 className="card-title">{help.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>
-          <img src={help.image} id="myImgCard" class="card-img-top" />
-          <p className="card-text">{help.description}</p>
+          <div className="row">
+            <p className="text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>
+            <p className="cardDescription card-text col-6">{help.description}</p>
+          </div>
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
           <a href="/" className="card-link">Share</a>
         </div>

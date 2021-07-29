@@ -48,6 +48,7 @@ return (
         onHide={handleClose}
         backdrop="true"
         keyboard={false}
+        centered="true"
       >
         <Modal.Header>
           <Modal.Title>Comments</Modal.Title>

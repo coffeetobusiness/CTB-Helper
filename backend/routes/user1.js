@@ -12,8 +12,13 @@ const User = require('../Models/UserModel');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const flash = require('connect-flash')
-
+const flash = require('connect-flash');
+const findOrCreate = require("mongoose-findorcreate");
+const gauth = require('../Models/gschema');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const keys = require("../Models/keys");
+const FacebookStrategy = require('passport-facebook').Strategy;
+const fbauth = require('../Models/fbschema');
 
 
 // routes.use(bodyParser.urlencoded({extended:true}));
@@ -150,6 +155,87 @@ passport.deserializeUser(function(id,cb){
 
 
 
+
+//Google Authentication
+
+
+//Authentication Using Google
+passport.use(new GoogleStrategy({
+    clientID: keys.google.clientID,
+    clientSecret: keys.google.clientSecret,
+    callbackURL: "http://localhost:4000/users/auth/google/callback"
+  },
+  function (accessToken, refreshToken, profile, done) {
+      console.log("access token is",accessToken)
+       gauth.findOrCreate({ googleId: profile.id }, function (err, user) {
+         return done(err, user);
+       });
+
+ 
+    //   isLoggedIn();
+
+         
+        
+    
+    
+
+    // console.log("req is ",req);
+    // console.log("access token is ",accessToken);
+    // console.log("profile is ...................",profile)
+      
+  }
+//    profile=>{
+//        console.log("profile is", profile.id)
+//    }
+));
+
+
+
+//Authentication with facebook
+passport.use(new FacebookStrategy({
+    clientID: keys.facebook.clientID,
+    clientSecret: keys.facebook.clientSecret,
+    callbackURL: "http://localhost:9000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      console.log("access token in fb is",accessToken);
+      console.log("profile in fb is",profile)
+    fbauth.findOrCreate({ facebookId: profile.id }, function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+
+
+//routes google
+routes.get('/auth/google',
+  passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+  
+routes.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/users/login' }),
+  function(req, res) {
+      console.log("eq is",req)
+    res.redirect('/users/home');
+  });
+
+//facebook
+
+routes.get('/auth/facebook', passport.authenticate('facebook'));
+routes.get('/auth/facebook/callback',
+passport.authenticate('facebook', {failureRedirect: '/login' }),
+function(req,res){
+    console.log("req in fb",req)
+    res.redirect('/users/home');
+}
+);
+
+
+
+///-----//////////
+
 routes.get('/login',(req,res)=>{
     
    
@@ -184,6 +270,12 @@ routes.get('/success',checkAuthenticated,(req,res,next)=>{
      console.log("in success")
      res.send("success")
   
+})
+
+//trial route
+routes.get('/home',(req,res,next)=>{
+    console.log("in home");
+    res.send("home");
 })
 
 

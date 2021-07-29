@@ -10,11 +10,9 @@ export default (posts = [], action) => {
 
     case COMMENT:
       return posts.map((post)=>(post._id === action.payload._id ? action.payload : post))
-      // return posts;
 
     case LIKE:
       return posts.map((post)=>(post._id === action.payload._id ? action.payload : post))
-      // return posts.map((post)=>action.payload)
       
     default:
       return posts;

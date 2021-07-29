@@ -43,9 +43,10 @@ export default function Popup({show,setShow,currentId}) {
 return (
     <>
       <Modal
+        scrollable="true"
         show={show}
         onHide={handleClose}
-        backdrop="static"
+        backdrop="true"
         keyboard={false}
       >
         <Modal.Header>
@@ -71,7 +72,7 @@ return (
       ))}
         </Modal.Body>
         <Modal.Footer>
-          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})} />
+          <input required type="text" className="form-control" placeholder="add comment" value={data.comment || ""} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})} />
           <Button variant="contained" color="primary" onClick={()=>comm(currentId)}>
             Add
           </Button>

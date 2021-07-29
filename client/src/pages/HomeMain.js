@@ -6,7 +6,6 @@ import { Button } from '@material-ui/core';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux';
 import { getPosts,likePost } from '../redux/actions/posts';
-import { comment } from '../redux/actions/posts';
 import Popup from './popup/Popup';
 
 
@@ -17,28 +16,6 @@ const ApiCardData =()=>{
   const posts = useSelector(state => state.posts)
   console.log(posts)
 
-// //COMMENT
-//   const [data,setData] = useState({comment:""})
-//   // const dispatch = useDispatch()
-
-//   const comm = async (id) => {   
-//     if(data===""){
-//       console.log("entr data")
-//     }
-//     else{
-//       try{     
-//         console.log(currentId);
-//         console.log(data)
-//         console.log(id)
-//         dispatch(comment(data,id))
-//         setShow(!show)
-//         setData("")
-//       }
-//       catch(error){
-//         console.log(error)
-//       }
-//     }
-//   }
 
 
   useEffect(() => {
@@ -46,12 +23,13 @@ const ApiCardData =()=>{
     dispatch(getPosts());
   },[]);
 
-  const like = async (id) => {
-    dispatch(likePost(id))
-    .then(()=>{
-      dispatch(getPosts());
-    })
-  }
+  // const like = async (id) => {
+    
+  //   dispatch(likePost(id))
+  //   // .then(()=>{
+  //   //   dispatch(getPosts());
+  //   // })
+  // }
 
   
 
@@ -66,15 +44,17 @@ const ApiCardData =()=>{
                 <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
                 <a href="/" className="card-link">Share</a>
                 <br></br>
-                <Button onClick={()=>like(help._id)}>
-                  <ThumbUpAltIcon />
-                </Button>
-                <span>{help.likes.length}</span>
+                <div>
+                  <Button onClick={()=>dispatch(likePost(help._id))}>
+                    <ThumbUpAltIcon />
+                  </Button>
+                  <span>{help.likes.length}</span>
 
-                <Button onClick={()=>{setCurrentId(help._id);setShow(!show)}}>
-                  <CommentIcon />
-                </Button>
-                <span>{help.comment.length}</span>
+                  <Button onClick={()=>{setCurrentId(help._id);setShow(!show)}}>
+                    <CommentIcon />
+                  </Button>
+                  <span>{help.comment.length}</span>
+                </div>
                 <br></br>
                 <Popup  
                   show={show}
@@ -82,16 +62,6 @@ const ApiCardData =()=>{
                   currentId={currentId}
                   setCurrentId={setCurrentId}
                 />
-                {/* {show? 
-                  <div className="popup">
-                      <div className="popup-inner">
-                          <h5>comments</h5>
-                          <h6>{help.comment}</h6>
-                          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
-                          <button className="close-btn" onClick={()=>comm(help._id)} >Add</button>
-                      </div>
-                  </div>
-                :null}         */}
             </div>
           </div>
       ))}

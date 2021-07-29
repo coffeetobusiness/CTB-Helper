@@ -32,7 +32,7 @@ const verifyJWT = (req, res, next) => {
                 res.json({ auth: false, message:"failed to authenticate"});
             }else{
                 req.userId = decoded.id;
-                res.json({ userId:decoded.id, auth: true, message:"you are authenticated"});
+                // res.json({ userId:decoded.id, auth: true, message:"you are authenticated"});
                 next();
             }
         })
@@ -66,10 +66,11 @@ router.post('/login', async(req, res) => {
                  res.status(200)
                   //jwt 
                 const id = user1._id;
+                const name= user1.firstName;
                 const token = jwt.sign({id},"jwtSecret",{
                     expiresIn: "7d",
                 })
-                res.json({auth:true, token:token, 
+                res.json({auth:true, token:token,name:name
                    // result:user1
                 }); //jwt end
 
@@ -141,7 +142,6 @@ router.post('/help', verifyJWT, async (req, res) => {
         description: req.body.description,
         time:currentTime,
         date:currentDate,
-        likeCount:0,
         likes:[],
         comment:[],
         
@@ -151,6 +151,9 @@ router.post('/help', verifyJWT, async (req, res) => {
         res.json({
             message:"success",
         });
+            // res.send(help);
+            // console.log(he)
+        
 });
 
 //Help Get
@@ -315,9 +318,11 @@ router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
     if (index === -1) {
         //new like
       post.likes.push(user._id);
+      console.log(typeof(post.likes))
     } else {
         //remove like
       post.likes = post.likes.filter((id) => id !== String(user._id));
+        
     }
     const updatedPost = await Help.findByIdAndUpdate(id, post, { new: true });
     console.log(updatedPost)
@@ -325,12 +330,14 @@ router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
 })
 
 //comment
-router.put('/:id/comment',async (req,res)=>{
+router.put('/:id/comment',verifyJWT,async (req,res)=>{
     
-    
+    const user = await User.findOne({ _id: req.userId });// user id
     const { id } = req.params
-    const data = req.body.comment
+    // const data = req.body.comment
+    const data = `${user.firstName}:${req.body.comment}`
     console.log(id)
+    console.log(user.firstName)
     console.log(data)
 
 

@@ -3,14 +3,13 @@ import { useDispatch } from 'react-redux'
 import {comment,getPosts} from '../../redux/actions/posts'
 import {Modal} from 'react-bootstrap'
 import {useSelector} from 'react-redux'
-import { Typography, TextField, Button } from '@material-ui/core/';
+import { Button } from '@material-ui/core/';
 
 
 
 
 export default function Popup({show,setShow,currentId}) {
   const posts = useSelector(state => state.posts)
-
     const handleClose = () => setShow(false);
 
     useEffect(() => {
@@ -18,19 +17,19 @@ export default function Popup({show,setShow,currentId}) {
         dispatch(getPosts());
       },[]);
 
-//COMMENT
   const [data,setData] = useState({comment:""})
   const dispatch = useDispatch()
+
+//COMMENT
 
   const comm = async (id) => {   
     if(data===""){
       console.log("entr data")
     }
     else{
-      try{     
-        console.log(currentId);
+      try{            
         console.log(data)
-        console.log(id)
+        console.log(data.comment)
         dispatch(comment(data,id))
         setShow(!show)
         setData("")
@@ -49,18 +48,30 @@ return (
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>Comments</Modal.Title>
+          <button onClick={()=>handleClose()} type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         </Modal.Header>
         <Modal.Body>
             {posts.filter(post => post._id === currentId).map((filteredPerson,index) => (
-            <li>
-               {filteredPerson.comment[index]}
-            </li>
+            
+              <div>
+              {filteredPerson.comment.map((data,index) => (
+            <ul>
+              <li>
+               {data}
+              </li>
+            </ul>
+            
+      ))}
+            </div>
+            
       ))}
         </Modal.Body>
         <Modal.Footer>
-          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})}/>
+          <input required type="text" className="form-control" placeholder="add comment" value={data.comment} label="comment" name="comment" onChange={(e) => setData({...data,comment:e.target.value})} />
           <Button variant="contained" color="primary" onClick={()=>comm(currentId)}>
             Add
           </Button>

@@ -18,11 +18,11 @@ export default function HelpForm() {
     const PostHelpClick = async (e) => {
         e.preventDefault();
 
-        dispatch(createPost(postData))
-        .then(() => {
-                    alert("Your Post successfully added")
-                    history.push('/home')
-        })
+        dispatch(createPost(postData,history))
+        // .then(() => {
+        //             alert("Your Post successfully added")
+        //             history.push('/home')
+        // })
     }
    
     return(

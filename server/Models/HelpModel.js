@@ -48,7 +48,6 @@ var UserSchema = new mongoose.Schema(
 
  created_by:String,
  
- comments:String,
 
  
 likes: { type: [String], default: [] },

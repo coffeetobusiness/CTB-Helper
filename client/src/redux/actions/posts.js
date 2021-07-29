@@ -13,7 +13,7 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
-export const createPost = (post,history) => async (dispatch) => {
+export const createPost = (post) => async (dispatch) => {
   // console.log("i was here in actions")
   try {
     console.log(post)

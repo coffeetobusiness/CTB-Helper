@@ -22,7 +22,7 @@ export const createPost = (post,history) => async (dispatch) => {
 
 
     dispatch({ type: CREATE, payload: data });
-    history.push('/home')
+    // history.push('/home')
   } catch (error) {
     console.log(error.message);
   }

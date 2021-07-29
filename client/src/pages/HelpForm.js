@@ -19,10 +19,10 @@ export default function HelpForm() {
         e.preventDefault();
 
         dispatch(createPost(postData,history))
-        // .then(() => {
-        //             alert("Your Post successfully added")
-        //             history.push('/home')
-        // })
+        .then(() => {
+                    alert("Your Post successfully added")
+                    history.push('/home')
+        })
     }
    
     return(

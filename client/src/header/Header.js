@@ -36,6 +36,10 @@ export default function Header(){
                 <Link className="nav-link" to={"#"}>Contact</Link>
               </li>}
 
+              {credentials && <li className="nav-item">
+                <Link className="nav-link" to={'/profile'}>Profile</Link>
+              </li>}
+
               {!credentials && <li className="nav-item">
                 <Link className="nav-link btnsign"  to={"/register"}>Sign up</Link>
               </li>}

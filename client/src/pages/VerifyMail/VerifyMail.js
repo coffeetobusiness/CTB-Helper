@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import Header from '../header/Header';
+import Header from '../../header/Header';
 import {useHistory,useParams} from 'react-router-dom'
 
 const VerifyMail  = ()=>{

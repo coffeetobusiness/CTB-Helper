@@ -54,6 +54,11 @@ var UserSchema = new mongoose.Schema(
 
  status:String,
 
+ verify:{
+   type:Boolean,
+   default:false
+},
+
  verified_at:String,
 
  verified_by:String,

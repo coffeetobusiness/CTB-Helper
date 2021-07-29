@@ -12,6 +12,8 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
       setresult(data));  
       console.log(result)
   }
+  //
+  
   
   useEffect(() =>{
     LoadData();

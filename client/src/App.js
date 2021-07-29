@@ -7,8 +7,10 @@ import Reset from './pages/Reset';
 import Home from './pages/Home';
 import ProtectedRoute from './ProtectedRoute';
 import Newpassword from './pages/Newpassword';
-import VerifyMail from './pages/VerifyMail';
+import VerifyMail from './pages/VerifyMail/VerifyMail';
 import HelpForm from '../src/components/HelpForm';
+import VolunteerForm from '../src/components/VolunteerForm'
+import Profile from './components/Profile/Profile';
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -38,6 +40,8 @@ function App() {
 
         <ProtectedRoute path="/home" component={Home}/>
         <ProtectedRoute path="/helpform" component={HelpForm}/>
+        <ProtectedRoute path="/volunteerform" component={VolunteerForm}/>
+        <ProtectedRoute path="/profile" component={Profile}/>
         
       </Router>
       </CredentialsContext.Provider>

@@ -5,11 +5,19 @@ import ApiCardData from './ApiCardData'
 import FilterForm from './FilterForm'
 import RightBar from './RightBar'
 import HomeSearch from './HomeSearch';
+import VerifyButton from '../pages/VerifyMail/VerifyButton'
 
 const Postbutton = () =>{
   return(
       <div className="mt-2">
         <Link className="btn btn-primary btn-block" to="/helpform">Post A help</Link>
+      </div>
+  )
+}
+const VolunteerBtn = () =>{
+  return(
+      <div className="mt-2">
+        <Link className="btn btn-primary btn-block" to="/volunteerform">Request For Volunteer</Link>
       </div>
   )
 }
@@ -40,6 +48,8 @@ export default function HomeMain(){
            </div>
            <div className="col-2">
              <Postbutton/>
+             <VolunteerBtn/>
+             <VerifyButton/>
             <RightBar/>
             <hr></hr>
            </div>

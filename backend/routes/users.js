@@ -1,8 +1,11 @@
 const express = require('express');
-const User = require('../Models/UserModel');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const router = express.Router();
+
+//----model
+const User = require('../Models/UserModel');
+const Help = require('../Models/HelpModel');
 //------------JSON WEB TOKEN---------------------
 
 const jwt = require('jsonwebtoken');
@@ -14,7 +17,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
         api_key:"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"
    }
 }))
-
+//middleware
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
 
@@ -28,7 +31,7 @@ const verifyJWT = (req, res, next) => {
                 res.json({ auth: false, message:"failed to authenticate"});
             }else{
                 req.userId = decoded.id;
-                res.json({ userId:decoded.id, auth: true, message:"you are authenticated"});
+               // res.json({ userId:decoded.id, auth: true, message:"you are authenticated"});
                 next();
             }
         })
@@ -115,8 +118,6 @@ router.post('/register', async (req, res,) => {
    }
 });
 
-
-const Help = require('../Models/HelpModel');
 //////////Help Post
 router.post('/help', verifyJWT , async (req, res,) => {
 
@@ -125,6 +126,9 @@ router.post('/help', verifyJWT , async (req, res,) => {
     if(user){
         const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
         const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        
+        user.UserRole = "Contributor"
+      
         const help = new Help({
             title: req.body.title,
             phone: req.body.phone,
@@ -153,6 +157,7 @@ router.post('/help', verifyJWT , async (req, res,) => {
     
         try {
         await help.save()
+              user.save()
         res.json({
             message:"success",
         });
@@ -177,7 +182,64 @@ router.get('/help', async (req, res,) => {
    }
 });
 
-//reset
+router.get('/userdata',verifyJWT, async (req, res) => {
+   
+  const user = await User.findOne({ _id: req.userId });
+
+   if(user){
+       try{
+            res.json(user)
+           console.log(user)
+       }
+       catch (err) {
+        res.send("error" + err)
+       }
+   }else{
+       res.send("no user")
+   }
+});
+
+//for volunteer 
+router.post('/volunteer', verifyJWT , async (req, res,) => {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+        const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
+        const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        
+        user.UserRole = "Volunteer"
+
+        user.phone = req.body.phone
+        user.image = req.body.image
+        user.userImage =req.body.userImage
+
+        user.address = req.body.address
+        user.city = req.body.city
+        user.state = req.body.state
+        user.country = req.body.country
+
+        user.description = req.body.description
+
+        user.time = currentTime
+        user.date = currentDate
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
+
+//reset password
 router.post('/reset-password',(req,res)=>{
         crypto.randomBytes(32,(err,buffer)=>{
             if(err){
@@ -237,7 +299,7 @@ router.post('/new-password',(req,res)=>{
     })
 })
 
-
+//Verify Email
 router.post('/verifyclick',(req,res)=>{
     crypto.randomBytes(32,(err,buffer)=>{
         if(err){
@@ -272,6 +334,7 @@ router.post('/verifyclick',(req,res)=>{
         })
     })
 })
+//Verify Email
 router.post('/verify-email',(req,res)=>{
     const sentToken = req.body.token
     User.findOne({resetToken:sentToken,expireToken:{$gt:Date.now()}})

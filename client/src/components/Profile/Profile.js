@@ -2,25 +2,24 @@ import React,{useEffect,useState} from 'react';
 import Header from '../../header/Header'
 
  const Profile = () =>{
+   
     const [userData, setUserData] = useState([]);
 
     const LoadData =() =>{
       fetch('http://localhost:4000/users/userdata',{
           method: "GET",
           headers: {
-          "Content-Type": "application/json",
           "x-access-token": localStorage.getItem("token")
         },
       })
       .then(response => response.json())
-      .then(data => 
+      .then(data =>
         setUserData(data));
-        console.log(userData)
     }
     
-   // useEffect(() =>{
-   //   LoadData();
-    //}, []);
+     useEffect(() =>{
+       LoadData();
+     }, []);
 
   
 
@@ -29,23 +28,22 @@ import Header from '../../header/Header'
           <Header/>
          <button onClick={LoadData}>hey Click</button>
 
-         {/* {userData.map((data) => (
+         {userData.map((data) => (
           <div className="card" key={data._id}>
         
           <h5 className="card-title">{data.firstName}</h5>
           <h5 className="card-title">{data.lastName}</h5>
         
          </div>
-        ))} */}
-{/* 
-{userData  && userData.map((data) => (
+        ))}
+
+        {userData !== ""  && userData.map((data) => (
           <div className="card" key={data._id}>
         
           <h5 className="card-title">{data.firstName}</h5>
         
          </div>
-        ))
-        } */}
+        ))} 
 
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">

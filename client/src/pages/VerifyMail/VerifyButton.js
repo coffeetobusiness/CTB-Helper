@@ -29,7 +29,7 @@ function VerifyButton(){
            else{
               alert("Please check your email")
               console.log(data.message)
-               history.push('/home')
+               history.push('/profile')
            }
       })
       .catch(error=>{
@@ -41,7 +41,7 @@ function VerifyButton(){
     return(
         <div className="mt-2">
          
-         <button type="submit" onClick={PostData} className="btn btn-secondary btn-block">Verify Email</button>
+         <button type="submit" onClick={PostData} className="btn btn-secondary ">Verify Email</button>
             
         </div>
     )

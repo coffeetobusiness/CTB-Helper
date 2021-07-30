@@ -127,7 +127,11 @@ router.post('/help', verifyJWT , async (req, res,) => {
         const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
         const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
         
-        user.UserRole = "Contributor"
+        if(user.UserRole=="Admin"){
+            user.UserRole = "Admin"
+        }else{
+            user.UserRole = "Contributor"
+        }
       
         const help = new Help({
             title: req.body.title,
@@ -171,8 +175,8 @@ router.post('/help', verifyJWT , async (req, res,) => {
     }
 });
 
-//Help Get
-router.get('/help', async (req, res,) => {
+//All Help Get
+router.get('/help',verifyJWT, async (req, res,) => {
     try {
         await  Help.find({}, function (err, users) {
             res.send(users);
@@ -181,7 +185,7 @@ router.get('/help', async (req, res,) => {
         res.json("error" + error)
    }
 });
-
+//for profile
 router.get('/userdata',verifyJWT, async (req, res) => {
    
   const user = await User.findOne({ _id: req.userId });
@@ -189,13 +193,81 @@ router.get('/userdata',verifyJWT, async (req, res) => {
    if(user){
        try{
             res.json(user)
-           console.log(user)
        }
        catch (err) {
         res.send("error" + err)
        }
    }else{
        res.send("no user")
+   }
+});
+
+//All user for verify by admin
+router.get('/allvolunteeruserdata',verifyJWT, async (req, res,) => {
+    try {
+        await  User.find({UserRole:'Volunteer',Verify_Role:false}, function (err, users) {
+            res.send(users);
+            console.log(users)
+        });
+    }catch (error) {
+        res.json("error" + error)
+   }
+});
+
+//verify post by volunteer
+router.get('/allpost_toverify',verifyJWT,  async (req, res,) => {
+    try {
+        await  Help.find({verify:false}, function (err, helps) {
+            res.send(helps);
+            console.log(helps)
+        });
+    }catch (error) {
+        res.json("error" + error)
+   }
+});
+
+//Verify volunteer by Admin
+
+router.post('/verifyvolunteer',verifyJWT, async (req, res,) => {
+    const user = await User.findOne({ email: req.body.emailForVerify });
+    try {
+        if (user) {
+            res.status(200)
+            user.Verify_Role = true
+            await user.save()
+            res.json({
+                message: "Success",
+            });
+            return;
+        }
+        res.status(404)
+        res.json({
+            message:"Email not Found",
+        });  
+    }catch (error) {
+        res.send("error" + error)
+   }
+});
+
+//verifypost by volunteer
+router.post('/verifypostbyvolunteer',verifyJWT, async (req, res,) => {
+    const help = await Help.findOne({ email: req.body.PostForVerify });
+    try {
+        if (help) {
+            res.status(200)
+            help.verify = true
+            await help.save()
+            res.json({
+                message: "Success",
+            });
+            return;
+        }
+        res.status(404)
+        res.json({
+            message:"Email not Found",
+        });  
+    }catch (error) {
+        res.send("error" + error)
    }
 });
 

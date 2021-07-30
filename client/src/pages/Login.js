@@ -93,12 +93,7 @@ export default function Login(){
                     <input required minLength="5" type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                    </div>
-                </div>
-
+                
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
 
                 

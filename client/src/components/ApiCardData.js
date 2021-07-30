@@ -6,14 +6,15 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
   const [result, setresult] = useState([]);
 
   const LoadData =() =>{
-    fetch('http://localhost:4000/users/help')
+    fetch('http://localhost:4000/users/help',{
+      method: "GET",
+      headers: {
+      "x-access-token": localStorage.getItem("token")
+    }})
     .then(response => response.json())
     .then(data => 
-      setresult(data));  
-      console.log(result)
+      setresult(data) || console.log(data));
   }
-  //
-  
   
   useEffect(() =>{
     LoadData();

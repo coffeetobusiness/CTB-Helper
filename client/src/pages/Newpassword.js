@@ -72,7 +72,6 @@ const NewPassword  = ()=>{
             {error && <span id="reg-msg" >{error}</span>}
         </div>
     </div>
-    <button type="submit" onClick={VerifyEmail} className="btn btn-success btn-lg btn-block">verified</button>
     </div>
    )
 }

@@ -11,7 +11,6 @@ const Help = require('../Models/HelpModel');
 const jwt = require('jsonwebtoken');
 
  const nodemailer = require('nodemailer')
- 
 // const sendgridTransport = require('nodemailer-sendgrid-transport')
 
 // const transporter = nodemailer.createTransport(sendgridTransport({
@@ -25,24 +24,11 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'uditmehra70@gmail.com', //your google email
-    pass: 'your-gmail-password'         //your password
+    pass: 'yourpassward'         //your password
   }
 });
 
-var mailOptions = {
-  from: 'uditmehra70@gmail.com',
-  to: 'uditmehra80@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
 
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
 //middleware
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]

@@ -9,14 +9,40 @@ const Help = require('../Models/HelpModel');
 //------------JSON WEB TOKEN---------------------
 
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
 
-const transporter = nodemailer.createTransport(sendgridTransport({
-    auth:{
-        api_key:"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"
-   }
-}))
+ const nodemailer = require('nodemailer')
+ 
+// const sendgridTransport = require('nodemailer-sendgrid-transport')
+
+// const transporter = nodemailer.createTransport(sendgridTransport({
+//     auth:{
+//         api_key:"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"
+//    }
+// }))
+
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'uditmehra70@gmail.com', //your google email
+    pass: 'your-gmail-password'         //your password
+  }
+});
+
+var mailOptions = {
+  from: 'uditmehra70@gmail.com',
+  to: 'uditmehra80@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
 //middleware
 const verifyJWT = (req, res, next) => {
     const token = req.headers["x-access-token"]
@@ -391,13 +417,19 @@ router.post('/verifyclick',(req,res)=>{
             .then((result)=>{
                 transporter.sendMail({
                     to:user.email,
-                    from:"uditmehra80@gmail.com",
+                    from:"uditmehra70@gmail.com",
                     subject:"EMAIL VERIFY",
                     html:`
                     <p>You requested for verify email</p>
-                    <h2>Click in this <a href="http://localhost:3000/verify/${token}">link</a> to reset your password</h2>
+                    <h2>Click in this <a href="http://localhost:3000/verify/${token}">link</a> to Verify your email</h2>
                     `
-                })
+                },function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent to: '+user.email + info.response);
+                    }
+                  })
             res.json({
                 message:"check your email",
             })
@@ -428,6 +460,54 @@ router.post('/verify-email',(req,res)=>{
     })
 })
 
+//profilephoto
+router.post('/profilephoto', verifyJWT , async (req, res,) => {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+       
+        user.userImage = req.body.image
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
+
+//Make me Admin
+router.post('/adminme', verifyJWT , async (req, res,) => {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+       
+        user.UserRole = req.body.UserRole
+        user.Verify_Role = req.body.Verify_Role
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
 
 
 

@@ -1,4 +1,4 @@
-import React,{ useState , useContext } from 'react';
+import React,{ useState , useContext, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { CredentialsContext } from "../App";
 //import './page.scss';
@@ -105,7 +105,7 @@ export default function Login(){
             </form>
             </div>
             <div className="col" >
-              
+            
             </div>
         </div>
         </div>

@@ -11,6 +11,7 @@ import VerifyMail from './pages/VerifyMail/VerifyMail';
 import HelpForm from '../src/components/HelpForm';
 import VolunteerForm from '../src/components/VolunteerForm'
 import Profile from './components/Profile/Profile';
+import ProfilePhoto from './components/Profile/ProfilePhoto';
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -42,6 +43,7 @@ function App() {
         <ProtectedRoute path="/helpform" component={HelpForm}/>
         <ProtectedRoute path="/volunteerform" component={VolunteerForm}/>
         <ProtectedRoute path="/profile" component={Profile}/>
+        <ProtectedRoute path="/profilephoto" component={ProfilePhoto}/>
         
       </Router>
       </CredentialsContext.Provider>

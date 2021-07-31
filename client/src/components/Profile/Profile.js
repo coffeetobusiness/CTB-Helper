@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react';
 import Header from '../../header/Header'
 import { useHistory } from 'react-router';
+import { Link,  } from "react-router-dom";
 import VerifyButton from '../../pages/VerifyMail/VerifyButton'
-
+import MakeAdmin from '../Profile/MakeAdmin'
  const Profile = () =>{
 
    const history = useHistory();
@@ -93,9 +94,10 @@ import VerifyButton from '../../pages/VerifyMail/VerifyButton'
             <div className="card-body">
               <div className="d-flex flex-column align-items-center text-center">
                 <img src={userImage} alt="Admin" className="rounded-circle" width="150" height="150"/>
+                <small><Link  to="/profilephoto">Change Profile Photo</Link></small>
                 <div className="mt-2">
                   <h4>{firstName} {lastName}</h4> {verify_user =='false' && <i className='fa fa-exclamation-circle text-warning'>Verify your email</i>}{verify_user =='true' && <i className='fa fa-check-circle text-success'></i>}
-                  <p className="text-primary mb-1">{UserRole} ({Verify_Role})</p>
+                  <h6 className="text-primary mb-1">{UserRole} ({Verify_Role})</h6>
                   <p className="text-muted font-size-sm">{city},{state},{country}</p>
                 </div>
               </div>
@@ -158,6 +160,7 @@ import VerifyButton from '../../pages/VerifyMail/VerifyButton'
               </div>
             </div>
           </div>
+          <p className="text-right"><MakeAdmin/></p>
         </div>
       </div>
       )}
@@ -202,12 +205,13 @@ import VerifyButton from '../../pages/VerifyMail/VerifyButton'
          {AllVolenteerUserData.map((user,index) => (
          <div className="card bordered text-dark bg-light mb-3 container-fluid" key={user._id}>
 
-           <div className="form-row card-header">
-             <div><h2>Verify</h2></div>
+           <div className="row card-footer">
+             <div className="form-group col"><h2>Verify</h2></div>
             <div className="form-group col"><input className="form-control" value={user.email} onChange={(e) => setemailForVerify(e.target.value)} type="checkbox"/></div>
             <div className="form-group col"><h6 className="text-danger">{error}</h6></div>
-            <div className="form-group col"><button  onClick={VolVerifyClick} className="btn btn-success btn-block form-control">Submit</button></div>
+            <div className="form-group col"><button  onClick={VolVerifyClick} className="btn btn-success btn-block form-control btn-lg">Submit</button></div>
           </div>
+        
          <div className="row g-0">
            <div className="col-md-3">
              <img src={user.userImage} height="650px" className="img-fluid rounded-start" alt="..."/>

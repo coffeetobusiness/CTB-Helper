@@ -120,7 +120,6 @@ export default function HelpForm() {
         setImage(fileUrl);
     }
   }
-
    
     return(
         <div className="app">
@@ -184,7 +183,8 @@ export default function HelpForm() {
                         <textarea required class="form-control"  rows="3" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                     </div>
                     </div>
-                    <p className="text-right"><input type="file" onChange={Imagechange}></input></p>
+                    <p className="text-right"><span>Upload Photo</span> <input type="file" onChange={Imagechange}></input></p>
+                    
                     {error && <span id="reg-msg" >{error}</span>}
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
             </form>

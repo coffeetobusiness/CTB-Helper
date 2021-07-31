@@ -5,7 +5,7 @@ import ApiCardData from './ApiCardData'
 import FilterForm from './FilterForm'
 import RightBar from './RightBar'
 import HomeSearch from './HomeSearch';
-import VerifyButton from '../pages/VerifyMail/VerifyButton'
+
 
 const Postbutton = () =>{
   return(
@@ -49,7 +49,6 @@ export default function HomeMain(){
            <div className="col-2">
              <Postbutton/>
              <VolunteerBtn/>
-             <VerifyButton/>
             <RightBar/>
             <hr></hr>
            </div>

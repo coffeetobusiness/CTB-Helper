@@ -6,9 +6,6 @@ import { Link,  } from "react-router-dom";
 import Header from '../header/Header';
 // <Link  to="/register">Register</Link>
 
-
-
-
 export const handleErrors = async (response) => {
     if (!response.ok) {
       const { message } = await response.json();
@@ -104,8 +101,8 @@ export default function Login(){
                 </p>
             </form>
             </div>
-            <div className="col" >
-            
+            <div className="col">
+             
             </div>
         </div>
         </div>

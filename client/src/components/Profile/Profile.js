@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { Link,  } from "react-router-dom";
 import VerifyButton from '../../pages/VerifyMail/VerifyButton'
 import MakeAdmin from '../Profile/MakeAdmin'
+
  const Profile = () =>{
 
    const history = useHistory();
@@ -205,11 +206,21 @@ import MakeAdmin from '../Profile/MakeAdmin'
          {AllVolenteerUserData.map((user,index) => (
          <div className="card bordered text-dark bg-light mb-3 container-fluid" key={user._id}>
 
-           <div className="row card-footer">
-             <div className="form-group col"><h2>Verify</h2></div>
-            <div className="form-group col"><input className="form-control" value={user.email} onChange={(e) => setemailForVerify(e.target.value)} type="checkbox"/></div>
-            <div className="form-group col"><h6 className="text-danger">{error}</h6></div>
-            <div className="form-group col"><button  onClick={VolVerifyClick} className="btn btn-success btn-block form-control btn-lg">Submit</button></div>
+          <div className="form-row card-footer text-right align-items-center">
+            <div className="col-auto">
+            <div className="form-check mb-2">
+              <input className=" chechboxverify form-check-input" value={user.email} onChange={(e) => setemailForVerify(e.target.value)} type="checkbox" />
+              <label className="labelverify form-check-label ml-3">
+                Verify
+              </label>
+            </div>
+            </div>
+            <div className="col-auto">
+             <h6 className="text-danger">{error}</h6>
+            </div>
+            <div className="col-auto">
+             <button onClick={VolVerifyClick} className="btn btn-success mb-1">Submit</button>
+            </div>
           </div>
         
          <div className="row g-0">

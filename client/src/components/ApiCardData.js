@@ -48,13 +48,13 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
         {filterdata.map((help,index) => (
         <div className="card">
         <div className="card-body" key={help._id}>
-            <button type="button" className="ml-2 mb-1 close text-danger">
+            <button type="button" className=" ml-2 mb-1 close text-danger">
                <span >&times;</span>
             </button>
           <h5 className="card-title">{help.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>
           <div className="row">
-            <p className="text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>
+            <p className="cardimage text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>
             <p className="cardDescription card-text col-6">{help.description}</p>
           </div>
           <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>

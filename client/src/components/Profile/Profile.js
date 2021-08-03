@@ -438,6 +438,8 @@ import MakeAdmin from '../Profile/MakeAdmin'
       )}
 
     if(UserRole=="Volunteer"){
+
+      if(Verify_Role=="true"){
         return(
           <div >
             <Header/>
@@ -446,9 +448,18 @@ import MakeAdmin from '../Profile/MakeAdmin'
 
             <VerifyPost/>
           </div>
-        )}
+        )
+      }
+        return(
+          <div >
+            <Header/>
 
-    if(UserRole=="Admin"){
+            <CardProfile/>
+          </div>
+        )}
+        
+
+    if(UserRole=="Admin" && Verify_Role==="true"){
       return(
         <div >
           <Header/>

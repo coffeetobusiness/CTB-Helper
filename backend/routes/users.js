@@ -20,11 +20,13 @@ const jwt = require('jsonwebtoken');
 // }))
 
 
+
+
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'uditmehra70@gmail.com', //your google email
-    pass: 'yourpassward'         //your password
+    pass: 'yourpassward'      //your password
   }
 });
 

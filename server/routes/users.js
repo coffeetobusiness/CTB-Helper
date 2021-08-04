@@ -18,8 +18,9 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 const verifyJWT = (req, res, next) => {
     console.log("i was in jwt")
 
-    // const token = req.headers["x-access-token"]
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers["x-access-token"]
+    console.log(token)
+    // const token = req.headers.authorization.split(" ")[1];
     // const token = localStorage.getItem('token')
 
     if(!token){
@@ -373,6 +374,186 @@ router.get('/home',verifyJWT, async (req, res) => {
     res.send("error" + err);
   }
   });
+
+
+  //for profile
+router.get('/userdata',verifyJWT, async (req, res) => {
+   
+    const user = await User.findOne({ _id: req.userId });
+  
+     if(user){
+         try{
+              res.json(user)
+         }
+         catch (err) {
+          res.send("error" + err)
+         }
+     }else{
+         res.send("no user")
+     }
+  });
+  
+  //profilephoto
+router.post('/profilephoto', verifyJWT , async (req, res,) => {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+       
+        user.userImage = req.body.image
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
+
+//Make me Admin
+router.post('/adminme', verifyJWT , async (req, res,) => {
+
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+       
+        user.UserRole = req.body.UserRole
+        user.Verify_Role = req.body.Verify_Role
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
+
+
+
+  //All user for verify by admin
+  router.get('/allvolunteeruserdata',verifyJWT, async (req, res,) => {
+      try {
+          await  User.find({UserRole:'Volunteer',Verify_Role:false}, function (err, users) {
+              res.send(users);
+              console.log(users)
+          });
+      }catch (error) {
+          res.json("error" + error)
+     }
+  });
+  
+  //verify post by volunteer
+  router.get('/allpost_toverify',verifyJWT,  async (req, res,) => {
+      try {
+          await  Help.find({verify:false}, function (err, helps) {
+              res.send(helps);
+              console.log(helps)
+          });
+      }catch (error) {
+          res.json("error" + error)
+     }
+  });
+  
+  //Verify volunteer by Admin
+  
+  router.post('/verifyvolunteer',verifyJWT, async (req, res,) => {
+      const user = await User.findOne({ email: req.body.emailForVerify });
+      try {
+          if (user) {
+              res.status(200)
+              user.Verify_Role = true
+              await user.save()
+              res.json({
+                  message: "Success",
+              });
+              return;
+          }
+          res.status(404)
+          res.json({
+              message:"Email not Found",
+          });  
+      }catch (error) {
+          res.send("error" + error)
+     }
+  });
+  
+  //verifypost by volunteer
+  router.post('/verifypostbyvolunteer',verifyJWT, async (req, res,) => {
+      const help = await Help.findOne({ email: req.body.PostForVerify });
+      try {
+          if (help) {
+              res.status(200)
+              help.verify = true
+              await help.save()
+              res.json({
+                  message: "Success",
+              });
+              return;
+          }
+          res.status(404)
+          res.json({
+              message:"Email not Found",
+          });  
+      }catch (error) {
+          res.send("error" + error)
+     }
+  });
+  
+  //for volunteer 
+  router.post('/volunteer', verifyJWT , async (req, res,) => {
+    console.log("i was in volunteer backend")
+      const user = await User.findOne({ _id: req.userId });
+  
+      if(user){
+          const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
+          const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+          
+          user.UserRole = "Volunteer"
+  
+          user.phone = req.body.phone
+          user.image = req.body.image
+          user.userImage =req.body.userImage
+  
+          user.address = req.body.address
+          user.city = req.body.city
+          user.state = req.body.state
+          user.country = req.body.country
+  
+          user.description = req.body.description
+  
+          user.time = currentTime
+          user.date = currentDate
+      
+        try {
+          await user.save()
+          res.json({
+              message:"success",
+          });
+          
+        }catch (error) {
+            console.log("i was in volunteer error")
+          res.send("error" + error)
+          }
+      }
+      else{
+          res.send("Invalid user")
+      }
+  });
+  
 
 
 module.exports = router;

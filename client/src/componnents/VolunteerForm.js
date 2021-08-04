@@ -18,7 +18,8 @@ export default function VolunteerForm() {
     const [userImage, setUserImage] = useState("");
 
     const [error, setError] = useState("");
-    
+    // const token = (localStorage.getItem('token'))
+    // console.log(token)
 
     const PostClick =(e) =>{
       e.preventDefault();
@@ -26,7 +27,7 @@ export default function VolunteerForm() {
           method: "POST",
           headers:{
               "Content-Type": "application/json",
-              "x-access-token": localStorage.getItem("token"),
+              "x-access-token": localStorage.getItem('token'),
           },
           body: JSON.stringify({
                phone,address, city, state, country, description, image,userImage

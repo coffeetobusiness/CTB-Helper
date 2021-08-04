@@ -7,6 +7,14 @@ import Header from '../header/Header';
 import { CredentialsContext } from "../App";
 
 
+export const handleErrors = async (response) => {
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw Error(message);
+    }
+    return response.json();
+  };
+
 export default function Login(){
 
     const dispatch = useDispatch();
@@ -15,6 +23,7 @@ export default function Login(){
     const [postData, setPostData] = useState({ email: '', password: '' });
     const [, setCredentials] = useContext(CredentialsContext);
 
+    
    
 
     const handleSubmit = async (e) => {

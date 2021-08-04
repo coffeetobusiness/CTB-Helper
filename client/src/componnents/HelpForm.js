@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Header from '../header/Header';
 import { useHistory } from 'react-router';
-import { handleErrors } from './Login';
+import { handleErrors } from '../pages/Login';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../redux/actions/posts';
 

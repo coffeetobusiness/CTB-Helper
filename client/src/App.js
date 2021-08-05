@@ -12,6 +12,7 @@ import HelpForm from '../src/components/HelpForm';
 import VolunteerForm from '../src/components/VolunteerForm'
 import Profile from './components/Profile/Profile';
 import ProfilePhoto from './components/Profile/ProfilePhoto';
+import AWS from './components/AWS';
 
 export const CredentialsContext = React.createContext(null);///////////////:  null karna hai
 
@@ -24,6 +25,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Login/>
+          </Route>
+          <Route exact path="/aws">
+            <AWS/>
           </Route>
           <Route exact path="/register">
             <Register/>

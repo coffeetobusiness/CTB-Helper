@@ -46,7 +46,7 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
         </div>
 
         {filterdata.map((help,index) => (
-        <div className="card">
+        <div className="card cardResponsive">
         <div className="card-body" key={help._id}>
             <button type="button" className=" ml-2 mb-1 close text-danger">
                <span >&times;</span>

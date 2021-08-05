@@ -19,6 +19,81 @@ const jwt = require('jsonwebtoken');
 //    }
 // }))
 
+//key id-  AKIA2CCP7WEIRZFSK6WG
+//secret key-  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
+
+//ARn aws -  arn:aws:iam::691657486609:user/udituser
+//myuserbacket
+// arn:aws:s3:::myuserbacket
+const aws = require( 'aws-sdk' );
+const multerS3 = require( 'multer-s3' );
+const multer = require('multer');
+const path = require( 'path' );
+
+//PROFILE IMAGE STORING STARTS
+
+const s3 = new aws.S3({
+accessKeyId: 'AKIA2CCP7WEIRZFSK6WG',
+secretAccessKey: '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',
+Bucket: 'myuserbacket'
+});
+
+//Single Upload
+
+const ImgUpload = multer({
+ storage: multerS3({
+ s3: s3,
+ bucket: 'myuserbacket',
+ acl: 'public-read',
+ key: function (req, file, cb) {
+  cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+ }
+}),
+limits:{ fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+fileFilter: function( req, file, cb ){
+ checkFileType( file, cb );
+}
+}).single('Image');
+
+function checkFileType( file, cb ){
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|gif/;
+    // Check ext
+    const extname = filetypes.test( path.extname( file.originalname ).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test( file.mimetype );if( mimetype && extname ){
+     return cb( null, true );
+    } else {
+     cb( 'Error: Images Only!' );
+    }
+   }
+
+router.post( '/img-upload', ( req, res ) => {
+    ImgUpload( req, res, ( error ) => {
+    // console.log( 'requestOkokok', req.file );
+    // console.log( 'error', error );
+    if( error ){
+     console.log( 'errors', error );
+     res.status(403)
+     res.json( { message: "only image accepted less than 2 Mb" } );
+    } else {
+     // If File not found
+     if( req.file === undefined ){
+      console.log( 'Error: No File Selected!' );
+      res.json( {message: "Image not found" } )
+     } else {
+      // If Success
+      console.log(req.file.location)
+      const imageName = req.file.key;
+      const imageLocation = req.file.location;// Save the file name into database into profile model
+      res.json({
+       image: imageName,
+       location: imageLocation
+      })
+     }
+    }
+   })
+});
 
 
 
@@ -136,6 +211,7 @@ router.post('/register', async (req, res,) => {
 router.post('/help', verifyJWT , async (req, res,) => {
 
     const user = await User.findOne({ _id: req.userId });
+    
 
     if(user){
         const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
@@ -146,13 +222,39 @@ router.post('/help', verifyJWT , async (req, res,) => {
         }else{
             user.UserRole = "Contributor"
         }
+        ImgUpload( req, res, ( error ) => {
+            // console.log( 'requestOkokok', req.file );
+            // console.log( 'error', error );
+            if( error ){
+             console.log( 'errors', error );
+             res.status(403)
+             res.json( { message: "only image accepted less than 2 Mb" } );
+            } else {
+             // If File not found
+             if( req.file === undefined ){
+              console.log( 'Error: No File Selected!' );
+              res.json( {message: "Image not found" } )
+             } else {
+              // If Success
+              console.log(req.file.location)
+              const imageName = req.file.key;
+              const imageLocation = req.file.location;// Save the file name into database into profile model
+              res.json({
+               image: imageName,
+               location: imageLocation
+              })
+              help.image = ""
+             }
+            }
+           })
+       
       
         const help = new Help({
             title: req.body.title,
             phone: req.body.phone,
             category: req.body.category,
             description: req.body.description,
-            image:req.body.image,
+           // image:req.file.location,
 
             location: req.body.location,
             latitude:req.body.latitude,
@@ -449,27 +551,42 @@ router.post('/verify-email',(req,res)=>{
 })
 
 //profilephoto
-router.post('/profilephoto', verifyJWT , async (req, res,) => {
+router.post('/profilephoto', verifyJWT ,( req, res ) => {
+    ImgUpload( req, res, ( error ) => {
+    // console.log( 'requestOkokok', req.file );
+    // console.log( 'error', error );
+    if( error ){
+     console.log( 'errors', error );
+     res.status(403)
+     res.json( { message: "only image accepted less than 2 Mb" } );
+    } else {
+     // If File not found
+     if( req.file === undefined ){
+      console.log( 'Error: No File Selected!' );
+      res.json( {message: "Image not found" } )
+     } else {
+      // If Success
 
-    const user = await User.findOne({ _id: req.userId });
-
-    if(user){
-       
-        user.userImage = req.body.image
-    
-      try {
-        await user.save()
-        res.json({
-            message:"success",
-        });
-        
-      }catch (error) {
-        res.send("error" + error)
-        }
+      console.log(req.file.location)
+      const imageName = req.file.key;
+      const imageLocation = req.file.location;
+      
+       res.json({
+       image: imageName,
+       location: imageLocation
+      })
+        User.findByIdAndUpdate(req.userId , { userImage: imageLocation },
+            function (err, docs) {
+           if (err){
+            console.log(err)
+           }
+          else{
+          console.log("Updated User : ", docs);
+             }
+});
+     }
     }
-    else{
-        res.send("Invalid user")
-    }
+   })
 });
 
 //Make me Admin

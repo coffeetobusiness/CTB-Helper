@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, LIKE, COMMENT } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, LIKE, COMMENT,VOLUNTEER } from '../constants/actionTypes';
 
 export default (posts = [], action) => {
   switch (action.type) {
@@ -6,6 +6,9 @@ export default (posts = [], action) => {
       return action.payload;
 
     case CREATE:
+      return [...posts];
+
+    case VOLUNTEER:
       return [...posts];
 
     case COMMENT:

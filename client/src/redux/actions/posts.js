@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, COMMENT,LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, COMMENT,LIKE, VOLUNTEER } from '../constants/actionTypes';
 
 import * as api from '../api/index';
 
@@ -22,6 +22,21 @@ export const createPost = (post) => async (dispatch) => {
 
 
     dispatch({ type: CREATE, payload: data });
+    // history.push('/home')
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const createVolunteer = (post) => async (dispatch) => {
+  // console.log("i was here in actions")
+  try {
+    console.log(post)
+    const { data } = await api.createVolunteer(post);
+    console.log(data)
+
+
+    dispatch({ type: VOLUNTEER, payload: data });
     // history.push('/home')
   } catch (error) {
     console.log(error.message);

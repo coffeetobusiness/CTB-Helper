@@ -14,12 +14,17 @@ API.interceptors.request.use((req) => {
 });
 
 export const fetchPosts = () => axios.get(`${url}/help/post`);
-// export const createPost = (newPost) => axios.post(`${url}/help`, newPost);
+
 export const createPost = (newPost) => API.post('/help', newPost);
 
+export const createVolunteer = (newPost) => API.post('/volunteer', newPost);
+
 export const likePost = (id) => API.put(`/${id}/likePost`)
-// export const comment = (post,id) => axios.put(`${url}/${id}/comment`,post)
+
 export const comment = (post,id) => API.put(`${id}/comment`,post)
 
+
+
 export const signUp = (newPost) => axios.post(`${url}/register`, newPost);
+
 export const signIn = (newPost) => axios.post(`${url}/login`, newPost);

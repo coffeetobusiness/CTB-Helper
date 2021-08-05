@@ -2,38 +2,25 @@ import React, {useState ,useEffect} from 'react'
 import Header from '../header/Header';
 import { useHistory } from 'react-router';
 import { handleErrors } from '../pages/Login';
+import { useDispatch } from 'react-redux';
+import { createVolunteer } from '../redux/actions/posts';
 
 
 export default function VolunteerForm() {
 
     const [phone,setPhone] = useState("");
-   
-    const [address,setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state,setState] = useState(null);
-    const [country,setCountry] = useState(null);
-    const [description,setDescription] = useState(null);
+    const dispatch = useDispatch()
+    const [postData, setPostData] = useState({ phone: '', image: '', userImage: '', country: '', address: '',city:'',state:'',description:'' });
 
-    const [image, setImage] = useState("");
-    const [userImage, setUserImage] = useState("");
 
     const [error, setError] = useState("");
-    // const token = (localStorage.getItem('token'))
-    // console.log(token)
+    
 
     const PostClick =(e) =>{
       e.preventDefault();
-      fetch(`http://localhost:4000/users/volunteer`,{
-          method: "POST",
-          headers:{
-              "Content-Type": "application/json",
-              "x-access-token": localStorage.getItem('token'),
-          },
-          body: JSON.stringify({
-               phone,address, city, state, country, description, image,userImage
-            }),
-      })
-      .then(handleErrors)
+    
+    dispatch(createVolunteer(postData))
+    //   .then(handleErrors)
       .then(() => {
           alert("Your request for volunteer is submitted successfully, our team verify your details and notify you by your email")
           history.push('/home')
@@ -51,7 +38,7 @@ export default function VolunteerForm() {
         img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
        
         const fileUrl = URL.createObjectURL(e.target.files[0]);
-        setImage(fileUrl);
+        setPostData({...postData,image:fileUrl})
     }
   }
   const  Photochange = (e) =>{
@@ -61,7 +48,7 @@ export default function VolunteerForm() {
       img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
      
       const fileUrl = URL.createObjectURL(e.target.files[0]);
-      setUserImage(fileUrl);
+      setPostData({...postData,userImage:fileUrl})
   }
 }
 
@@ -77,43 +64,42 @@ export default function VolunteerForm() {
                 </div>
             <form onSubmit={PostClick}>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                        <input required minLength="10" type="number" class="form-control"  placeholder="Phone" onChange={(e) => setPhone(e.target.value)}/>
+                        <div class="form-group col-md-6">        
+                        <input required minLength="10" type="number" class="form-control"  placeholder="Phone" value={postData.phone} label="phone" name="phone" onChange={(e) => setPostData({...postData,phone:e.target.value})}/>
                         </div>
                     </div>
                 
                     <div class="form-row">
                         <div class="form-group col-md-8">
                           
-                             <input required type="text" onChange={(e) => setAddress(e.target.value)} value={address} class="form-control" placeholder="Address" />
-                         
+                             <input required type="text" value={postData.address} label="address" name="address" onChange={(e) => setPostData({...postData,address:e.target.value})} class="form-control" placeholder="Address" />
                         </div>
                     </div>
                     <div class="form-row">
                     <div class="form-group col-md-4">
-                        <input required placeholder="City" value={city} class="form-control" onChange={(e) => setCity(e.target.value)}/>
+                        <input required placeholder="City" class="form-control" value={postData.city} label="city" name="city" onChange={(e) => setPostData({...postData,city:e.target.value})}/>
                            
                         </div>
                         <div class="form-group col-md-4">
-                        <input required placeholder="State" value={state} class="form-control" onChange={(e) => setState(e.target.value)}/>
+                        <input required placeholder="State" class="form-control" value={postData.state} label="state" name="state" onChange={(e) => setPostData({...postData,state:e.target.value})}/>
                             
                         </div>
                         <div class="form-group col-md-4">
-                        <input required placeholder="Country" value={country}  class="form-control" onChange={(e) => setCountry(e.target.value)}/>
+                        <input required placeholder="Country" class="form-control" value={postData.country} label="country" name="country" onChange={(e) => setPostData({...postData,country:e.target.value})}/>
                            
                         </div>
                     </div>
                     
                     <div class="form-group">
                     <div class="form-group">
-                        <textarea required class="form-control"  rows="3" placeholder="Describe yourself" onChange={(e) => setDescription(e.target.value)}></textarea>
+                        <textarea required class="form-control"  rows="3" placeholder="Describe yourself" value={postData.description} label="description" name="description" onChange={(e) => setPostData({...postData,description:e.target.value})}></textarea>
                     </div>
                     </div>
                     <h5>Upload your photo</h5> <input required type="file" className="mb-3" onChange={Photochange}></input>
                     <h5>Upload photo of your Registered Identity</h5> <input required type="file" className="mb-3" onChange={Imagechange}></input>
                     {error && <span id="reg-msg" >{error}</span>}
                     
-                    {image && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
+                    {postData.image && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
             </form>
                
             </div>

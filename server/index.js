@@ -9,7 +9,7 @@ app.use(cors());
 
 
 //Database Connection
-const url = "mongodb://localhost/pratik-redux";
+const url = "mongodb://localhost/my_db";
 mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology:true,useFindAndModify: false})
 const db = mongoose.connection
 db.on('open',()=>console.log('db connected'));

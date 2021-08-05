@@ -18,9 +18,9 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 const verifyJWT = (req, res, next) => {
     console.log("i was in jwt")
 
-    const token = req.headers["x-access-token"]
+    // const token = req.headers["x-access-token"]
+    const token = req.headers.authorization.split(" ")[1];
     console.log(token)
-    // const token = req.headers.authorization.split(" ")[1];
     // const token = localStorage.getItem('token')
 
     if(!token){
@@ -308,7 +308,7 @@ router.put('/:id/likePost',verifyJWT ,async (req,res)=>{
     
     const { id } = req.params//post id
     console.log(id)
-    console.log(user._id)
+    console.log(user.firstName)
 
     
     const post = await Help.findById(id);
@@ -516,7 +516,10 @@ router.post('/adminme', verifyJWT , async (req, res,) => {
   //for volunteer 
   router.post('/volunteer', verifyJWT , async (req, res,) => {
     console.log("i was in volunteer backend")
-      const user = await User.findOne({ _id: req.userId });
+    // const user = await User.findOne({ _id: req.userId });
+    const user = await User.findOne({ _id: req.userId });
+    console.log(user.firstName)
+
   
       if(user){
           const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()

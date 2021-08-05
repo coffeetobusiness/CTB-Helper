@@ -25,9 +25,39 @@ var UserSchema = new mongoose.Schema(
     type:Boolean,
     default:false
  },
+ UserRole:{
+   type:String,
+   default:"Seeker"
+ },
+
+ Verify_Role:{
+    type:Boolean,
+    default:false
+ },
  resetToken:String,
 
  expireToken:String,
+
+ phone:String,
+
+ image:String,
+
+ userImage:String,
+
+ address:String,
+
+ city:String,
+
+ state:String,
+
+ country:String,
+
+ description:String,
+
+ time:String,
+
+ date:String,
+ 
 }
 )
 

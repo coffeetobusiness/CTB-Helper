@@ -1,16 +1,18 @@
-import React,{ useState,useContext,}  from 'react';
+import React,{ useState}  from 'react';
 
 import { useHistory } from 'react-router';
 
 
 function MakeAdmin(){
 
-    const [UserRole, setUserRole] = useState("Admin");
-    const [Verify_Role, setVerify_Role] = useState(true);
+
+    const [UserRole] = "Admin"
+    const [Verify_Role] = useState(true);
 
     const [error, setError] = useState("");
 
     const PostData = ()=>{
+        console.log(error)
     
       fetch('http://localhost:4000/users/adminme',{
           method:"POST",

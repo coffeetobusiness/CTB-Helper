@@ -25,7 +25,6 @@ import MakeAdmin from '../Profile/MakeAdmin'
     const [verify_user, setverify_user] = useState('');
     const [Verify_Role, setVerify_Role] = useState('');
     const [email, setemail] = useState('');
-    const [id, setid] = useState('');
     const [address, setaddress] = useState('');
     const [city, setcity] = useState('');
     const [state, setstate] = useState('');
@@ -49,7 +48,6 @@ import MakeAdmin from '../Profile/MakeAdmin'
                     setverify_user(data.verify.toString()) ||
                     setVerify_Role(data.Verify_Role.toString()) ||
                     setemail(data.email) ||
-                    setid(data._id) ||
                     setaddress(data.address) ||
                     setcity(data.city) ||
                     setstate(data.state) ||
@@ -97,7 +95,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                 <img src={userImage} alt="Admin" className="rounded-circle" width="150" height="150"/>
                 <small><Link  to="/profilephoto">Change Profile Photo</Link></small>
                 <div className="mt-2">
-                  <h4>{firstName} {lastName}</h4> {verify_user =='false' && <i className='fa fa-exclamation-circle text-warning'>Verify your email</i>}{verify_user =='true' && <i className='fa fa-check-circle text-success'></i>}
+                  <h4>{firstName} {lastName}</h4> {verify_user ==='false' && <i className='fa fa-exclamation-circle text-warning'>Verify your email</i>}{verify_user ==='true' && <i className='fa fa-check-circle text-success'></i>}
                   <h6 className="text-primary mb-1">{UserRole} ({Verify_Role})</h6>
                   <p className="text-muted font-size-sm">{city},{state},{country}</p>
                 </div>
@@ -129,7 +127,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                    {email}
                 </div>
                 <div className="col-sm-3 text-secondary">
-                   {verify_user =='false' && <VerifyButton/>}
+                   {verify_user ==='false' && <VerifyButton/>}
                 </div>
               </div>
               <hr/>
@@ -175,7 +173,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
       };
 
       const VolVerifyClick = (e) =>{
-        if(emailForVerify==""){
+        if(emailForVerify===""){
           setError("Please Select Checkbox")
         }else{
           fetch(`http://localhost:4000/users/verifyvolunteer`,
@@ -225,10 +223,10 @@ import MakeAdmin from '../Profile/MakeAdmin'
         
          <div className="row g-0">
            <div className="col-md-3">
-             <img src={user.userImage} height="650px" className="img-fluid rounded-start" alt="..."/>
+             <img src={user.userImage}  className="image-vol-req img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-3">
-             <img src={user.image} className="img-fluid rounded-start" alt="..."/>
+             <img src={user.image} className="image-vol-req img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-6">
              <div className="card-body">
@@ -303,7 +301,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
     )}
     
     const PostVerifyClick = (e) =>{
-      if(PostForVerify==""){
+      if(PostForVerify===""){
         setError("Please Select Checkbox")
       }else{
         fetch(`http://localhost:4000/users/verifypostbyvolunteer`,
@@ -424,11 +422,11 @@ import MakeAdmin from '../Profile/MakeAdmin'
        </>
   )}
 
-    if (userData =="") {
+    if (userData ==="") {
       return <div>Loading...</div>
      }
 
-    if(UserRole=="Seeker"){
+    if(UserRole==="Seeker"){
       return(
         <div >
           <Header/>
@@ -437,9 +435,9 @@ import MakeAdmin from '../Profile/MakeAdmin'
         </div>
       )}
 
-    if(UserRole=="Volunteer"){
+    if(UserRole==="Volunteer"){
 
-      if(Verify_Role=="true"){
+      if(Verify_Role==="true"){
         return(
           <div >
             <Header/>
@@ -459,7 +457,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
         )}
         
 
-    if(UserRole=="Admin" && Verify_Role==="true"){
+    if(UserRole==="Admin" && Verify_Role==="true"){
       return(
         <div >
           <Header/>

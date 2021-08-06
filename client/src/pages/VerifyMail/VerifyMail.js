@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import Header from '../../header/Header';
-import {useHistory,useParams,Link} from 'react-router-dom'
+import {useParams,Link} from 'react-router-dom'
 
 const VerifyMail  = ()=>{
-    const history = useHistory()
+
     const [error, setError] = useState("");
     const {token} = useParams()
 

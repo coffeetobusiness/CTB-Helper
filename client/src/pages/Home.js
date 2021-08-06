@@ -1,4 +1,4 @@
-import React,{ useState,useContext,useEffect }  from 'react';
+import React,{useContext,useEffect }  from 'react';
 import {  CredentialsContext } from '../App';
 import { withRouter } from 'react-router-dom';
 import Header from '../header/Header';
@@ -9,8 +9,8 @@ import HomeMain from '../components/HomeMain';
 function Home(){
 
     const [ credentials, ] = useContext(CredentialsContext)
-    const [error, setError] = useState("");
     const email = credentials.email;
+    console.log(email)
 
     useEffect(() => {
         fetch(`http://localhost:4000/users/home`, {

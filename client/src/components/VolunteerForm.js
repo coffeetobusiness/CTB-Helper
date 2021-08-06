@@ -1,8 +1,8 @@
-import React, {useState ,useEffect} from 'react'
+import React, {useState} from 'react'
 import Header from '../header/Header';
 import { useHistory } from 'react-router';
-import { handleErrors } from '../pages/Login';
-
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export default function VolunteerForm() {
 
@@ -14,25 +14,37 @@ export default function VolunteerForm() {
     const [country,setCountry] = useState(null);
     const [description,setDescription] = useState(null);
 
-    const [image, setImage] = useState("");
-    const [userImage, setUserImage] = useState("");
+    const [selectedFile, setselectedFile] = useState(null);
+   
 
     const [error, setError] = useState("");
     
 
     const PostClick =(e) =>{
       e.preventDefault();
-      fetch(`http://localhost:4000/users/volunteer`,{
-          method: "POST",
-          headers:{
-              "Content-Type": "application/json",
-              "x-access-token": localStorage.getItem("token"),
-          },
-          body: JSON.stringify({
-               phone,address, city, state, country, description, image,userImage
-            }),
+
+      const data = new FormData();
+      if ( selectedFile ){
+        data.append( 'Image', selectedFile, selectedFile.name )
+        data.append( 'phone',  phone)
+        data.append( 'address',  address)
+        data.append( 'city',  city)
+        data.append( 'state',  state)
+        data.append( 'country',  country)
+        data.append( 'description',  description)
+      }
+
+      axios({
+        method: 'POST',
+        headers:{
+          'accept': 'application/json',
+          'Accept-Language': 'en-US,en;q=0.8',
+            "x-access-token": localStorage.getItem("token"),
+            'Content-Type': `multipart/form-data; boundary=${data._boundary}`
+        },
+        url: 'http://localhost:4000/users/volunteer',
+        data
       })
-      .then(handleErrors)
       .then(() => {
           alert("Your request for volunteer is submitted successfully, our team verify your details and notify you by your email")
           history.push('/home')
@@ -49,20 +61,19 @@ export default function VolunteerForm() {
         var img = document.getElementById("myCardImg");
         img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
        
-        const fileUrl = URL.createObjectURL(e.target.files[0]);
-        setImage(fileUrl);
+        setselectedFile(e.target.files[0])
     }
   }
-  const  Photochange = (e) =>{
-    console.log(e.target.files[0])
-    if (e.target.files && e.target.files[0]) {
-      var img = document.getElementById("myUserImg");
-      img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
+//   const  Photochange = (e) =>{
+//     console.log(e.target.files[0])
+//     if (e.target.files && e.target.files[0]) {
+//       var img = document.getElementById("myUserImg");
+//       img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
      
-      const fileUrl = URL.createObjectURL(e.target.files[0]);
-      setUserImage(fileUrl);
-  }
-}
+//       const fileUrl = URL.createObjectURL(e.target.files[0]);
+//       setUserImage(fileUrl);
+//   }
+// }
 
    
     return(
@@ -108,17 +119,21 @@ export default function VolunteerForm() {
                         <textarea required class="form-control"  rows="3" placeholder="Describe yourself" onChange={(e) => setDescription(e.target.value)}></textarea>
                     </div>
                     </div>
-                    <h5>Upload your photo</h5> <input required type="file" className="mb-3" onChange={Photochange}></input>
-                    <h5>Upload photo of your Registered Identity</h5> <input required type="file" className="mb-3" onChange={Imagechange}></input>
+                    <h5>Upload your photo in profile if not updated</h5>
+                     {/* <input required type="file" className="mb-3" onChange={Photochange}></input> */}
+                    <Link  to="/profilephoto" className="btn btn-primary mb-3">Change Profile Photo</Link>
+
+                    <h5>Upload photo of your Registered Identity</h5> <input required type="file"  onChange={Imagechange}></input>
+                    <br/><small className="mb-3 text-secondary">image should be less than 2mb and only jpg,jpeg,gif,png accepted</small>
                     {error && <span id="reg-msg" >{error}</span>}
                     
-                    {image && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
+                    {selectedFile && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
             </form>
                
             </div>
             <div className="col">
-              <img src="" alt=" " height="250px" width="250px"  id="myUserImg" ></img><hr/>
-              <img src="" alt=" " height="250px" width="250px"  id="myCardImg" ></img>
+              {/* <img src="" alt=" " height="250px" width="250px"  id="myUserImg" ></img><hr/> */}
+              <img src=" " alt="  " height="350px" width="250px"  id="myCardImg" ></img>
             </div>
         </div>
         </div>

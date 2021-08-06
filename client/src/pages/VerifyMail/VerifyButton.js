@@ -11,6 +11,7 @@ function VerifyButton(){
     const email = credentials.email;
 
     const PostData = (e)=>{
+        console.log(error)
       e.preventDefault();
       fetch('http://localhost:4000/users/verifyclick',{
           method:"POST",

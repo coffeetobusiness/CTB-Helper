@@ -211,7 +211,6 @@ router.post('/register', async (req, res,) => {
 router.post('/help', verifyJWT , async (req, res,) => {
 
     const user = await User.findOne({ _id: req.userId });
-    
 
     if(user){
         const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
@@ -222,9 +221,11 @@ router.post('/help', verifyJWT , async (req, res,) => {
         }else{
             user.UserRole = "Contributor"
         }
+
         ImgUpload( req, res, ( error ) => {
-            // console.log( 'requestOkokok', req.file );
-            // console.log( 'error', error );
+              console.log( 'requestOkokok', req.file );
+            //  console.log( 'error', error );
+            console.log( 'data', req.body );
             if( error ){
              console.log( 'errors', error );
              res.status(403)
@@ -232,59 +233,56 @@ router.post('/help', verifyJWT , async (req, res,) => {
             } else {
              // If File not found
              if( req.file === undefined ){
+                res.status(404)
               console.log( 'Error: No File Selected!' );
               res.json( {message: "Image not found" } )
              } else {
-              // If Success
-              console.log(req.file.location)
-              const imageName = req.file.key;
-              const imageLocation = req.file.location;// Save the file name into database into profile model
-              res.json({
-               image: imageName,
-               location: imageLocation
-              })
-              help.image = ""
+
+                console.log(req.file.location)
+                const imageName = req.file.key;
+                 const imageLocation = req.file.location;
+
+                    const help = new Help({
+                    title: req.body.title,
+                    phone: req.body.phone,
+                    category: req.body.category,
+                    description: req.body.description,
+                    image:imageLocation,
+        
+                    location: req.body.location,
+                    latitude:req.body.latitude,
+                    longitude:req.body.longitude,
+        
+                    address: req.body.address, 
+                    city: req.body.city, 
+                    state: req.body.state, 
+                    country: req.body.country, 
+        
+                    time:currentTime,
+                    date:currentDate,
+                    
+                    userId:user._id,
+                    email:user.email,
+                    firstName:user.firstName,
+                    lastName:user.lastName
+                    
+                })
+                try {
+                 help.save()
+                 user.save()
+                res.status(200)
+                res.json({
+                    message:"success",
+                    image: imageName,
+                    location: imageLocation
+                });
+                
+                }catch (error) {
+                    res.send("error" + error)
+               }
              }
             }
            })
-       
-      
-        const help = new Help({
-            title: req.body.title,
-            phone: req.body.phone,
-            category: req.body.category,
-            description: req.body.description,
-           // image:req.file.location,
-
-            location: req.body.location,
-            latitude:req.body.latitude,
-            longitude:req.body.longitude,
-
-            address: req.body.address, 
-            city: req.body.city, 
-            state: req.body.state, 
-            country: req.body.country, 
-
-            time:currentTime,
-            date:currentDate,
-            
-            userId:user._id,
-            email:user.email,
-            firstName:user.firstName,
-            lastName:user.lastName
-            
-        })
-    
-        try {
-        await help.save()
-              user.save()
-        res.json({
-            message:"success",
-        });
-        
-        }catch (error) {
-        res.send("error" + error)
-        }
     }
     else{
         res.send("Invalid user")
@@ -396,12 +394,36 @@ router.post('/volunteer', verifyJWT , async (req, res,) => {
         const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
         const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
         
-        user.UserRole = "Volunteer"
+        if(user.UserRole=="Admin"){
+            user.UserRole = "Admin"
+        }else{
+            user.UserRole = "Volunteer"
+        }
+
+        ImgUpload( req, res, ( error ) => {
+              console.log( 'requestOkokok', req.file );
+            //  console.log( 'error', error );
+            console.log( 'data', req.body );
+            if( error ){
+             console.log( 'errors', error );
+             res.status(403)
+             res.json( { message: "only image accepted less than 2 Mb" } );
+            } else {
+             // If File not found
+             if( req.file === undefined ){
+                res.status(404)
+              console.log( 'Error: No File Selected!' );
+              res.json( {message: "Image not found" } )
+             } else {
+
+                console.log(req.file.location)
+                const imageName = req.file.key;
+                 const imageLocation = req.file.location;
+
+                 
+        user.image = imageLocation
 
         user.phone = req.body.phone
-        user.image = req.body.image
-        user.userImage =req.body.userImage
-
         user.address = req.body.address
         user.city = req.body.city
         user.state = req.body.state
@@ -412,15 +434,20 @@ router.post('/volunteer', verifyJWT , async (req, res,) => {
         user.time = currentTime
         user.date = currentDate
     
-      try {
-        await user.save()
+        try {
+         user.save()
         res.json({
             message:"success",
         });
         
-      }catch (error) {
+        }catch (error) {
         res.send("error" + error)
         }
+
+
+        }
+    }
+    })
     }
     else{
         res.send("Invalid user")

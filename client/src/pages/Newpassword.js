@@ -33,28 +33,6 @@ const NewPassword  = ()=>{
         })
     }
 
-    const VerifyEmail = ()=>{
-        fetch("http://localhost:4000/users/verify-email",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                token
-            })
-        })
-        .then(res=>res.json())
-        .then(data=>{
-           if(data.error){
-             setError(data.error)
-           }
-           else{
-               alert("Verified Sucess")
-               history.push('/home')
-           }
-        })
-    }
-
    return (
     <div className="app">
          <div><Header/></div> 

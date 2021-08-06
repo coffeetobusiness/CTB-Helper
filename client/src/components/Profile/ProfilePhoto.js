@@ -1,14 +1,11 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import Header from '../../header/Header';
 import { useHistory } from 'react-router';
-import { handleErrors } from '../../pages/Login';
-
 import axios from 'axios';
-import $ from 'jquery';
 
  const ProfilePhoto = () =>{
     const DefaultAvtar = "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/104113705/original/6076831db34315e45bd2a31a9d79bb7b91d48e04/design-flat-style-minimalist-avatar-of-you.jpg";
-    const [image, setImage] = useState(DefaultAvtar);
+    const [image] = useState(DefaultAvtar);
     const [error, setError] = useState("");
     const hiddenFileInput = React.useRef();
     const history = useHistory();
@@ -17,13 +14,11 @@ import $ from 'jquery';
 
     const  Imagechange = (e) =>{
       setselectedFile(e.target.files[0])
+      
         console.log(e.target.files[0])
         if (e.target.files && e.target.files[0]) {
           var img = document.getElementById("myImg");
           img.src = URL.createObjectURL(e.target.files[0]); // set src to blob url
-         
-          const fileUrl = URL.createObjectURL(e.target.files[0]);
-        //  setImage(fileUrl);
       }
     }
 
@@ -49,7 +44,7 @@ import $ from 'jquery';
                   alert( 'Max size: 2MB');
                  } else {
                   console.log( response.data );// If not the given file type
-                  alert( response.data.error);
+                  alert( "only jpg,jpeg,gif,png accepted");
                  }
                 } else {
                  // Success
@@ -61,9 +56,10 @@ import $ from 'jquery';
                 //  console.log( 'fileName', fileName );
                 }
                }
-              }).catch( ( error ) => {
+              })
+              .catch( ( error ) => {
               // If another error
-              alert( error);
+              alert( 'image size should be less than 2Mb and jpg,jpeg,gif,png accepted');
              });
             } else {
              // if file not selected throw error
@@ -99,3 +95,30 @@ import $ from 'jquery';
     )
 }
 export default  ProfilePhoto;
+
+// if ( selectedFile ){
+//   data.append( 'Image', selectedFile, selectedFile.name )
+//   data.append( 'title',  title)
+//   data.append( 'phone',  phone)
+//   data.append( 'location',  location)
+//   data.append( 'latitude',  latitude)
+//   data.append( 'longitude',  longitude)
+//   data.append( 'category',  category)
+//   data.append( 'address',  address)
+//   data.append( 'city',  city)
+//   data.append( 'state',  state)
+//   data.append( 'country',  country)
+//   data.append( 'description',  description)
+// }
+
+// axios({
+//   method: 'POST',
+//   headers:{
+//     'accept': 'application/json',
+//     'Accept-Language': 'en-US,en;q=0.8',
+//       "x-access-token": localStorage.getItem("token"),
+//       'Content-Type': `multipart/form-data; boundary=${data._boundary}`
+//   },
+//   url: 'http://localhost:4000/users/help',
+//   data
+// })

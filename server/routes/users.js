@@ -126,25 +126,69 @@ router.post('/register', async (req, res,) => {
 const Help = require('../Models/HelpModel');
 //////////Help Post
 router.post('/help', verifyJWT, async (req, res) => {
+
     console.log("i was here in users backend")
     const user = await User.findOne({ _id: req.userId });
     console.log(req.body)
+
     const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
     const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+
+    if(user.UserRole=="Admin"){
+        user.UserRole = "Admin"
+    }else{
+        user.UserRole = "Contributor"
+    }
+    ImgUpload( req, res, ( error ) => {
+        // console.log( 'requestOkokok', req.file );
+        // console.log( 'error', error );
+        if( error ){
+         console.log( 'errors', error );
+         res.status(403)
+         res.json( { message: "only image accepted less than 2 Mb" } );
+        } else {
+         // If File not found
+         if( req.file === undefined ){
+          console.log( 'Error: No File Selected!' );
+          res.json( {message: "Image not found" } )
+         } else {
+          // If Success
+          console.log(req.file.location)
+          const imageName = req.file.key;
+          const imageLocation = req.file.location;// Save the file name into database into profile model
+          res.json({
+           image: imageName,
+           location: imageLocation
+          })
+          help.image = ""
+         }
+        }
+       })
+
+
     const help = new Help({
         title: req.body.title,
         phone: req.body.phone,
-        userId:user._id,
-        location: req.body.location, 
-        category: req.body.category ,
         address: req.body.address, 
         city: req.body.city, 
         state: req.body.state, 
         description: req.body.description,
+        country: req.body.country, 
+        
+        location: req.body.location,
+        latitude:req.body.latitude,
+        longitude:req.body.longitude,
+
+        
         time:currentTime,
         date:currentDate,
         likes:[],
         comment:[],
+
+        userId:user._id,
+        email:user.email,
+        firstName:user.firstName,
+        lastName:user.lastName
         
     })
     console.log(help)

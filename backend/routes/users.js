@@ -365,7 +365,7 @@ router.post('/verifyvolunteer',verifyJWT, async (req, res,) => {
 
 //verifypost by volunteer
 router.post('/verifypostbyvolunteer',verifyJWT, async (req, res,) => {
-    const help = await Help.findOne({ email: req.body.PostForVerify });
+    const help = await Help.findOne({ _id: req.body.PostForVerify });
     try {
         if (help) {
             res.status(200)

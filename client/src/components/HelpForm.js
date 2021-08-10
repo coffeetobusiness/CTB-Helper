@@ -7,6 +7,9 @@ import axios from 'axios';
 
 export default function HelpForm() {
 
+  const [loading,setloading] = useState(false);
+
+  
     const [title,setTitle] = useState("");
     const [phone,setPhone] = useState("");
     const [location,setLocation] = useState("");
@@ -51,6 +54,8 @@ export default function HelpForm() {
       }
 
      if(selectedFile){
+      setloading(true);
+
       axios({
         method: 'POST',
         headers:{
@@ -73,6 +78,10 @@ export default function HelpForm() {
      }else{
        setError('Please choose a photo')
      }
+
+     setTimeout(() => {
+      setloading(false);
+    }, 15000);
   };
   const history = useHistory();
 
@@ -216,7 +225,9 @@ export default function HelpForm() {
                     <p className="text-right"><span>Upload Photo</span> <input type="file" onChange={Imagechange}></input></p>
                     
                     {error && <span id="reg-msg" >{error}</span>}
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+
+                    {loading && <button type="submit" className="btn btn-secondary btn-lg btn-block"><i class="fa fa-spinner fa-spin"></i> Please Wait</button>}
+                    {!loading && <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>}
             </form>
                
             </div>

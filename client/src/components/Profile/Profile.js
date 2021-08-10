@@ -280,7 +280,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                   <h6 className="mb-0">Address</h6>
                 </div>
                 <div className="col-sm-9 text-secondary">
-                      {address} <br/>{city} ,{state} ,{country}
+                      {user.address} <br/>{user.city} ,{user.state} ,{user.country}
                 </div>
               </div>
               <hr/>
@@ -304,6 +304,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
       if(PostForVerify===""){
         setError("Please Select Checkbox")
       }else{
+        console.log(PostForVerify)
         fetch(`http://localhost:4000/users/verifypostbyvolunteer`,
             {
                 method: "POST",
@@ -333,7 +334,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
 
            <div className="form-row card-header">
              <div><h2>Verify</h2></div>
-            <div className="form-group col"><input className="form-control" value={help.email} onChange={(e) => setPostForVerify(e.target.value)} type="checkbox"/></div>
+            <div className="form-group col"><input className="form-control" value={help._id} onChange={(e) => setPostForVerify(e.target.value)} type="checkbox"/></div>
             <div className="form-group col"><h6 className="text-danger">{error}</h6></div>
             <div className="form-group col"><button  onClick={PostVerifyClick} className="btn btn-success btn-block form-control">Submit</button></div>
           </div>

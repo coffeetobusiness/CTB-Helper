@@ -51,7 +51,8 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
             <button type="button" className=" ml-2 mb-1 close text-danger">
                <span >&times;</span>
             </button>
-          <h5 className="card-title">{help.title}</h5>
+          <h5 className="card-title">{help.title} {help.verify === true && <i class="fas fa-check-double text-success"><small>(verified)</small></i>} {help.verify === false && <i class="fas fa-check-double text-warning"><small>(not verified)</small></i>}</h5>
+          
           <h6 className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>
           <div className="row">
             <p className="cardimage text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>

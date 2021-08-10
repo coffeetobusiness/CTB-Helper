@@ -29,7 +29,7 @@ export default function Header(){
               </li>
 
               {credentials && <li className="nav-item">
-                <Link className="nav-link" to={"/aws"}>About</Link>
+                <Link className="nav-link" to={"/"}>About</Link>
               </li>}
 
               {credentials && <li className="nav-item">

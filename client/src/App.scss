@@ -40,14 +40,20 @@ body, html, .App, #root {
   border-radius: 4px;
   background: rgb(255, 255, 255);
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  transition: .5s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
   padding: 14px;
   cursor: pointer;
+  //transition: width 2s, height 2s, transform 2s;
 }
 
 .cardResponsive:hover{
-   transform: scale(1.05);
+  // transform: scale(1.05);
   // transform: rotateY(15deg);
+  transform: translate(-15px, 0px);
+// -ms-transform: skewX(4deg); /* IE 9 */
+  // transform: skewX(4deg); 
+ // transform: rotate(-4deg);
+ 
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 

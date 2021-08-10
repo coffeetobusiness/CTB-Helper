@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 function MakeAdmin(){
 
 
-    const [UserRole] = "Admin"
+    const [UserRole] = useState('Admin')
     const [Verify_Role] = useState(true);
 
     const [error, setError] = useState("");

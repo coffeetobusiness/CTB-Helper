@@ -6,6 +6,8 @@ import axios from 'axios';
 
 export default function VolunteerForm() {
 
+    const [loading,setloading] = useState(false);
+
     const [phone,setPhone] = useState("");
    
     const [address,setAddress] = useState("");
@@ -25,6 +27,8 @@ export default function VolunteerForm() {
 
       const data = new FormData();
       if ( selectedFile ){
+        setloading(true);
+
         data.append( 'Image', selectedFile, selectedFile.name )
         data.append( 'phone',  phone)
         data.append( 'address',  address)
@@ -52,6 +56,11 @@ export default function VolunteerForm() {
       .catch((error) =>{
           setError(error.message);
       });
+
+      setTimeout(() => {
+        setloading(false);
+      }, 15000);
+
   };
   const history = useHistory();
 
@@ -127,7 +136,9 @@ export default function VolunteerForm() {
                     <br/><small className="mb-3 text-secondary">image should be less than 2mb and only jpg,jpeg,gif,png accepted</small>
                     {error && <span id="reg-msg" >{error}</span>}
                     
-                    {selectedFile && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
+                    {loading && selectedFile && <button type="submit" className="btn btn-primary btn-lg btn-block"><i class="fa fa-spinner fa-spin"></i> Please Wait</button>}
+                
+                    {!loading && selectedFile && <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Request</button>}
             </form>
                
             </div>

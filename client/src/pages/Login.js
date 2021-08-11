@@ -15,13 +15,17 @@ export const handleErrors = async (response) => {
   };
 
 export default function Login(){
+
+    const [loading,setloading] = useState(false);
+
     const [email,setemail] = useState("");
     const [password,setPassword] = useState("");
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
-    const  [loginStatus, setloginStatus] = useState(false);
+    
 
     const login =(e) =>{
+        setloading(true);
         e.preventDefault();
         fetch(`http://localhost:4000/users/login`,
             {
@@ -36,7 +40,6 @@ export default function Login(){
         })
         .then(handleErrors)
         .then((response) => {
-            setloginStatus(true);
             localStorage.setItem("token",response.token)
             setCredentials({
               email,
@@ -46,32 +49,17 @@ export default function Login(){
         .catch((error) =>{
             setError(error.message);
         });
+
+        setTimeout(() => {
+            setloading(false);
+          }, 15000);
     };
         const history = useHistory();
-       //Button
-    const ClickAuth = () => {
-        fetch(`http://localhost:4000/users/isUserAuth`,
-        {
-            method: "GET",
-            headers: {
-                "x-access-token": localStorage.getItem("token"),
-              "Content-Type": "application/json",
-        },
-       })
-       .then(handleErrors)
-       .then(() => {
-        history.push("/home");
-        })
-       .catch((error) =>{
-        setError(error.message);
-       });
-    }
+     
 
     return(
         <div className="app">
         <div><Header/></div>
-       
-        {loginStatus && <button className="btn btn-success" onClick={ClickAuth}>Check if auth</button>}
 
         <div className="row App-conatiner">
             <div className="col-6 container-fluid">
@@ -90,8 +78,9 @@ export default function Login(){
                     <input required minLength="5" type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
+                {loading && <button type="submit" className="btn btn-secondary btn-lg btn-block"><i class="fa fa-spinner fa-spin"></i> Sign in</button>}
+                {!loading && <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>}
                 
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
 
                 
                 {error && <span id="reg-msg" >{error}</span>}

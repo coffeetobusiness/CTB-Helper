@@ -644,16 +644,50 @@ router.post('/adminme', verifyJWT , async (req, res,) => {
 
 
 //Delete
-router.delete('/:id', async (req, res) => {
+router.delete('/removeuser',verifyJWT, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id)
-        const user1 = user.remove()
-        res.send("userdata remove  with email id of:" + user.email)
+        const user = await User.findById(req.userId)
+        user.remove()
+
+        res.json({
+            message: "userdata remove  with email id of:" + user.email
+          });
     } catch (err) {
         res.send("error" + err);
     }
 })
+ // editprofile
+ router.post('/EditProfile', verifyJWT , async (req, res,) => {
 
+    const user = await User.findOne({ _id: req.userId });
+
+    if(user){
+       
+        user.firstName = req.body.firstName
+        user.lastName = req.body.lastName
+        user.email = req.body.email
+        user.phone = req.body.phone
+
+        user.address = req.body.address
+        user.city = req.body.city
+        user.state = req.body.state
+        user.country = req.body.country
+       
+    
+      try {
+        await user.save()
+        res.json({
+            message:"success",
+        });
+        
+      }catch (error) {
+        res.send("error" + error)
+        }
+    }
+    else{
+        res.send("Invalid user")
+    }
+});
 
 //Home
 router.get('/home',verifyJWT, async (req, res) => {

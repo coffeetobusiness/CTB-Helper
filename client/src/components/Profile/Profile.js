@@ -108,7 +108,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
       
           
         <div className="col-md-8">
-          <div className="card  p-1">
+          <div className="card  p-1">  <span className="text-right"><Link  to="/EditProfile"> <i className="fa fa-edit"></i>Edit Profile</Link></span>
             <div className="card-body">
               <div className="row">
                 <div className="col-sm-3">

@@ -8,6 +8,8 @@ import { handleErrors } from './Login';
 
 export default function Register(){
 
+    const [loading,setloading] = useState(false);
+
     const [firstName,setfirstName] = useState("");
     const [lastName,setlastName] = useState("");
     const [email,setemail] = useState("");
@@ -18,11 +20,13 @@ export default function Register(){
     
 
     const register =(e) =>{
+        
         e.preventDefault();
         if(password!==password2){
             setError("Password does not match")
         }else{
-        
+            setloading(true);
+
         fetch(`http://localhost:4000/users/register`,{
             method: "POST",
             headers:{
@@ -44,6 +48,10 @@ export default function Register(){
         .catch((error) =>{
             setError(error.message);
         });
+
+        setTimeout(() => {
+            setloading(false);
+          }, 15000);
     };
     };
     const history = useHistory();
@@ -77,8 +85,9 @@ export default function Register(){
                 </div>
 
                
-
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                {loading && <button type="submit" className="btn btn-secondary btn-lg btn-block"><i class="fa fa-spinner fa-spin"></i>Register</button>}
+                {!loading && <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>}
+                
                 {error && <span id="reg-msg" >{error}</span>}
                 <p className=" text-right">
                     Back to <Link  to="/">Login</Link>

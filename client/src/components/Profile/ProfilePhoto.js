@@ -4,6 +4,9 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 
  const ProfilePhoto = () =>{
+
+  const [loading,setloading] = useState(false);
+
     const DefaultAvtar = "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/104113705/original/6076831db34315e45bd2a31a9d79bb7b91d48e04/design-flat-style-minimalist-avatar-of-you.jpg";
     const [image] = useState(DefaultAvtar);
     const [error, setError] = useState("");
@@ -27,6 +30,8 @@ import axios from 'axios';
             setError("Please Select a file")
         }else{
 
+          setloading(true);
+
              const data = new FormData();// If file selected
             if ( selectedFile ) {data.append( 'Image', selectedFile, selectedFile.name );
               axios.post( 'http://localhost:4000/users/profilephoto', data, {
@@ -48,7 +53,7 @@ import axios from 'axios';
                  }
                 } else {
                  // Success
-                 alert( 'Profile Photo Uploaded');
+                // alert( 'Profile Photo Uploaded');
                  history.push('/profile')
 
                  
@@ -61,6 +66,11 @@ import axios from 'axios';
               // If another error
               alert( 'image size should be less than 2Mb and jpg,jpeg,gif,png accepted');
              });
+
+             setTimeout(() => {
+              setloading(false);
+            }, 15000);
+
             } else {
              // if file not selected throw error
              alert( 'Please upload file');
@@ -83,7 +93,10 @@ import axios from 'axios';
                   <input type="file" onChange={Imagechange} ref={hiddenFileInput} style={{display: 'none'}}/>
                   <button className="btn btn-primary" onClick={(e)=>hiddenFileInput.current.click()}>Select a new photo</button>
 
-                  <button className="btn btn-success ml-5" onClick={SubmitPhoto}>Upload</button>
+                    
+                {loading && <button type="submit" className="btn btn-success ml-5"><i class="fa fa-spinner fa-spin"></i> Uploading...</button>}
+                {!loading && <button className="btn btn-success ml-5" onClick={SubmitPhoto}>Upload</button>}
+                
                 </div>
               </div>
             </div>

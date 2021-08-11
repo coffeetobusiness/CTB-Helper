@@ -1,8 +1,10 @@
 import React from 'react';
+import DeleteAccount from '../components/Profile/DeleteAccount'
 
  const RightBar = () =>{
     return(
         <div className="RightBar card w-100 mt-2">
+            <DeleteAccount/>
             <div className="card-header bg-secondary text-warning">
                Most Recent searches
             </div>

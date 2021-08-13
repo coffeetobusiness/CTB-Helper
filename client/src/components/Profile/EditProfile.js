@@ -84,7 +84,7 @@ export default function EditProfile(){
 
     return(<div >
         <Headers/>
-        <div className="App-conatiner">
+        <div className="App-conatiner zoomEffect">
         <form onSubmit={Click}>
            <div className="row"> 
           <div className="col-6">

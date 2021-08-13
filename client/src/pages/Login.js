@@ -61,7 +61,7 @@ export default function Login(){
         <div className="app">
         <div><Header/></div>
 
-        <div className="row App-conatiner">
+        <div className="row App-conatiner zoomEffect">
             <div className="col-6 container-fluid">
                <form onSubmit={login}>
                 <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>

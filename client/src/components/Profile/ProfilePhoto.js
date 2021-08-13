@@ -81,7 +81,7 @@ import axios from 'axios';
     return(
         <div className="">
            <Header/>
-           <div className="App-conatiner">
+           <div className="App-conatiner zoomEffect">
            <div >
            <div className=" ">
            <div className="card ">

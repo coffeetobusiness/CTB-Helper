@@ -163,7 +163,7 @@ export default function HelpForm() {
     return(
         <div className="app">
         <div><Header/></div> 
-        <div className="row App-conatiner">
+        <div className="row App-conatiner zoomEffect">
             <div className="col-9">
                 <h3><i class="fas fa-hands-helping"></i> Helpo </h3>
                 <div>

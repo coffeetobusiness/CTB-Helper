@@ -218,6 +218,9 @@ router.post('/help', verifyJWT , async (req, res,) => {
         
         if(user.UserRole=="Admin"){
             user.UserRole = "Admin"
+        }
+        if(user.UserRole=="Volunteer"){
+            user.UserRole = "Volunteer"
         }else{
             user.UserRole = "Contributor"
         }
@@ -292,8 +295,8 @@ router.post('/help', verifyJWT , async (req, res,) => {
 //All Help Get
 router.get('/help',verifyJWT, async (req, res,) => {
     try {
-        await  Help.find({}, function (err, users) {
-            res.send(users);
+        await  Help.find({}, function (err, helps) {
+            res.send(helps);
         });
     }catch (error) {
         res.json("error" + error)

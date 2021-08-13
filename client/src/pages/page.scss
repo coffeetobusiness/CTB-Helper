@@ -9,7 +9,6 @@
   border: none;
   border-bottom: 1px solid black;
   border-radius: 0%;
-  
 }
 .form-control:focus{
   border: none;
@@ -35,6 +34,15 @@
   align-items: center;
   justify-content: center;
   background-image: linear-gradient( 69.9deg,  rgb(101, 124, 158) 5.5%, rgba(100, 97, 155, 0.74) 45.2%, rgb(86, 118, 179) 55.2%, rgb(78, 108, 146) 88.4% );
+  animation: home-search 400ms ease-in-out;
+}
+@keyframes home-search {
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
 }
 .searchForm{
   align-items: center;

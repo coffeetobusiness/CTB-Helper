@@ -4,6 +4,13 @@
     color: #14a0c7;
     font-weight: 700;
     font-family:'Lucida Sans';
+    animation: nav-load 100ms ease-in-out;
+   
+  }
+  .nav-link{
+    animation: nav-link-load 200ms ease-in 300ms;
+    animation-fill-mode: forwards;
+    transform: scale(0);
   }
   .nav-link:hover{
     text-decoration: 2px blue underline;
@@ -33,4 +40,24 @@
     background: transparent;
     color: red;
     text-decoration: 2px red underline;
+  }
+  @keyframes nav-load {
+    0%{
+      transform: translateY(-100%);
+    }
+    100%{
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes nav-link-load {
+    0%{
+      transform: scale(0);
+    }
+    90%{
+      transform: scale(1.2);
+    }
+    100%{
+      transform: scale(1);
+    }
   }

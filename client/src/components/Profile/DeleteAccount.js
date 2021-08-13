@@ -36,7 +36,7 @@ export default function DeleteAccount(){
     return(
         <div className="app mb-3">
              {loading && <button className="btn btn-secondary"><i class="fa fa-spinner fa-spin btn-block"></i> Deleting</button>}
-            {!loading &&  <button onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) ClickDelete() } } className="btn btn-danger btn-block">Delete My Account</button>}
+            {!loading &&  <button onClick={() => { if (window.confirm('Are you sure you wish to delete this account?')) ClickDelete() } } className="btn btn-danger btn-block">Delete My Account</button>}
            
         </div>
     )

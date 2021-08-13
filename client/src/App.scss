@@ -1,7 +1,6 @@
 @import './header/header.scss';
 @import './pages/page.scss';
 
-
 .main {
   font-family: sans-serif;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -12,7 +11,56 @@ body {
   display: flex;
   font-weight: 400;
   background: #4872111c;  /* fallback for old browsers */
-  
+}
+.mainbody{
+  animation: main-body 400ms ease-in;
+  animation-fill-mode: forwards;
+  transform: scale(0);
+
+  // animation: card-swipe 600ms ease-in-out;
+  // animation-fill-mode: forwards;
+}
+.card{
+  animation: main-body 300ms ease-in;
+  animation-fill-mode: forwards;
+  transform: scale(0);
+}
+@keyframes main-body {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+.zoomEffect{
+  animation: form-div 400ms ease-in;
+  animation-fill-mode: forwards;
+  transform: scale(0);
+}
+@keyframes form-div {
+  0%{
+    transform: scale(0);
+  }
+ 60%{
+   transform: scale(1.1);
+ }
+  100%{
+    transform: scale(1);
+  }
+}
+.cardResponsive{
+  animation: card-swipe 300ms ease-in-out;
+  animation-fill-mode: forwards;
+}
+@keyframes card-swipe {
+  0%{
+    transform: translateX(-100%);
+  }
+  100%{
+    transform: translateX(0);
+  }
 }
 
 body, html, .App, #root {
@@ -40,7 +88,7 @@ body, html, .App, #root {
   border-radius: 4px;
   background: rgb(255, 255, 255);
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .5s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+ // transition: .5s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
   padding: 14px;
   cursor: pointer;
   //transition: width 2s, height 2s, transform 2s;

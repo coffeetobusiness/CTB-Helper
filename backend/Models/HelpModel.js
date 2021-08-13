@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var UserSchema = new mongoose.Schema(
+var HelpSchema = new mongoose.Schema(
 
 {
  title:{
@@ -75,4 +75,4 @@ var UserSchema = new mongoose.Schema(
 }
 )
 
-module.exports = mongoose.model('help',UserSchema)
+module.exports = mongoose.model('help',HelpSchema)

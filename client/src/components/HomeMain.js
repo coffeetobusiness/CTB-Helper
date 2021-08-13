@@ -32,7 +32,7 @@ export default function HomeMain(){
              setFilterSearch={setFilterSearch}
              />
           </div>
-        <div className="row">
+        <div className="row mainbody">
            <div className="col-2">
                <FilterForm
                filterSearch={filterSearch}

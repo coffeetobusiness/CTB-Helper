@@ -469,7 +469,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
         </div>
       )}
     else{
-        return <div>404 Not Found</div>
+        return <div>Loading Please Wait...</div>
       }
 }
 export default Profile;

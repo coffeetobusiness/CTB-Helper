@@ -58,7 +58,7 @@ export default function Register(){
     return(
         <div className="app">
         <div><Header/></div> 
-        <div className="row App-conatiner">
+        <div className="row App-conatiner zoomEffect">
             <div className="col-6">
            
                <form onSubmit={register}>

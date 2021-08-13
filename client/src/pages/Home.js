@@ -3,6 +3,7 @@ import {  CredentialsContext } from '../App';
 import { withRouter } from 'react-router-dom';
 import Header from '../header/Header';
 import HomeMain from '../components/HomeMain';
+import Footer from '../Footer/Footer';
 // <Link  to="/register">Register</Link>
 
 
@@ -30,6 +31,9 @@ function Home(){
           <div><Header/></div>
           <div>
             <HomeMain/>
+          </div>
+          <div>
+            <Footer/>
           </div>
        </div>
     )

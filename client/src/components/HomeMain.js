@@ -25,15 +25,15 @@ const VolunteerBtn = () =>{
 export default function HomeMain(){
   const [filterSearch,setFilterSearch] =useState('');
 
-    return(<div className="container-fluid">
+    return(<div className="">
         <div>
             <HomeSearch
              filterSearch={filterSearch}
              setFilterSearch={setFilterSearch}
              />
           </div>
-        <div className="row mainbody">
-           <div className="col-2">
+        <div className="row mainbody container-fluid">
+           <div className="col">
                <FilterForm
                filterSearch={filterSearch}
                setFilterSearch={setFilterSearch}
@@ -46,7 +46,7 @@ export default function HomeMain(){
                 setFilterSearch={setFilterSearch}
                />
            </div>
-           <div className="col-2">
+           <div className="col">
              <Postbutton/>
              <VolunteerBtn/>
             <RightBar/>

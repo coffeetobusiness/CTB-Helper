@@ -25,7 +25,8 @@ function App() {
 
   useEffect(()=>{
     Aos.init({
-        duration:1000
+        duration:1000,
+        offset: 0,
     })
   },[]);
 

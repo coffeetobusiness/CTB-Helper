@@ -35,22 +35,22 @@ body {
   }
 }
 
-.zoomEffect{
-  animation: form-div 400ms ease-in;
-  animation-fill-mode: forwards;
-  transform: scale(0);
-}
-@keyframes form-div {
-  0%{
-    transform: scale(0);
-  }
- 60%{
-   transform: scale(1.1);
- }
-  100%{
-    transform: scale(1);
-  }
-}
+// .zoomEffect{
+//   animation: form-div 400ms ease-in;
+//   animation-fill-mode: forwards;
+//   transform: scale(0);
+// }
+// @keyframes form-div {
+//   0%{
+//     transform: scale(0);
+//   }
+//  60%{
+//    transform: scale(1.1);
+//  }
+//   100%{
+//     transform: scale(1);
+//   }
+// }
 .cardResponsive{
   animation: card-swipe 300ms ease-in-out;
   animation-fill-mode: forwards;

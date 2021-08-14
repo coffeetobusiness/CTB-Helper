@@ -87,9 +87,9 @@ export default function EditProfile(){
         <div className="App-conatiner zoomEffect">
         <form onSubmit={Click}>
            <div className="row"> 
-          <div className="col-6">
+          <div data-aos="fade-down-right" className="col-6">
             <div className="form-group mt-5">
-                <input required minLength="3" value={firstName} type="text" className="form-control input-line" placeholder="firstname" onChange={(e) => setfirstName(e.target.value)}/>
+                <input autoFocus required minLength="3" value={firstName} type="text" className="form-control input-line" placeholder="firstname" onChange={(e) => setfirstName(e.target.value)}/>
             </div>
             <div className="form-group">
                 <input required minLength="3" value={lastName} type="text" className="form-control input-line" placeholder="lastname" onChange={(e) => setlastName(e.target.value)}/>
@@ -106,7 +106,7 @@ export default function EditProfile(){
             {error && <span id="reg-msg" >{error}</span>}
             
           </div>
-          <div className="col-6" id="col-side">
+          <div data-aos="fade-down-left" className="col-6" id="col-side">
           <div className="form-group mt-5">
                 <input required minLength="3" value={address} type="text" className="form-control input-line" placeholder="Address" onChange={(e) => setaddress(e.target.value)}/>
             </div>
@@ -126,7 +126,7 @@ export default function EditProfile(){
           </div>
 
              {loading && <button className="btn btn-secondary btn-block"><i class="fa fa-spinner fa-spin btn-block"></i>Saving</button>}
-            {!loading &&  <button type="submit"  className="btn btn-success btn-block">Save Changes</button>}
+            {!loading &&  <button type="submit" data-aos="fade-down"  className="btn btn-success btn-block">Save Changes</button>}
         
         </form>
         </div>

@@ -223,14 +223,14 @@ import MakeAdmin from '../Profile/MakeAdmin'
         
          <div className="row g-0">
            <div className="col-md-3">
-             <img src={user.userImage}  className="image-vol-req img-fluid rounded-start" alt="..."/>
+             <img data-aos="fade-right" src={user.userImage}  className="image-vol-req img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-3">
-             <img src={user.image} className="image-vol-req img-fluid rounded-start" alt="..."/>
+             <img data-aos="fade-right" src={user.image} className="image-vol-req img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-6">
              <div className="card-body">
-               <div className="row">
+               <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Full Name</h6>
                 </div>
@@ -340,11 +340,11 @@ import MakeAdmin from '../Profile/MakeAdmin'
           </div>
          <div className="row g-0">
            <div className="col-md-6">
-             <img src={help.image} className="img-fluid rounded-start" alt="..."/>
+             <img data-aos="fade-right" src={help.image} className="img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-6">
-             <div className="card-body">
-              <div className="row">
+             <div data-aos="fade-left" className="card-body">
+              <div  className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Title</h6>
                 </div>

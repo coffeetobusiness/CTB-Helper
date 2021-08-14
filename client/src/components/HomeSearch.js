@@ -5,7 +5,7 @@ export default function HomeSearch({filterSearch,setFilterSearch}){
     return(<>
         <div className="homesearch">
             
-            <h2 data-aos="zoom-in" data-aos-duration="2500" className="text-center">How Can We help?</h2>
+            <h2 data-aos="zoom-in" data-aos-duration="1500" className="text-center">How Can We help?</h2>
             <form className="searchForm">
             <div className="form-row">
              <div className="form-group col-3">

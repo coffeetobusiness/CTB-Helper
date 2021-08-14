@@ -46,7 +46,7 @@ export default function HomeMain(){
                 setFilterSearch={setFilterSearch}
                />
            </div>
-           <div className="col">
+           <div className="col" data-aos="fade-up"  data-aos-duration="1500">
              <Postbutton/>
              <VolunteerBtn/>
             <RightBar/>

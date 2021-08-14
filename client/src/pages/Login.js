@@ -52,7 +52,7 @@ export default function Login(){
 
         setTimeout(() => {
             setloading(false);
-          }, 15000);
+          }, 8000);
     };
         const history = useHistory();
      
@@ -62,9 +62,9 @@ export default function Login(){
         <div><Header/></div>
 
         <div className="row App-conatiner zoomEffect">
-            <div className="col-6 container-fluid">
+            <div className="col-6 container-fluid" data-aos="zoom-in">
                <form onSubmit={login}>
-                <h3><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
+                <h3 data-aos="zoom-in"><i class="fas fa-hands-helping"></i> Helpo LogIn</h3>
                
                 <p className=" mt-5">
                     New User?? <Link  to="/register">Register</Link>
@@ -94,6 +94,7 @@ export default function Login(){
              
             </div>
         </div>
+       
         </div>
     )
 }

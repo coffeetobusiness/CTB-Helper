@@ -163,8 +163,8 @@ export default function HelpForm() {
     return(
         <div className="app">
         <div><Header/></div> 
-        <div className="row App-conatiner zoomEffect">
-            <div className="col-9">
+        <div className="row App-conatiner zoomEffect" >
+            <div data-aos="flip-down" className="col-9">
                 <h3><i class="fas fa-hands-helping"></i> Helpo </h3>
                 <div>
                     <h3 className="text">Post  Help</h3>
@@ -231,7 +231,7 @@ export default function HelpForm() {
             </form>
                
             </div>
-            <div className="">
+            <div data-aos="flip-down">
               <img src="https://www.autoserviceworld.com/wp-content/uploads/2018/08/deal-merger-shake-hands.jpg" alt=" "  id="myImg" ></img>
             </div>
         </div>

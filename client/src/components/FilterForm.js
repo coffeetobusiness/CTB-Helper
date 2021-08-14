@@ -3,7 +3,7 @@ import React from 'react';
  const FilterForm = ({filterSearch,setFilterSearch}) =>{
      
     return(
-        <div>
+        <div data-aos="fade-up" data-aos-duration="1500">
           <form className="FilterForm mt-2">
               <h4 className="text-center text-primary"><i className="fa fa-filter"></i>Filter</h4>
               <select  class="form-control" onChange={(e) => setFilterSearch(e.target.value)}>

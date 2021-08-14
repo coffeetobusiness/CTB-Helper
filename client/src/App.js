@@ -1,6 +1,10 @@
-import React,{ useState } from 'react';
+import React,{ useState ,useEffect} from 'react';
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
 import './App.scss';
+
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reset from './pages/Reset';
@@ -18,6 +22,13 @@ export const CredentialsContext = React.createContext(null);///////////////:  nu
 
 function App() {
   const credentialsState = useState('');///////////////:  null karna hai
+
+  useEffect(()=>{
+    Aos.init({
+        duration:1000
+    })
+  },[]);
+
   return (
     <div className="main">
       <CredentialsContext.Provider value={credentialsState}>

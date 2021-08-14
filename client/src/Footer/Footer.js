@@ -10,7 +10,7 @@ export default function Footer(){
   <div className="container-fluid">
     <div className="row">
       <div className="col-md-4 footer-column">
-        <ul className="nav flex-column ml-5">
+        <ul data-aos="fade-right" className="nav flex-column ml-5">
           <li className="nav-item">
             <span className="footer-title">Description</span>
           </li>
@@ -20,7 +20,7 @@ export default function Footer(){
         </ul>
       </div>
       <div className="col-md-4 footer-column">
-        <ul className="nav flex-column">
+        <ul data-aos="zoom-in" className="nav flex-column">
           <li className="nav-item">
             <span className="footer-title">Company</span>
           </li>
@@ -36,7 +36,7 @@ export default function Footer(){
         </ul>
       </div>
       <div className="col-md-4 footer-column">
-        <ul className="nav flex-column">
+        <ul data-aos="fade-left" className="nav flex-column">
           <li className="nav-item">
             <span className="footer-title">Contact & Support</span>
           </li>
@@ -59,8 +59,8 @@ export default function Footer(){
     <div className="text-center"><i className="fas fa-ellipsis-h"></i></div>
     
     <div className="row text-center">
-      <div className="col-md-4 box">
-        <span className="copyright quick-links">Copyright &copy; 2021 Coffee to Business <script>document.write(new Date().getFullYear())</script>
+      <div  className="col-md-4 box">
+        <span  className="copyright quick-links">Copyright &copy; 2021 Coffee to Business <script>document.write(new Date().getFullYear())</script>
         </span>
       </div>
       <div className="col-md-4 box">

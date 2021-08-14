@@ -92,9 +92,9 @@ import MakeAdmin from '../Profile/MakeAdmin'
           <div className="card">
             <div className="card-body">
               <div className="d-flex flex-column align-items-center text-center">
-                <img src={userImage} alt="Admin" className="rounded-circle" width="150" height="150"/>
-                <small><Link  to="/profilephoto">Change Profile Photo</Link></small>
-                <div className="mt-2">
+                <img data-aos="fade-up" src={userImage} alt="Admin" className="rounded-circle" width="150" height="150"/>
+                <small data-aos="fade-right"><Link  to="/profilephoto">Change Profile Photo</Link></small>
+                <div data-aos="fade-right" className="mt-2">
                   <h4>{firstName} {lastName}</h4> {verify_user ==='false' && <i className='fa fa-exclamation-circle text-warning'>Verify your email</i>}{verify_user ==='true' && <i className='fa fa-check-circle text-success'></i>}
                   <h6 className="text-primary mb-1">{UserRole} ({Verify_Role})</h6>
                   <p className="text-muted font-size-sm">{city},{state},{country}</p>
@@ -110,7 +110,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
         <div className="col-md-8">
           <div className="card  p-1">  <span className="text-right"><Link  to="/EditProfile"> <i className="fa fa-edit"></i>Edit Profile</Link></span>
             <div className="card-body">
-              <div className="row">
+              <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Full Name</h6>
                 </div>
@@ -119,7 +119,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                 </div>
               </div>
               <hr/>
-              <div className="row">
+              <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Email</h6>
                 </div>
@@ -131,7 +131,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                 </div>
               </div>
               <hr/>
-              <div className="row">
+              <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Phone</h6>
                 </div>
@@ -140,7 +140,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                 </div>
               </div>
               <hr/>
-              <div className="row">
+              <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">User Verify</h6>
                 </div>
@@ -149,7 +149,7 @@ import MakeAdmin from '../Profile/MakeAdmin'
                 </div>
               </div>
               <hr/>
-              <div className="row">
+              <div data-aos="fade-left" className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Address</h6>
                 </div>

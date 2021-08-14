@@ -59,7 +59,7 @@ export default function Register(){
         <div className="app">
         <div><Header/></div> 
         <div className="row App-conatiner zoomEffect">
-            <div className="col-6">
+            <div className="col-6" data-aos="zoom-in">
            
                <form onSubmit={register}>
 

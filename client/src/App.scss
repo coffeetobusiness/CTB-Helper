@@ -21,11 +21,11 @@ body {
   // animation: card-swipe 600ms ease-in-out;
   // animation-fill-mode: forwards;
 }
-.card{
-  animation: main-body 300ms ease-in;
-  animation-fill-mode: forwards;
-  transform: scale(0);
-}
+// .card{
+//   animation: main-body 300ms ease-in;
+//   animation-fill-mode: forwards;
+//   transform: scale(0);
+// }
 @keyframes main-body {
   0%{
     transform: scale(0);

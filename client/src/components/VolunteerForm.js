@@ -89,7 +89,7 @@ export default function VolunteerForm() {
         <div className="app">
         <div><Header/></div> 
         <div className="row App-conatiner zoomEffect">
-            <div className="col-8">
+            <div data-aos="flip-down" className="col-8">
                 <h3><i class="fas fa-hands-helping"></i> Helpo </h3>
                 <div>
                     <h3 className="text">Request For Volunteer</h3>

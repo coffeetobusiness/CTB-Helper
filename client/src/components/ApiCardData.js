@@ -46,20 +46,20 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
         </div>
 
         {filterdata.map((help,index) => (
-        <div className="card cardResponsive">
+        <div  className="card cardResponsive">
         <div className="card-body" key={help._id}>
             <button type="button" className=" ml-2 mb-1 close text-danger">
                <span >&times;</span>
             </button>
-          <h5 className="card-title">{help.title} {help.verify === true && <i class="fas fa-check-double text-success"><small>(verified)</small></i>} {help.verify === false && <i class="fas fa-check-double text-warning"><small>(not verified)</small></i>}</h5>
+          <h5 data-aos="fade-left" className="card-title">{help.title} {help.verify === true && <i class="fas fa-check-double text-success"><small>(verified)</small></i>} {help.verify === false && <i class="fas fa-check-double text-warning"><small>(not verified)</small></i>}</h5>
           
-          <h6 className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>
+          <h6 data-aos="fade-left" className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>
           <div className="row">
-            <p className="cardimage text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>
-            <p className="cardDescription card-text col-6">{help.description}</p>
+            <p data-aos="fade-right" className="cardimage text-center"> <img src={help.image}  alt=" " class="cardImg card-img-top" /></p>
+            <p data-aos="fade-left" className="cardDescription card-text col-6">{help.description}</p>
           </div>
-          <a href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
-          <a href="/" className="card-link">Share</a>
+          <a data-aos="fade-left" href='mailto:uditmehra80@gmail.com' className="card-link">Contact</a>
+          <a data-aos="fade-left" href="/" className="card-link">Share</a>
         </div>
     </div>
       ))}

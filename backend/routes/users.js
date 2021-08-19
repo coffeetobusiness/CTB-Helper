@@ -134,36 +134,36 @@ router.post('/help', verifyJWT, async (req, res) => {
     const currentDate = new Intl.DateTimeFormat("en-GB",{dateStyle:"long",}).format()
     const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 
-    if(user.UserRole=="Admin"){
-        user.UserRole = "Admin"
-    }else{
-        user.UserRole = "Contributor"
-    }
-    ImgUpload( req, res, ( error ) => {
-        // console.log( 'requestOkokok', req.file );
-        // console.log( 'error', error );
-        if( error ){
-         console.log( 'errors', error );
-         res.status(403)
-         res.json( { message: "only image accepted less than 2 Mb" } );
-        } else {
-         // If File not found
-         if( req.file === undefined ){
-          console.log( 'Error: No File Selected!' );
-          res.json( {message: "Image not found" } )
-         } else {
-          // If Success
-          console.log(req.file.location)
-          const imageName = req.file.key;
-          const imageLocation = req.file.location;// Save the file name into database into profile model
-          res.json({
-           image: imageName,
-           location: imageLocation
-          })
-          help.image = ""
-         }
-        }
-       })
+    // if(user.UserRole=="Admin"){
+    //     user.UserRole = "Admin"
+    // }else{
+    //     user.UserRole = "Contributor"
+    // }
+    // ImgUpload( req, res, ( error ) => {
+    //     // console.log( 'requestOkokok', req.file );
+    //     // console.log( 'error', error );
+    //     if( error ){
+    //      console.log( 'errors', error );
+    //      res.status(403)
+    //      res.json( { message: "only image accepted less than 2 Mb" } );
+    //     } else {
+    //      // If File not found
+    //      if( req.file === undefined ){
+    //       console.log( 'Error: No File Selected!' );
+    //       res.json( {message: "Image not found" } )
+    //      } else {
+    //       // If Success
+    //       console.log(req.file.location)
+    //       const imageName = req.file.key;
+    //       const imageLocation = req.file.location;// Save the file name into database into profile model
+    //       res.json({
+    //        image: imageName,
+    //        location: imageLocation
+    //       })
+    //       help.image = ""
+    //      }
+    //     }
+    //    })
 
 
     const help = new Help({
@@ -175,9 +175,9 @@ router.post('/help', verifyJWT, async (req, res) => {
         description: req.body.description,
         country: req.body.country, 
         
-        location: req.body.location,
-        latitude:req.body.latitude,
-        longitude:req.body.longitude,
+        // location: req.body.location,
+        // latitude:req.body.latitude,
+        // longitude:req.body.longitude,
 
         
         time:currentTime,

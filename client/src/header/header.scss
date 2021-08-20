@@ -1,20 +1,27 @@
 .navbar {
-    background-color: #dad8d8;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    color: #14a0c7;
-    font-weight: 700;
-    font-family:'Lucida Sans';
+    background-color: transparent;
+    background-image: linear-gradient( 69.69deg,  rgb(230, 240, 240) 2.5%, rgba(211, 210, 230, 0.74) 15.2%, rgba(199, 213, 226, 0.932) 0.2%, rgb(199, 199, 228) 88.4% );
+    
+
+   // box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    color: #435257;
+    
+    font-family: "Titillium Web", sans-serif;
     animation: nav-load 100ms ease-in-out;
+  
    
   }
+ 
+  .navbar .nav-link {
+    font-size: 20px;
+    margin-left: 8px;
+  }
   .nav-link{
-    animation: nav-link-load 200ms ease-in 300ms;
+    animation: nav-link-load 500ms ease-in 100ms;
     animation-fill-mode: forwards;
     transform: scale(0);
   }
-  .nav-link:hover{
-    text-decoration: 2px blue underline;
-  }
+ 
   .btnsign{
     background-color: rgb(60, 149, 221);
     border-radius: 5px;
@@ -24,23 +31,7 @@
     background: linear-gradient(to right, #9eace7, #615fe2, #0e37eb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
   }
-  .btnsign:hover{
-    color: rgb(17, 2, 2);
-    border: 1px solid black;
-  }
-  .btnlogout{
-    font-weight: 700;
-    font-family:'Lucida Sans';
-    margin-top: 2px;
-    background: transparent;
-    color: red;
-    border: none; 
-  }
-  .btnlogout:hover{
-    background: transparent;
-    color: red;
-    text-decoration: 2px red underline;
-  }
+ 
   @keyframes nav-load {
     0%{
       transform: translateY(-100%);
@@ -61,3 +52,26 @@
       transform: scale(1);
     }
   }
+
+  nav ul li a,
+nav ul li a:after,nav ul li a:before {
+  transition: all .5s;
+}
+nav ul li a:hover {
+  color: rgb(43, 42, 42);
+}
+
+nav.stroke ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  background: #aaa;
+  height: 2px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}

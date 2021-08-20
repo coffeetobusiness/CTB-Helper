@@ -48,9 +48,10 @@ export default function ApiCardData({filterSearch,setFilterSearch,}){
         {filterdata.map((help,index) => (
         <div  className="card cardResponsive">
         <div className="card-body" key={help._id}>
-            <button type="button" className=" ml-2 mb-1 close text-danger">
+            {/* <button type="button" className=" ml-2 mb-1 close text-danger">
                <span >&times;</span>
-            </button>
+            </button> */}
+            <span className="position-absolute tm-new-badge">New</span>
           <h5 data-aos="fade-left" className="card-title">{help.title} {help.verify === true && <i class="fas fa-check-double text-success"><small>(verified)</small></i>} {help.verify === false && <i class="fas fa-check-double text-warning"><small>(not verified)</small></i>}</h5>
           
           <h6 data-aos="fade-left" className="card-subtitle mb-2 text-muted">{help.city} {help.country},{help.time},{help.date}</h6>

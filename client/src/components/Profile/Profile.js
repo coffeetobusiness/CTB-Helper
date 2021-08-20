@@ -229,8 +229,8 @@ import MakeAdmin from '../Profile/MakeAdmin'
              <img data-aos="fade-right" src={user.image} className="image-vol-req img-fluid rounded-start" alt="..."/>
            </div>
            <div className="col-md-6">
-             <div className="card-body">
-               <div data-aos="fade-left" className="row">
+             <div  data-aos="fade-left" className="card-body">
+               <div  className="row">
                 <div className="col-sm-3">
                   <h6 className="mb-0">Full Name</h6>
                 </div>

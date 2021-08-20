@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  background: #4872111c;  /* fallback for old browsers */
+  background: #aebac579;  /* fallback for old browsers */
 }
 .mainbody{
   animation: main-body 400ms ease-in;
@@ -116,4 +116,12 @@ font-weight: 600;
 
 .image-vol-req:hover{
   zoom: 2;
+}
+
+.tm-new-badge {
+  top: 10px;
+  right: -10px;
+  background-color: rgb(117, 131, 66);
+  color: white;
+  padding: 5px 20px;
 }

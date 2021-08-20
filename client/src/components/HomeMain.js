@@ -7,6 +7,7 @@ import RightBar from './RightBar'
 import HomeSearch from './HomeSearch';
 
 
+
 const Postbutton = () =>{
   return(
       <div className="mt-2">
@@ -40,7 +41,7 @@ export default function HomeMain(){
                />
            </div>
 
-           <div className="col-8">
+           <div className="col-8 container-fluid">
                <ApiCardData
                 filterSearch={filterSearch}
                 setFilterSearch={setFilterSearch}

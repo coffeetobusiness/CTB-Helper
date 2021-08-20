@@ -17,7 +17,7 @@ export default function Header(){
   }
     return(
         <div>
-          <nav className="navbar  navbar-expand-lg">
+          <nav className="navbar stroke navbar-expand-lg">
             <Link className="navbar-brand nav-link" href="/" to="/home"><h3><i class="fas fa-hands-helping"></i> Helpo</h3></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <i className="fa fa-bars"></i>
@@ -45,7 +45,7 @@ export default function Header(){
               </li>}
 
               {credentials && <li className="nav-item">
-                 <button className="btn btn-danger btnlogout"  onClick={logout}>Logout</button>
+                 <Link className="nav-link btn text-danger"  onClick={logout}>Logout</Link>
               </li> }
             </ul>
             

@@ -21,6 +21,7 @@ export default function Login(){
     const [error, setError] = useState("");
     const [, setCredentials] = useContext(CredentialsContext);
     const  [loginStatus, setloginStatus] = useState(false);
+    const [showPassword,setShowPassword] = useState(false)
 
     const login =(e) =>{
         e.preventDefault();
@@ -112,7 +113,7 @@ export default function Login(){
             <div className="base-container">
                 <form onSubmit={login}>
                     <div className="content">
-                        <div className="header">Welcome back</div>
+                        <div className="header">Welcome Back</div>
 
                             <div className="image">
                                 <img src={LoginImg} />
@@ -125,14 +126,19 @@ export default function Login(){
                                 </div>
                                 <div className="form-group">
                                 <label htmlFor="password">Password</label>
-                                {/* <input type="password" name="password" placeholder="password" /> */}
-                                <input required minLength="5" type="password" className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                                <input required minLength="5"  type={showPassword===true?"text":"password"} className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                                <span>
+                                    <i class="fas fa-eye" onClick={(e)=>setShowPassword(!showPassword)}></i>
+                                </span>
                                 </div>
                             </div>
                             <div className="footer">
                                 <button type="submit" className="btn">
                                     Login
                                 </button>
+                            </div>
+                            <div className="error">
+                                {error && <span id="reg-msg" >{error}</span>}
                             </div>
                             <div className="password">
                                 <p>forgot your password?<Link  to="/reset">Reset password</Link></p>
@@ -147,6 +153,10 @@ export default function Login(){
                     </div> 
                 </form>
             </div>
+            {/* <div className="base-container2">
+
+            </div> */}
+            
         </div>
         </div>
     )

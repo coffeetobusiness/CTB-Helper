@@ -120,17 +120,17 @@ export default function Login(){
                             </div>
                             <div className="form">
                                 <div className="form-group">
-                                <label htmlFor="username">Username</label>
-                                {/* <input type="text" name="username" placeholder="username" /> */}
-                                <input required type="email" className="form-control input-line" placeholder="username" onChange={(e) => setemail(e.target.value)}/>
+                                    <label htmlFor="username">Username</label>
+                                        <input required type="email" className="form-control input-line" placeholder="username" onChange={(e) => setemail(e.target.value)}/>
                                 </div>
                                 <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input required minLength="5"  type={showPassword===true?"text":"password"} className="form-control input-line" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-                                <span>
-                                    <i class="fas fa-eye" onClick={(e)=>setShowPassword(!showPassword)}></i>
-                                </span>
-                                </div>
+                                        <label htmlFor="password">Password</label>
+                                        <input required minLength="5"  type={showPassword===true?"text":"password"} className="form-control input-line" aria-describedby="basic-addon2" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                                    <span>
+                                        <i class="fas fa-eye" onClick={(e)=>setShowPassword(!showPassword)}></i>
+                                    </span>
+                                </div>   
+                                
                             </div>
                             <div className="footer">
                                 <button type="submit" className="btn">
